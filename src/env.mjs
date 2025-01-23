@@ -5,8 +5,8 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
     CONSTRUCTION: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
-    PUBLIC_VIDEO: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
-    PUBLIC_FIGMA: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
+    SET_PUBLIC_VIDEO: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
+    SET_PUBLIC_FIGMA: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
   },
   client: {
     FIGMA_LINK: z.string(),
