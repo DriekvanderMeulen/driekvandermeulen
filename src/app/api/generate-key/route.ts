@@ -10,7 +10,7 @@ export async function GET() {
     try {
         const hashedKey = await argon2.hash(key);
         return NextResponse.json({ key: hashedKey });
-    } catch (err) {
+    } catch {
         return NextResponse.json({ error: 'Error generating key' }, { status: 500 });
     }
 }

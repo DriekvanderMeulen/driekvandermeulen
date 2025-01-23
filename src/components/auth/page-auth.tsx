@@ -58,7 +58,7 @@ const Auth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     inputRef.current.focus();
                 }
             }
-        } catch (err) {
+        } catch {
             setError('Error verifying code. Please try again.');
             setCode('');
             if (inputRef.current) {
