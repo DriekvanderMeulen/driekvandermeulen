@@ -13,7 +13,7 @@ export default function NotFound() {
 
         const timeout = setTimeout(() => {
             router.push('/');
-        }, 3000);
+        }, 2000);
 
         return () => {
             clearInterval(interval);

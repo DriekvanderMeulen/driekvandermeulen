@@ -7,11 +7,11 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Construction mode check
-  // if (env.CONSTRUCTION === true) {
-  //   if (pathname !== '/construction') {
-  //     return NextResponse.redirect(new URL('/construction', request.url))
-  //   }
-  // }
+  if (env.CONSTRUCTION === true) {
+    if (pathname !== '/construction') {
+      return NextResponse.redirect(new URL('/construction', request.url))
+    }
+  }
 
   // Stage video access check
   if (env.IS_VIDEO_PUBLIC === false && pathname === '/stagevideo') {
