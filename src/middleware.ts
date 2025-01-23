@@ -7,19 +7,19 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Construction mode check
-  if (env.CONSTRUCTION && process.env.NODE_ENV !== 'development') {
-    if (pathname !== '/construction') {
-      return NextResponse.redirect(new URL('/construction', request.url))
-    }
-  }
+  // if (env.CONSTRUCTION === true) {
+  //   if (pathname !== '/construction') {
+  //     return NextResponse.redirect(new URL('/construction', request.url))
+  //   }
+  // }
 
   // Stage video access check
-  if (!env.IS_VIDEO_PUBLIC && process.env.NODE_ENV !== 'development' && pathname === '/stagevideo') {
+  if (env.IS_VIDEO_PUBLIC === false && pathname === '/stagevideo') {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
   // Stage figma access check
-  if (!env.IS_FIGMA_PUBLIC && process.env.NODE_ENV !== 'development' && pathname === '/stageverslag') {
+  if (env.IS_FIGMA_PUBLIC === false && pathname === '/stageverslag') {
     return NextResponse.redirect(new URL('/', request.url))
   }
 

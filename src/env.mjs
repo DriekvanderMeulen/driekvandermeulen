@@ -8,8 +8,8 @@ export const env = createEnv({
     IS_FIGMA_PUBLIC: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
   },
   client: {
-    FIGMA_LINK: z.string(),
-    VIDEO_LINK: z.string(),
+    FIGMA_LINK: z.string().url(),
+    VIDEO_LINK: z.string().url(),
   },
   runtimeEnv: {
     CONSTRUCTION: process.env.CONSTRUCTION,
