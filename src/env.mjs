@@ -3,20 +3,18 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    NODE_ENV: z.enum(["development", "test", "production"]),
     CONSTRUCTION: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
-    SET_PUBLIC_VIDEO: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
-    SET_PUBLIC_FIGMA: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
+    IS_VIDEO_PUBLIC: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
+    IS_FIGMA_PUBLIC: z.preprocess((str) => str === "true" || str === "false" ? str === "true" : str, z.boolean()),
   },
   client: {
     FIGMA_LINK: z.string(),
     VIDEO_LINK: z.string(),
   },
   runtimeEnv: {
-    NODE_ENV: process.env.NODE_ENV,
     CONSTRUCTION: process.env.CONSTRUCTION,
-    PUBLIC_VIDEO: process.env.PUBLIC_VIDEO,
-    PUBLIC_FIGMA: process.env.PUBLIC_REPORT,
+    IS_VIDEO_PUBLIC: process.env.IS_VIDEO_PUBLIC,
+    IS_FIGMA_PUBLIC: process.env.IS_FIGMA_PUBLIC,
     FIGMA_LINK: process.env.FIGMA_LINK,
     VIDEO_LINK: process.env.VIDEO_LINK,
   },

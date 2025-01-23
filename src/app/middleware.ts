@@ -14,12 +14,12 @@ export function middleware(request: NextRequest) {
   }
 
   // Stage video access check
-  if (!env.SET_PUBLIC_VIDEO && process.env.NODE_ENV !== 'development' && pathname === '/stagevideo') {
+  if (!env.IS_VIDEO_PUBLIC && process.env.NODE_ENV !== 'development' && pathname === '/stagevideo') {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
   // Stage figma access check
-  if (!env.SET_PUBLIC_FIGMA && process.env.NODE_ENV !== 'development' && pathname === '/stageverslag') {
+  if (!env.IS_FIGMA_PUBLIC && process.env.NODE_ENV !== 'development' && pathname === '/stageverslag') {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
