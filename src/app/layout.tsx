@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import DarkModeToggle from "@/components/functions/dark-mode";
-import PianoClient from '@/components/functions/piano-client';
 
 export const metadata: Metadata = {
   title: "Create Next App",
