@@ -10,9 +10,9 @@ const tabs = [
 
 const Header = () => {
     return (
-        <div className="px-4 md:px-48 fixed top-0 left-0 right-0 flex items-center justify-between p-4 bg-transparent">
+        <div className="px-4 md:px-48 fixed top-0 left-0 bg-brand-white-light dark:bg-brand-pureblack right-0 flex items-center justify-between p-4">
             <div className="overflow-hidden w-fit">
-                < span className="inline-block overflow-hidden text-brand-black-regular text-3xl font-extralight dark:text-brand-white-regular animate-typing transition-all duration-300" >
+                < span className="inline-block overflow-hidden text-brand-black-regular text-3xl font-extralight dark:text-brand-white-regular animate-typing  " >
                     Driek.dev
                 </span >
             </div >
@@ -22,7 +22,7 @@ const Header = () => {
                         <Menubar.Menu key={index}>
                             <Menubar.Trigger asChild>
                                 <button
-                                    className="text-brand-black-regular dark:text-brand-white-regular p-2 hover:text-brand-blue-regular dark:hover:text-brand-blue-regular focus:outline-none transition-all duration-300"
+                                    className="text-brand-black-regular dark:text-brand-white-regular p-2 hover:text-brand-blue-regular dark:hover:text-brand-blue-regular focus:outline-none  "
                                     onMouseEnter={(e) => e.currentTarget.click()}
                                 >
                                     {tab.label}
@@ -33,7 +33,7 @@ const Header = () => {
                                     {tab.subItems.map((subItem, subIndex) => (
                                         <Menubar.Item key={subIndex} asChild>
                                             <button
-                                                className="text-brand-black-regular dark:text-brand-white-regular p-2 hover:text-brand-black-regular dark:hover:text-brand-white-regular focus:outline-none transition-all duration-300"
+                                                className="text-brand-black-regular dark:text-brand-white-regular p-2 hover:text-brand-black-regular dark:hover:text-brand-white-regular focus:outline-none  "
                                             >
                                                 {subItem}
                                             </button>

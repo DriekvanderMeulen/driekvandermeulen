@@ -9,7 +9,11 @@ body {
   font-optical-sizing: auto;
   overscroll-behavior: contain;
   transition: all;
-  transition-duration: 50ms;
+  transition-duration: 100ms;
+}
+
+html {
+  transition: background-color 0.3s, color 0.3s;
 }
 
 html.dark body {
