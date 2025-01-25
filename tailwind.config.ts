@@ -9,6 +9,10 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'flare': 'linear-gradient(to right, #f12711, #f5af19)',
+
+      },
       colors: {
         brand: {
           pureblack: "#000000",
