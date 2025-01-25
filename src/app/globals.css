@@ -1,20 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Open+Sans:ital,wght@0,300..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background-light: #ffffff;
-  --foreground-light: #171717;
-  --background-dark: #171717;
-  --foreground-dark: #ffffff;
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
+  font-family: 'Funnel Sans', serif;
+  font-optical-sizing: auto;
+  overscroll-behavior: contain;
+  transition: all;
+  transition-duration: 50ms;
 }
 
-body.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
+html.dark body {
+  background-color: var(--tw-bg-opacity, 1) var(--tw-bg-brand-black-regular);
+  color: var(--tw-text-opacity, 1) var(--tw-text-brand-white-regular);
+}
+
+::selection {
+  background-color: #003F91;
+  color: #fff;
 }
