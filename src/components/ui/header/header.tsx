@@ -1,7 +1,7 @@
 'use client'
 import { Menubar } from "radix-ui"
 import DarkModeToggle from '@/components/ui/dark-mode-toggle';
-import { handleNavScroll } from './nav-scroll';
+import { handleNavScroll } from '@/components/ui/header/nav-scroll';
 import { useEffect } from 'react';
 
 const tabs = [
