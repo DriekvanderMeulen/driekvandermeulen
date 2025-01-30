@@ -1,20 +1,24 @@
-"use client"
-import * as Menubar from '@radix-ui/react-menubar';
+'use client'
+import { Menubar } from "radix-ui"
 import DarkModeToggle from '@/components/ui/dark-mode-toggle';
-import useNavScroll from './nav-scroll';
+import { handleNavScroll } from './nav-scroll';
+import { useEffect } from 'react';
 
 const tabs = [
-    { label: 'About', subItems: ["This is me", "get in touch"] },
+    { label: 'About', subItems: ["This is me", ""] },
     { label: 'Portfolio', subItems: ['Projects', 'Gallery'] },
     { label: 'Lab', subItems: ['Experiments', 'Research'] }
 ];
 
-const Header = () => {
-    useNavScroll();
+const Header: React.FC = () => {
+    useEffect(() => {
+        handleNavScroll();
+    }, []);
+
     return (
-        <div className="border-b-2 md:mx-48 fixed top-0 left-0 bg-brand-white-light dark:bg-brand-pureblack right-0 flex items-center justify-between px-4 py-4 navscroll">
+        <div className="border-b-2 dark:border-brand-white-regular border-brand-pureblack md:mx-48 fixed top-0 left-0 bg-brand-white-light dark:bg-brand-pureblack right-0 flex items-center justify-between px-4 py-4 navscroll">
             <div className="overflow-hidden w-fit">
-                <span className="inline-block overflow-hidden cursor-pointer text-3xl font-extralight transition-all bg-clip-text text-brand-black-regular dark:text-brand-white-regular dark:hover:text-transparent hover:text-transparent bg-flare animate-gradient-x hover:font-light">
+                <span className="inline-block overflow-hidden cursor-pointer transition-all duration-200 text-3xl font-extralight bg-clip-text text-brand-black-regular dark:text-brand-white-regular hover:font-light">
                     Driek.dev
                 </span>
             </div>
@@ -24,7 +28,7 @@ const Header = () => {
                         <Menubar.Menu key={index}>
                             <Menubar.Trigger asChild>
                                 <button
-                                    className="text-brand-black-regular dark:text-brand-white-regular p-2 dark:hover:text-transparent hover:text-transparent bg-flare bg-clip-text focus:outline-none"
+                                    className="text-brand-black-regular dark:text-brand-white-regular p-2 bg-clip-text transition-all duration-200 focus:outline-none"
                                     onMouseEnter={(e) => e.currentTarget.click()}
                                 >
                                     {tab.label}
@@ -35,7 +39,7 @@ const Header = () => {
                                     {tab.subItems.map((subItem, subIndex) => (
                                         <Menubar.Item key={subIndex} asChild>
                                             <button
-                                                className="text-brand-black-regular dark:text-brand-white-regular p-2 hover:text-brand-black-regular dark:hover:text-brand-white-regular focus:outline-none  "
+                                                className="text-brand-black-regular transition-all duration-200 dark:text-brand-white-regular p-2 hover:text-brand-black-regular dark:hover:text-brand-white-regular focus:outline-none"
                                             >
                                                 {subItem}
                                             </button>
@@ -48,7 +52,7 @@ const Header = () => {
                 </Menubar.Root>
                 <DarkModeToggle />
             </div>
-        </div >
+        </div>
     );
 };
 

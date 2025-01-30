@@ -25,3 +25,11 @@ html.dark body {
   background-color: #003F91;
   color: #fff;
 }
+
+.navscroll {
+	@apply py-4 transition-spacing duration-300;
+}
+
+.navscroll.scrolled {
+	@apply py-0;
+}

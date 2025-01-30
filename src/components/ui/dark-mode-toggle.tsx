@@ -55,9 +55,13 @@ const DarkModeToggle = () => {
         <button
             onClick={handleToggle}
             aria-label="Toggle dark mode"
-            className="p-2 text-brand-black-regular hover:text-brand-blue-regular dark:text-brand-white-regular dark:hover:text-brand-blue-regular"
+            className="p-2 text-brand-black-regular dark:text-brand-white-regular "
         >
-            {isDarkMode ? <SunIcon /> : <MoonIcon />}
+            <div className='bg-transparent w-6 h-6 flex items-center justify-center rounded-full transition-all duration-300'>
+                <div className='w-5 h-5 rounded-full bg-brand-white-regular dark:bg-brand-pureblack flex items-center justify-center'>
+                    {isDarkMode ? <SunIcon /> : <MoonIcon />}
+                </div>
+            </div>
         </button>
     );
 };
