@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/components/ui/header/header'
 import Footer from '@/components/ui/footer/footer'
+/* eslint-disable no-unused-vars */
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: 'Create Next App',
