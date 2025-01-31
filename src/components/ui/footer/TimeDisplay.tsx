@@ -49,7 +49,7 @@ function TimeDisplay() {
     }, [currentIndex])
 
     return (
-        <div className="absolute bottom-8 right-8 text-white text-right overflow-hidden">
+        <div className="absolute bottom-16 right-8 text-brand-black-1000 dark:text-brand-white-100 text-right overflow-hidden">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentIndex}
@@ -75,6 +75,16 @@ function TimeDisplay() {
                 >
                     <div className="text-sm opacity-80 whitespace-nowrap">{locations[currentIndex].name}</div>
                     <div className="text-2xl font-bold whitespace-nowrap">{time}</div>
+                    <motion.div
+                        className="h-0.5 bg-brand-black-1000 dark:bg-brand-white-100 mt-2 opacity-30"
+                        initial={{ width: '0%' }}
+                        animate={{ width: '100%' }}
+                        transition={{
+                            duration: 10,
+                            ease: "linear",
+                            repeat: Infinity
+                        }}
+                    />
                 </motion.div>
             </AnimatePresence>
         </div>

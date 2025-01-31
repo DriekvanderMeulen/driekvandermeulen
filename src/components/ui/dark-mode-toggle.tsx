@@ -9,16 +9,20 @@ const initializeDarkMode = () => {
     const currentHour = new Date().getHours();
     const isNightTime = currentHour >= 20 || currentHour < 6;
 
-    if (
-        darkModePreference === 'true' ||
+    const shouldBeDark = darkModePreference === 'true' ||
         (!darkModePreference &&
-            (isNightTime || window.matchMedia('(prefers-color-scheme: dark)').matches))
-    ) {
+            (isNightTime || window.matchMedia('(prefers-color-scheme: dark)').matches));
+
+    if (shouldBeDark) {
         document.documentElement.classList.add('dark');
     } else {
         document.documentElement.classList.remove('dark');
     }
+
+    return shouldBeDark;
 };
+
+export { initializeDarkMode };
 
 const toggleDarkMode = () => {
     const isDarkMode = document.documentElement.classList.toggle('dark');
@@ -62,7 +66,7 @@ const DarkModeToggle = () => {
             className="p-2 text-brand-black-500 dark:text-brand-white-500 "
         >
             <div className='bg-transparent w-6 h-6 flex items-center justify-center rounded-full transition-all duration-300'>
-                <div className='w-5 h-5 rounded-full bg-brand-white-500 dark:bg-brand-black-1000 flex items-center justify-center'>
+                <div className='w-5 h-5 rounded-full  flex items-center justify-center'>
                     {isDarkMode ? <SunIcon /> : <MoonIcon />}
                 </div>
             </div>
