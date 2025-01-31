@@ -10,17 +10,17 @@ interface GitHubHovercardProps {
 }
 
 export function GitHubHovercard({ link, username }: GitHubHovercardProps) {
-    const [open, setOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     const calendarRef = useRef<HTMLDivElement>(null)
-    const [calendarData, setCalendarData] = useState<HTMLElement[]>([])
+    const [calendarData, setCalendarData] = useState<Array<HTMLElement>>([])
 
     useEffect(() => {
         if (calendarRef.current) {
             const cells = Array.from(calendarRef.current.querySelectorAll('td[data-level]'))
             const lastYearCells = cells.slice(-364)
-            setCalendarData(lastYearCells as HTMLElement[])
+            setCalendarData(lastYearCells as Array<HTMLElement>)
         }
-    }, [open])
+    }, [isOpen])
 
     return (
         <HoverCard.Root openDelay={0} closeDelay={0}>
@@ -29,8 +29,8 @@ export function GitHubHovercard({ link, username }: GitHubHovercardProps) {
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onMouseEnter={() => setOpen(true)}
-                    onMouseLeave={() => setOpen(false)}
+                    onMouseEnter={() => setIsOpen(true)}
+                    onMouseLeave={() => setIsOpen(false)}
                     className="flex items-center justify-center text-brand-black dark:text-brand-white hover:opacity-80 transition-opacity h-12 w-12"
                 >
                     <GitHubLogoIcon className="w-5 h-5" />

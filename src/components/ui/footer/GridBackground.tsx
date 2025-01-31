@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 
 function getRandomColor(isDarkMode: boolean) {
+    console.log('getRandomColor called with isDarkMode:', isDarkMode);
     const blackColors = Object.keys({
         700: '#292929',
         800: '#1c1c1c',
@@ -23,6 +24,7 @@ function getRandomColor(isDarkMode: boolean) {
 }
 
 function GridBackground() {
+    console.log('GridBackground rendering');
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [colors, setColors] = useState<Array<Array<{ black: string; white: string }>>>(
         Array.from({ length: 36 }, () =>
@@ -31,9 +33,25 @@ function GridBackground() {
     );
 
     useEffect(() => {
+        console.log('Theme change effect setup');
         const handleThemeChange = () => {
-            setIsDarkMode(document.documentElement.classList.contains('dark'));
+            console.log('Theme change detected');
+            try {
+                const isDark = document.documentElement.classList.contains('dark');
+                console.log('isDark:', isDark);
+                setIsDarkMode(isDark);
+            } catch (error) {
+                console.error('Error accessing document:', error);
+            }
         };
+
+        // Initial check
+        try {
+            console.log('Initial theme check');
+            setIsDarkMode(document.documentElement.classList.contains('dark'));
+        } catch (error) {
+            console.error('Error during initial theme check:', error);
+        }
 
         window.addEventListener('storage', handleThemeChange);
         return () => {

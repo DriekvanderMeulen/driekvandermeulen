@@ -1,12 +1,14 @@
-import InstagramHovercard from './InstagramHovercard'
-import LinkedInHovercard from './LinkedInHovercard'
-import GitHubHovercard from './GitHubHovercard'
+"use client"
+
+// import InstagramHovercard from './InstagramHovercard'
+// import LinkedInHovercard from './LinkedInHovercard'
+// import GitHubHovercard from './GitHubHovercard'
 import GridBackground from './GridBackground'
 import TimeDisplay from './TimeDisplay'
 import EmploymentText from './EmploymentText'
 import Link from 'next/link'
 
-function Footer() {
+export default function Footer() {
     return (
         <div className="min-h-[30vh] relative">
             <div className="absolute top-0 left-0 w-full h-full z-10">
@@ -15,7 +17,7 @@ function Footer() {
             <div className="relative z-20 flex items-center min-h-[30vh]">
                 <div className="flex space-x-16 px-8 items-center">
                     <div className="flex flex-col space-y-8">
-                        <InstagramHovercard
+                        {/* <InstagramHovercard
                             link="https://instagram.com/yourprofile"
                             mockData="Instagram Profile Embed or Mock Data"
                         />
@@ -26,7 +28,7 @@ function Footer() {
                         <GitHubHovercard
                             link="https://github.com/driekvandermeulen"
                             username="driekvandermeulen"
-                        />
+                        /> */}
                     </div>
                     <div className="flex pl-16 flex-col text-xl space-y-4 mt-4">
                         <Link href="/about" className="text-white relative group">
@@ -61,5 +63,3 @@ function Footer() {
         </div>
     )
 }
-
-export default Footer

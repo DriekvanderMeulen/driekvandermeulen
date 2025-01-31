@@ -13,8 +13,16 @@ const tabs = [
 ];
 
 const Header: React.FC = () => {
+    console.log('Header component rendering');
+
     useEffect(() => {
-        handleNavScroll();
+        console.log('Header useEffect - about to call handleNavScroll');
+        try {
+            handleNavScroll();
+            console.log('handleNavScroll called successfully');
+        } catch (error) {
+            console.error('Error in handleNavScroll:', error);
+        }
     }, []);
 
     return (
