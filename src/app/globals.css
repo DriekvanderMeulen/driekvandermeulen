@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Funnel Sans', serif;
+  font-family: 'Inter', sans-serif;
   font-optical-sizing: auto;
   overscroll-behavior: contain;
   transition: all;
