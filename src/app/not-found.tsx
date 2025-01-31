@@ -1,29 +1,32 @@
 "use client"
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function NotFound() {
-    const [countdown, setCountdown] = useState(3);
-    const router = useRouter();
+    const [countdown, setCountdown] = useState(3)
+    const router = useRouter()
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCountdown(prevCountdown => prevCountdown - 1);
-        }, 1000);
+        const timer = setTimeout(() => {
+            router.push('/')
+        }, 3000)
 
-        const timeout = setTimeout(() => {
-            router.push('/');
-        }, 2000);
+        const interval = setInterval(() => {
+            setCountdown((prev) => prev - 1)
+        }, 1000)
 
         return () => {
-            clearInterval(interval);
-            clearTimeout(timeout);
-        };
-    }, [router]);
+            clearTimeout(timer)
+            clearInterval(interval)
+        }
+    }, [router])
 
     return (
-        <div className="flex items-center justify-center h-screen">
-            <span className="text-2xl font-inter">Not found, redirecting in {countdown}</span>
+        <div className="flex h-screen items-center justify-center">
+            <span className="font-inter text-2xl">
+                Not found, redirecting in {countdown}
+            </span>
         </div>
-    );
+    )
 }
