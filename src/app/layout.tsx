@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Header from '@/components/ui/header'
+import Header from '@/components/ui/header/header'
+import Footer from '@/components/ui/footer/footer'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,9 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-brand-white-light min-h-[200vh] dark:bg-brand-pureblack dark:text-brand-white-regular text-brand-black-regular">
+      <head>
+        <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
+      </head>
+      <body className="bg-brand-white-100 dark:bg-brand-black-900 dark:text-brand-white-100 text-brand-black-1000">
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )
