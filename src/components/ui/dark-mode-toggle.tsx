@@ -6,9 +6,13 @@ import { SunIcon, MoonIcon } from '@radix-ui/react-icons';
 // Helper functions for dark mode management
 const initializeDarkMode = () => {
     const darkModePreference = localStorage.getItem('darkMode');
+    const currentHour = new Date().getHours();
+    const isNightTime = currentHour >= 20 || currentHour < 6;
+
     if (
         darkModePreference === 'true' ||
-        (!darkModePreference && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        (!darkModePreference &&
+            (isNightTime || window.matchMedia('(prefers-color-scheme: dark)').matches))
     ) {
         document.documentElement.classList.add('dark');
     } else {
@@ -55,10 +59,10 @@ const DarkModeToggle = () => {
         <button
             onClick={handleToggle}
             aria-label="Toggle dark mode"
-            className="p-2 text-brand-black-regular dark:text-brand-white-regular "
+            className="p-2 text-brand-black-500 dark:text-brand-white-500 "
         >
             <div className='bg-transparent w-6 h-6 flex items-center justify-center rounded-full transition-all duration-300'>
-                <div className='w-5 h-5 rounded-full bg-brand-white-regular dark:bg-brand-pureblack flex items-center justify-center'>
+                <div className='w-5 h-5 rounded-full bg-brand-white-500 dark:bg-brand-black-1000 flex items-center justify-center'>
                     {isDarkMode ? <SunIcon /> : <MoonIcon />}
                 </div>
             </div>

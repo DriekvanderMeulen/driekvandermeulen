@@ -74,18 +74,18 @@ const Auth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-brand-white-light dark:bg-brand-pureblack">
-            <Form.Root className="relative max-w-md p-4 border border-brand-black-regular dark:border-brand-white-regular rounded-lg shadow-md bg-brand-white-regular dark:bg-brand-black-regular">
+        <div className="flex items-center justify-center min-h-screen bg-brand-white-100 dark:bg-brand-black-1000">
+            <Form.Root className="relative max-w-md p-4 border border-brand-black-500 dark:border-brand-white-500 rounded-lg shadow-md bg-brand-white-500 dark:bg-brand-black-500">
                 <Form.Field name="code">
                     <div className="flex flex-col gap-2">
-                        <Label.Root className="mb-4 text-center text-brand-black-regular dark:text-brand-white-regular text-lg font-medium">
+                        <Label.Root className="mb-4 text-center text-brand-black-500 dark:text-brand-white-500 text-lg font-medium">
                             Please enter verification code
                         </Label.Root>
                         <div className="flex justify-between gap-2">
                             {Array.from({ length: 6 }).map((_, index) => (
                                 <motion.div
                                     key={index}
-                                    className="w-12 h-12 border border-brand-black-light dark:border-brand-white-light rounded-md flex items-center justify-center text-xl text-brand-black-regular dark:text-brand-white-regular bg-brand-white-light dark:bg-brand-black-light"
+                                    className="w-12 h-12 border border-brand-black-100 dark:border-brand-white-100 rounded-md flex items-center justify-center text-xl text-brand-black-500 dark:text-brand-white-500 bg-brand-white-100 dark:bg-brand-black-100"
                                     animate={{ scale: code[index] ? [1, 1.05, 1] : 1 }}
                                     transition={{ duration: 0.2 }}
                                 >
@@ -100,13 +100,13 @@ const Auth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                                 value={code}
                                 onChange={handleChange}
                                 maxLength={6}
-                                className="absolute opacity-0 w-full h-12 text-center text-brand-black-regular dark:text-brand-white-regular text-xl border border-brand-black-light dark:border-brand-white-light rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue-regular"
+                                className="absolute opacity-0 w-full h-12 text-center text-brand-black-500 dark:text-brand-white-500 text-xl border border-brand-black-100 dark:border-brand-white-100 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue-500"
                                 style={{ top: '50%', transform: 'translateY(-50%)' }}
                                 aria-label="Verification code input"
                             />
                         </Form.Control>
                         {error && (
-                            <Form.Message className="text-center text-brand-magenta-regular dark:text-brand-magenta-light mt-4">
+                            <Form.Message className="text-center text-brand-blue-500 dark:text-brand-blue-100 mt-4">
                                 {error}
                             </Form.Message>
                         )}

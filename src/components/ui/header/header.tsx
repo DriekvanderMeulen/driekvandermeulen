@@ -3,11 +3,13 @@ import { Menubar } from "radix-ui"
 import DarkModeToggle from '@/components/ui/dark-mode-toggle';
 import { handleNavScroll } from '@/components/ui/header/nav-scroll';
 import { useEffect } from 'react';
+import Link from "next/link";
 
 const tabs = [
     { label: 'About', subItems: ["This is me", ""] },
     { label: 'Portfolio', subItems: ['Projects', 'Gallery'] },
-    { label: 'Lab', subItems: ['Experiments', 'Research'] }
+    { label: 'Lab', subItems: ['Experiments', 'Research'] },
+    { label: 'Contact', subItems: ['Mail', 'LinkedIn'] }
 ];
 
 const Header: React.FC = () => {
@@ -16,10 +18,19 @@ const Header: React.FC = () => {
     }, []);
 
     return (
-        <div className="border-b-2 dark:border-brand-white-regular border-brand-pureblack md:mx-48 fixed top-0 left-0 bg-brand-white-light dark:bg-brand-pureblack right-0 flex items-center justify-between px-4 py-4 navscroll">
+        <div className="border-b-2 dark:border-brand-white-100 border-brand-black-1000 md:mx-48 fixed top-0 left-0 bg-brand-white-100 dark:bg-brand-black-900 right-0 flex items-center justify-between px-4 py-4 navscroll">
             <div className="overflow-hidden w-fit">
-                <span className="inline-block overflow-hidden cursor-pointer transition-all duration-200 text-3xl font-extralight bg-clip-text text-brand-black-regular dark:text-brand-white-regular hover:font-light">
-                    Driek.dev
+                <span className="inline-block overflow-hidden cursor-pointer transition-all duration-200 text-3xl font-extralight">
+                    <Link href="/" className="relative group">
+                        <span className="relative">
+                            <span className="absolute left-0 w-0 text-brand-green-500 overflow-hidden group-hover:w-full transition-all duration-300 ease-in-out">
+                                Driek.dev
+                            </span>
+                            <span className="text-brand-black-1000 dark:text-brand-white-100">
+                                Driek.dev
+                            </span>
+                        </span>
+                    </Link>
                 </span>
             </div>
             <div className="flex items-center">
@@ -28,18 +39,24 @@ const Header: React.FC = () => {
                         <Menubar.Menu key={index}>
                             <Menubar.Trigger asChild>
                                 <button
-                                    className="text-brand-black-regular dark:text-brand-white-regular p-2 bg-clip-text transition-all duration-200 focus:outline-none"
+                                    className="text-brand-black-1000 dark:text-brand-white-100 p-2 relative group focus:outline-none"
                                     onMouseEnter={(e) => e.currentTarget.click()}
                                 >
-                                    {tab.label}
+                                    <span className="relative">
+                                        <span className={`absolute left-0 w-0 overflow-hidden group-hover:w-full transition-all duration-300 ease-in-out ${tab.label === 'Lab' ? 'text-brand-green-500' : 'text-brand-green-500'
+                                            }`}>
+                                            {tab.label}
+                                        </span>
+                                        <span>{tab.label}</span>
+                                    </span>
                                 </button>
                             </Menubar.Trigger>
                             {tab.subItems.length > 0 && (
-                                <Menubar.Content className="bg-brand-white-light dark:bg-brand-black-regular flex flex-col">
+                                <Menubar.Content className="bg-brand-white-100 dark:bg-brand-black-900 flex flex-col">
                                     {tab.subItems.map((subItem, subIndex) => (
                                         <Menubar.Item key={subIndex} asChild>
                                             <button
-                                                className="text-brand-black-regular transition-all duration-200 dark:text-brand-white-regular p-2 hover:text-brand-black-regular dark:hover:text-brand-white-regular focus:outline-none"
+                                                className="text-brand-black-1000 transition-all duration-200 dark:text-brand-white-100 p-2 hover:text-brand-black-1000 dark:hover:text-brand-white-100 focus:outline-none"
                                             >
                                                 {subItem}
                                             </button>

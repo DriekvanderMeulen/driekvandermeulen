@@ -10,35 +10,55 @@ export default {
   theme: {
     extend: {
       transitionProperty: {
-				spacing: 'margin, padding'
-			},
+        spacing: 'margin, padding',
+      },
       colors: {
         brand: {
-          pureblack: "#000000",
-          purewhite: "#ffffff",
           black: {
-            light: "#26262C",
-            regular: "#1C1C21",
-            dark: "#131316"
+            100: '#747474',
+            200: '#686868',
+            300: '#5c5c5c',
+            400: '#4e4e4e',
+            500: '#434343',
+            600: '#363636',
+            700: '#292929',
+            800: '#1c1c1c',
+            900: '#0f0f0f',
+            1000: '#000000',
           },
           white: {
-            light: "#E9E9EC",
-            regular: "#DEDEE3",
-            dark: "#D3D3D9"
+            100: '#fafafa',
+            200: '#f0f0f0',
+            300: '#e5e5e5',
+            400: '#d8d8d8',
+            500: '#cfcfcf', // reference color
+            600: '#c5c5c5',
+            700: '#bababa',
+            800: '#afafaf',
+            900: '#a4a4a4',
           },
-          cyan: {
-            light: "#15C8CB",
-            regular: "#13B6B9",
-            dark: "#11A4A6"
-          },
-          magenta: {
-            light: "#FB4BA3",
-            regular: "#FB3799",
-            dark: "#FB238F"
+          green: {
+            100: '#a6dcca',
+            200: '#97d7c0',
+            300: '#87d0b6',
+            400: '#7acaaD',
+            500: '#6cc2a2', // reference color
+            600: '#63b997',
+            700: '#58a687',
+            800: '#4e9378',
+            900: '#448068',
           },
           blue: {
-            regular:"#003F91",
-          }
+            100: '#55b6d7',
+            200: '#4ba3c1',
+            300: '#418faf',
+            400: '#35758b',
+            500: '#2b6072', // reference color
+            600: '#245361',
+            700: '#193d48',
+            800: '#0f292f',
+            900: '#06161a',
+          },
         },
       },
       keyframes: {

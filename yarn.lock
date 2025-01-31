@@ -2441,12 +2441,22 @@ github-calendar-legend@^1.0.11:
   resolved "https://registry.yarnpkg.com/github-calendar-legend/-/github-calendar-legend-1.0.11.tgz#0ffca7a893956d0babd4019bcbfbba5be230e3c7"
   integrity sha512-V7AkszKw2fMeU+g6W5dQ7vDGzJ3giSaukdOUEdUqhcHhQDVYcQf7c0Q3korbQzJsh+Wh3MqyPtN+ZSAuEnHP2A==
 
-github-calendar-parser@^1.2.2:
+github-calendar-parser@^1.1.13, github-calendar-parser@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/github-calendar-parser/-/github-calendar-parser-1.2.2.tgz#49ef6547a89484cac9f49b8cea2bd8d5bc27cfc8"
   integrity sha512-lA47NHVu5lTH0kZf71W+NXhqr3hvsHLwMRqUxTNsopLDQNCQTAgyhzHwi5iJegq2cTTn4p1ZeqmHyt8RbbhPOw==
   dependencies:
     github-calendar-legend "^1.0.11"
+
+github-calendar@2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/github-calendar/-/github-calendar-2.2.7.tgz#6bca00167492233a1dd14f610cbb3fd3331aeb26"
+  integrity sha512-9/YY5e9OoXPJP2bEMRKgLtKpHJQY9eotghCUMmxkJNAaXP6OHGy/Pg7FZD21xlG5GGTkTe39W5+66APU0sWMEw==
+  dependencies:
+    add-subtract-date "^1.0.15"
+    elly "^1.1.11"
+    formatoid "^1.2.4"
+    github-calendar-parser "^1.1.13"
 
 github-calendar@^2.3.4:
   version "2.3.4"
@@ -3110,6 +3120,11 @@ negotiator@0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
+next-themes@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.4.4.tgz#ce6f68a4af543821bbc4755b59c0d3ced55c2d13"
+  integrity sha512-LDQ2qIOJF0VnuVrrMSMLrWGjRMkq+0mpgl6e0juCLqdJ+oo8Q84JRWT6Wh11VDQKkMMe+dVzDKLWs5n87T+PkQ==
+
 next@^15.1.6:
   version "15.1.6"
   resolved "https://registry.yarnpkg.com/next/-/next-15.1.6.tgz#ce22fd0a8f36da1fc4aba86e3ec7e98eb248c555"
@@ -3562,6 +3577,13 @@ react-style-singleton@^2.2.2, react-style-singleton@^2.2.3:
   dependencies:
     get-nonce "^1.0.0"
     tslib "^2.0.0"
+
+react-ts-github-calendar@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-ts-github-calendar/-/react-ts-github-calendar-1.0.3.tgz#1b1fca681218607fb5405dd8d3df65d816e4802b"
+  integrity sha512-d58GZr9yrKzAaq7tPxbFvPT7sphAnEiJJnzdJSW9AygtjRO1LWNz9hZf9/OjpmYEP3Tlknbd59jKslNlClPZ5g==
+  dependencies:
+    github-calendar "2.2.7"
 
 react@^19.0.0:
   version "19.0.0"
