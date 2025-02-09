@@ -98,40 +98,6 @@ const NavigationMenuDemo = () => {
                         </ul>
                     </NavigationMenu.Content>
                 </NavigationMenu.Item>
-                <NavigationMenu.Item>
-                    <NavigationMenu.Trigger className="group flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[15px] font-medium leading-none text-brand-black-1000 dark:text-brand-white-100 outline-none hover:opacity-80 transition-colors focus:shadow-[0_0_0_2px] focus:shadow-brand-green-500">
-                        About me{" "}
-                        <CaretDownIcon
-                            className="relative top-px transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
-                            aria-hidden
-                        />
-                    </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto">
-                        <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr]">
-                            <li className="row-span-3 grid">
-                                <NavigationMenu.Link asChild>
-                                    <a
-                                        className="flex h-full w-full select-none flex-col justify-end rounded-md p-[25px] no-underline outline-none focus:shadow-[0_0_0_2px] focus:shadow-brand-green-500 bg-cover bg-center"
-                                        style={{ backgroundImage: "url('/driek.jpg')" }}
-                                    >
-                                    </a>
-                                </NavigationMenu.Link>
-                            </li>
-                            <div className="pb-6">
-                                <p className="text-xl p-2 leading-[1.3] text-brand-white-200">
-                                    Hi, my name is Driek,
-                                    here you can find more about me.
-                                </p>
-                            </div>
-                            <ListItem href="/about/who-am-i" title="Who am I?">
-                                Who am I, wow that&apos;s a good question.
-                            </ListItem>
-                            <ListItem href="/about/what-do-i-do" title="What do I do?">
-                                What subject keep me busy these days?
-                            </ListItem>
-                        </ul>
-                    </NavigationMenu.Content>
-                </NavigationMenu.Item>
                 <NavigationMenu.Indicator className="top-full z-10 flex h-2.5 items-end justify-center overflow-hidden transition-[width,transform_250ms_ease] data-[state=hidden]:animate-fadeOut data-[state=visible]:animate-fadeIn">
                     <div className="relative top-[70%] size-2.5 rotate-45 rounded-tl-sm bg-brand-white-100 dark:bg-brand-black-800" />
                 </NavigationMenu.Indicator>
