@@ -19,6 +19,16 @@
       "version": "alpha 0.0.3",
       "releaseDate": "2025-01-26",
       "keyPoints": ["Added Footer", "Added Version History page"]
+    },
+    {
+      "version": "alpha 0.0.4",
+      "releaseDate": "2025-01-27",
+      "keyPoints": [
+        "Finalized footer and drawer",
+        "Added navbar",
+        "Added secret page",
+        "Added breadcrumb navigation"
+      ]
     }
   ]
 }

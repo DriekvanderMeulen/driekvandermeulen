@@ -16,8 +16,27 @@ html {
   transition: background-color 0.3s, color 0.3s;
 }
 
+html.dark:before  {
+  background-color: #0f0f0f;
+}
+
+html:before {
+  background-color: #fafafa;
+}
+html:after {
+  background-color: #fafafa;
+}
+
+html.dark:after {
+  background-color: #0f0f0f;
+}
+
+html.after.light {
+  background-color: #fafafa;
+}
+
 html.dark body {
-  background-color: var(--tw-bg-opacity, 1) var(--tw-bg-brand-black-regular);
+  background-color: #0f0f0f;
   color: var(--tw-text-opacity, 1) var(--tw-text-brand-white-regular);
 }
 

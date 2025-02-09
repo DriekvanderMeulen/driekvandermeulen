@@ -49,7 +49,7 @@ function TimeDisplay() {
     }, [currentIndex])
 
     return (
-        <div className="absolute bottom-16 right-8 text-brand-black-1000 dark:text-brand-white-100 text-right overflow-hidden">
+        <div className="absolute bottom-8 right-8 text-brand-black-1000 dark:text-brand-white-100 text-right overflow-hidden">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentIndex}

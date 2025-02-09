@@ -8,7 +8,7 @@ function VersionDisplay() {
     )[0]
 
     return (
-        <Link href="/version" className="absolute left-1/2 bottom-8 -translate-x-1/2">
+        <Link href="/version" className="absolute left-1/2 bottom-1/2 translate-x-[-50%] translate-y-[50%]">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 0.05, y: 0 }}
