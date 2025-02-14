@@ -37,19 +37,21 @@ export default function Paragraph({ children, ctaText, ctaLink, hoverContents = 
     }
 
     return (
-        <div className="group relative transition-all duration-300 hover:pl-4 hover:border-l-2 border-brand-black-1000 dark:border-brand-white-100">
-            <p className='max-w-[75ch] mb-16'>
-                {highlightedText(children as string)}
-            </p>
-            {ctaText && ctaLink ? (
-                <div className="absolute top-full mt-2 opacity-0 transform translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                    <Link href={ctaLink}>
-                        <button className="inline-flex items-center justify-center rounded px-4 py-2 text-sm font-medium bg-brand-black-1000 text-brand-white-100 dark:bg-brand-white-100 dark:text-brand-black-1000 hover:opacity-90 transition-opacity hover:bg-brand-black-800 dark:hover:bg-brand-black-700 focus">
-                            {ctaText}
-                        </button>
-                    </Link>
-                </div>
-            ) : null}
+        <div className="mb-12">
+            <div className="group relative transition-all z-10 duration-300 hover:pl-4 hover:border-l-[1px] border-brand-black-1000 dark:border-brand-white-100">
+                <p className='max-w-[75ch] mb-0'>
+                    {highlightedText(children as string)}
+                </p>
+                {ctaText && ctaLink ? (
+                    <div className="pt-4 opacity-0 transform -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                        <Link href={ctaLink}>
+                            <button className="inline-flex items-center justify-center rounded px-4 py-2 text-sm font-medium bg-brand-black-1000 text-brand-white-100 dark:bg-brand-white-100 dark:text-brand-black-1000 hover:bg-brand-black-800 dark:hover:bg-brand-white-300 transition-all focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:ring-opacity-50">
+                                {ctaText}
+                            </button>
+                        </Link>
+                    </div>
+                ) : null}
+            </div>
         </div>
     )
 }

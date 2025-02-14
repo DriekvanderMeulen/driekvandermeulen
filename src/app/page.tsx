@@ -2,7 +2,7 @@ import Paragraph from "@/components/typography/paragraph";
 import { Link2Icon } from "@radix-ui/react-icons";
 export default function Page() {
   return (
-    <div className="flex items-left justify-start">
+    <div className="flex items-left mt-16 justify-start">
       <div className="p-4 rounded-lg gap-4">
         <h1 className='text-4xl font-extralight mb-4 max-w-[50ch]'>Hi, I&apos;m Driek</h1>
 
@@ -35,7 +35,9 @@ export default function Page() {
           On top of that, I also run @driekdev, where I juggle being the CEO, Senior Developer, and—most importantly—the coffee intern.
           At Driek.dev, I turn passion projects into reality, hoping that maybe, just maybe, someone downloads my app and gets me one step closer to buying a #LegoDeathStar.
         </Paragraph>
-
+        <h2 className="text-2xl font-extralight mb-4 max-w-[50ch]">
+          Some things about me
+        </h2>
         <Paragraph
           ctaText="Read more about me"
           ctaLink="/about/who-am-i"
@@ -69,7 +71,9 @@ export default function Page() {
           My weapon of choice? TypeScript, React, and, 99% of the time, #NextJS.
           I build software to make my life easier—because why spend 10 minutes doing something manually when I can spend 10 hours failing to automate it?
         </Paragraph>
-
+        <h2 className="text-2xl font-extralight mb-4 max-w-[50ch]">
+          My portfolio
+        </h2>
         <Paragraph ctaText="Check out my portfolio" ctaLink="/about/portfolio"
           hoverContents={[
             <>
@@ -98,7 +102,9 @@ export default function Page() {
           My projects fall into three categories: @35 related, @CMD related, and my own creations.
           If you want the full #DriekExperience, check out at least one from each category.
         </Paragraph>
-
+        <h2 className="text-2xl font-extralight mb-4 max-w-[50ch]">
+          My lab
+        </h2>
         <Paragraph ctaText="Open Pandora&apos;s Box" ctaLink="/lab"
           hoverContents={[
             <>

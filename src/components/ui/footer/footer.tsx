@@ -7,7 +7,7 @@ import { GitHubLogoIcon, InstagramLogoIcon, LinkedInLogoIcon, EnvelopeClosedIcon
 import FooterDrawer from './drawer'
 export default function Footer() {
     return (
-        <div className="h-[30vh] z-50 relative bg-brand-white-200 dark:bg-brand-black-800">
+        <div className="h-[30vh] mt-32 z-50 relative bg-brand-white-200 dark:bg-brand-black-800">
             <div className="flex h-full flex-row p-8 w-full relative">
                 <div className="flex flex-col min-h-full justify-between">
                     <Link
@@ -40,6 +40,12 @@ export default function Footer() {
                     </Link>
                 </div>
                 <div className="flex pl-16 flex-col text-xl justify-center gap-8 h-full">
+                    <Link href="/" className="dark:text-brand-white-100 text-brand-black-1000 relative group">
+                        <span className="relative">
+                            <span className="absolute left-0 w-0 hover:opacity-80 overflow-hidden group-hover:w-full transition-all duration-300 ease-in-out">Home</span>
+                            <span>Home</span>
+                        </span>
+                    </Link>
                     <Link href="/about" className="dark:text-brand-white-100 text-brand-black-1000 relative group">
                         <span className="relative">
                             <span className="absolute left-0 w-0 hover:opacity-80 overflow-hidden group-hover:w-full transition-all duration-300 ease-in-out">About</span>
@@ -59,13 +65,10 @@ export default function Footer() {
                         </span>
                     </Link>
                 </div>
-                <div className="absolute text-xl font-bold left-1/2 -translate-x-1/2 top-8 text-brand-black-1000 dark:text-brand-white-100 opacity-10">
-                    © {new Date().getFullYear()} Driek van der Meulen
-                </div>
                 <TimeDisplay />
                 <EmploymentText />
-                <VersionDisplay />
                 <FooterDrawer />
+                <VersionDisplay />
             </div>
         </div>
     )

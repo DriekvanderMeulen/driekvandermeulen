@@ -17,7 +17,7 @@ export default function FooterDrawer() {
                 </Drawer.Trigger>
 
                 <Drawer.Portal>
-                    <Drawer.Content className="bg-brand-white-200 dark:bg-brand-black-800 fixed bottom-0 left-0 right-0 h-[100vh] rounded-t-[10px] flex flex-col z-40">
+                    <Drawer.Content className="bg-brand-white-200 dark:bg-brand-black-800 fixed bottom-0 left-0 right-0 h-[100vh] rounded-t-[10px] flex flex-col z-[99]">
                         <div className="p-4 text-center bg-brand-white-300 dark:bg-brand-black-900 rounded-t-[10px] flex-1">
                             <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 dark:bg-zinc-700 mb-8" />
                             <div className="max-w-3xl mx-auto">

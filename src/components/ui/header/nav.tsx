@@ -3,11 +3,25 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import MatrixBackground from '../matrix/MatrixBackground'
+import DarkModeToggle from "../dark-mode-toggle";
 
 const NavigationMenuDemo = () => {
     return (
         <NavigationMenu.Root className="relative z-10 flex w-screen justify-center">
-            <NavigationMenu.List className="center m-0 flex list-none p-1 shadow-[0_2px_10px] shadow-blackA4">
+            <style jsx global>{`
+                @keyframes gradient-rotate {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+                    50% {
+                        background-position: 100% 50%;
+                    }
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+            `}</style>
+            <NavigationMenu.List className="center m-0 flex list-none px-14">
                 <NavigationMenu.Item>
                     <NavigationMenu.Trigger className="group flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[15px] font-medium leading-none text-brand-black-1000 dark:text-brand-white-100 outline-none hover:opacity-80 transition-colors focus:shadow-[0_0_0_2px] focus:shadow-brand-green-500">
                         About me{" "}
@@ -16,8 +30,8 @@ const NavigationMenuDemo = () => {
                             aria-hidden
                         />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto">
-                        <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr]">
+                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto bg-brand-white-200 dark:bg-brand-black-800 rounded-md">
+                        <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr] relative z-[1]">
                             <li className="row-span-3 grid">
                                 <NavigationMenu.Link href="/about/who-am-i" asChild>
                                     <a
@@ -47,8 +61,8 @@ const NavigationMenuDemo = () => {
                             aria-hidden
                         />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto">
-                        <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr]">
+                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto bg-brand-white-200 dark:bg-brand-black-800 rounded-md">
+                        <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr] relative z-[1]">
                             <li className="row-span-3 grid">
                                 <NavigationMenu.Link href="/portfolio" asChild>
                                     <a
@@ -78,14 +92,14 @@ const NavigationMenuDemo = () => {
                             aria-hidden
                         />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto">
-                        <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr]">
+                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto bg-brand-white-200 dark:bg-brand-black-800 rounded-md">
+                        <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr] relative z-[1]">
                             <li className="row-span-full col-span-full">
                                 <NavigationMenu.Link href="/lab" asChild>
                                     <a
                                         className="relative flex h-full w-full select-none flex-col justify-end rounded-md p-[25px] no-underline outline-none focus:shadow-[0_0_0_2px] focus:shadow-brand-green-500 bg-brand-black-900 overflow-hidden"
                                     >
-                                        <MatrixBackground color="#2b6072" charset="01" size={15} fps={30} />
+                                        <MatrixBackground charset="01" size={15} fps={30} />
                                         <div className="relative mb-[7px] mt-16 text-xl font-medium text-center leading-[1.2] text-white">
                                             Lab
                                         </div>
@@ -97,6 +111,11 @@ const NavigationMenuDemo = () => {
                             </li>
                         </ul>
                     </NavigationMenu.Content>
+                </NavigationMenu.Item>
+                <NavigationMenu.Item>
+                    <NavigationMenu.Trigger className="group flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[15px] font-medium leading-none text-brand-black-1000 dark:text-brand-white-100 outline-none hover:opacity-80 transition-colors focus:shadow-[0_0_0_2px] focus:shadow-brand-green-500">
+                        <DarkModeToggle />
+                    </NavigationMenu.Trigger>
                 </NavigationMenu.Item>
                 <NavigationMenu.Indicator className="top-full z-10 flex h-2.5 items-end justify-center overflow-hidden transition-[width,transform_250ms_ease] data-[state=hidden]:animate-fadeOut data-[state=visible]:animate-fadeIn">
                     <div className="relative top-[70%] size-2.5 rotate-45 rounded-tl-sm bg-brand-white-100 dark:bg-brand-black-800" />
@@ -121,13 +140,13 @@ const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
             <NavigationMenu.Link asChild>
                 <a
                     className={classNames(
-                        'block select-none rounded-md p-3 text-[15px] leading-none no-underline outline-none transition-colors hover:opacity-80 focus:shadow-[0_0_0_2px] focus:shadow-brand-green-500',
+                        'block select-none rounded-md p-3 text-[15px] leading-none no-underline outline-none transition-colors group hover:bg-opacity-5 focus:shadow-[0_0_0_2px] focus:shadow-brand-green-500',
                         className
                     )}
                     {...props}
                     ref={forwardedRef}
                 >
-                    <div className="mb-[5px] font-medium leading-[1.2] text-brand-black-1000 dark:text-brand-white-100">
+                    <div className="mb-[5px] font-medium leading-[1.2] text-brand-black-1000 dark:text-brand-white-100 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-[#0066DB] group-hover:via-[#18bf74] group-hover:to-[#0066DB] group-hover:bg-clip-text group-hover:text-transparent">
                         {title}
                     </div>
                     <p className="leading-[1.4] text-brand-black-100 dark:text-brand-white-300">{children}</p>

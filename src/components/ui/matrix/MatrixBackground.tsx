@@ -3,14 +3,16 @@
 import { useEffect, useRef } from 'react'
 
 interface MatrixBackgroundProps {
-    color?: string
+    color?: string | Array<string>
+    darkModeColor?: string | Array<string>
     charset?: string
     size?: number
     fps?: number
 }
 
 export default function MatrixBackground({
-    color = '#2b6072',
+    color = ['#0066DB', '#18bf74'],
+    darkModeColor = ['#0066DB', '#18bf74'],
     charset = '01',
     size = 25,
     fps = 60
@@ -36,7 +38,14 @@ export default function MatrixBackground({
         const draw = () => {
             ctx.fillStyle = 'rgba(0,0,0,0.05)'
             ctx.fillRect(0, 0, w, h)
-            ctx.fillStyle = color
+
+            // Create gradient for characters
+            const gradient = ctx.createLinearGradient(0, 0, w, h)
+            const colors = Array.isArray(color) ? color : [color]
+            colors.forEach((c, i) => {
+                gradient.addColorStop(i / (colors.length - 1), c)
+            })
+            ctx.fillStyle = gradient
 
             ctx.font = size + 'px monospace'
             for (let i = 0; i < p.length; i++) {
@@ -55,13 +64,12 @@ export default function MatrixBackground({
             window.removeEventListener('resize', resize)
             clearInterval(interval)
         }
-    }, [color, charset, size, fps])
+    }, [color, darkModeColor, charset, size, fps])
 
     return (
         <canvas
             ref={canvasRef}
-            className="absolute inset-0 w-full h-full"
-            style={{ mixBlendMode: 'screen' }}
+            className="absolute inset-0 w-full h-full mix-blend-screen"
         />
     )
 } 
