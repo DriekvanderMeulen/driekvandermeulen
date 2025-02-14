@@ -22,12 +22,24 @@
     },
     {
       "version": "alpha 0.0.4",
-      "releaseDate": "2025-01-27",
+      "releaseDate": "2025-02-09",
       "keyPoints": [
         "Finalized footer and drawer",
         "Added navbar",
         "Added secret page",
         "Added breadcrumb navigation"
+      ]
+    },
+    {
+      "version": "alpha 0.0.5",
+      "releaseDate": "2025-02-14",
+      "keyPoints": [
+        "Added logo",
+        "Finalized breadcrumb navigation",
+        "Added paragraph component",
+        "Added homepage content",
+        "Added email to the footer",
+        "Header UI tweaks"
       ]
     }
   ]

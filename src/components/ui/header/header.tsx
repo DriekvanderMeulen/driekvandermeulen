@@ -1,10 +1,8 @@
 'use client'
-import DarkModeToggle from '@/components/ui/dark-mode-toggle';
 import { handleNavScroll } from '@/components/ui/header/nav-scroll';
 import { useEffect } from 'react';
-import Breadcrumb from '@/components/ui/Breadcrumb';
 import Nav from '@/components/ui/header/nav';
-
+import Image from 'next/image';
 const Header: React.FC = () => {
 
     useEffect(() => {
@@ -18,12 +16,12 @@ const Header: React.FC = () => {
     return (
         <header className='bg-brand-white-100 dark:bg-brand-black-900 fixed top-0 left-0 right-0 navscroll'>
             <div className='px-48 py-4 flex items-center justify-between'>
-                <Breadcrumb />
+                <Image src='/logo.svg' alt='Driek van der Meulen' width={75} height={75} />
                 <div className="flex items-center">
                     <Nav />
-                    <DarkModeToggle />
                 </div>
             </div>
+            <div className="mx-48 border-b-2 border-brand-black dark:border-brand-white-100" />
         </header>
     );
 };

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { SunIcon, MoonIcon } from '@radix-ui/react-icons';
 
 // Helper functions for dark mode management
 const initializeDarkMode = () => {
@@ -60,16 +59,8 @@ const DarkModeToggle = () => {
     };
 
     return (
-        <button
-            onClick={handleToggle}
-            aria-label="Toggle dark mode"
-            className="p-2 text-brand-black-500 dark:text-brand-white-500 "
-        >
-            <div className='bg-transparent w-6 h-6 flex items-center justify-center rounded-full transition-all duration-300'>
-                <div className='w-5 h-5 rounded-full  flex items-center justify-center'>
-                    {isDarkMode ? <SunIcon /> : <MoonIcon />}
-                </div>
-            </div>
+        <button onClick={handleToggle}>
+            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
         </button>
     );
 };
