@@ -7,7 +7,7 @@ import DarkModeToggle from "../dark-mode-toggle";
 
 const NavigationMenuDemo = () => {
     return (
-        <NavigationMenu.Root className="relative z-10 flex w-screen justify-center">
+        <NavigationMenu.Root className="relative z-10 flex w-full justify-end">
             <style jsx global>{`
                 @keyframes gradient-rotate {
                     0% {
@@ -21,7 +21,7 @@ const NavigationMenuDemo = () => {
                     }
                 }
             `}</style>
-            <NavigationMenu.List className="center m-0 flex list-none px-14">
+            <NavigationMenu.List className="m-0 flex list-none">
                 <NavigationMenu.Item>
                     <NavigationMenu.Trigger className="group flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[15px] font-medium leading-none text-brand-black-1000 dark:text-brand-white-100 outline-none hover:opacity-80 transition-colors focus:shadow-[0_0_0_2px] focus:shadow-brand-green-500">
                         About me{" "}
@@ -30,7 +30,7 @@ const NavigationMenuDemo = () => {
                             aria-hidden
                         />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto bg-brand-white-200 dark:bg-brand-black-800 rounded-md">
+                    <NavigationMenu.Content className="absolute right-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto bg-brand-white-200 dark:bg-brand-black-800 rounded-md">
                         <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr] relative z-[1]">
                             <li className="row-span-3 grid">
                                 <NavigationMenu.Link href="/about/who-am-i" asChild>
@@ -61,7 +61,7 @@ const NavigationMenuDemo = () => {
                             aria-hidden
                         />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto bg-brand-white-200 dark:bg-brand-black-800 rounded-md">
+                    <NavigationMenu.Content className="absolute right-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto bg-brand-white-200 dark:bg-brand-black-800 rounded-md">
                         <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr] relative z-[1]">
                             <li className="row-span-3 grid">
                                 <NavigationMenu.Link href="/portfolio" asChild>
@@ -92,7 +92,7 @@ const NavigationMenuDemo = () => {
                             aria-hidden
                         />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="absolute left-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto bg-brand-white-200 dark:bg-brand-black-800 rounded-md">
+                    <NavigationMenu.Content className="absolute right-0 top-0 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto bg-brand-white-200 dark:bg-brand-black-800 rounded-md">
                         <ul className="one m-0 grid list-none gap-x-2.5 p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr] relative z-[1]">
                             <li className="row-span-full col-span-full">
                                 <NavigationMenu.Link href="/lab" asChild>
@@ -122,8 +122,8 @@ const NavigationMenuDemo = () => {
                 </NavigationMenu.Indicator>
             </NavigationMenu.List>
 
-            <div className="perspective-[2000px] absolute left-0 top-full flex w-full justify-center">
-                <NavigationMenu.Viewport className="relative mt-2.5 h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-md bg-brand-white-100 dark:bg-brand-black-800 transition-[width,_height] duration-300 data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn sm:w-[var(--radix-navigation-menu-viewport-width)]" />
+            <div className="perspective-[2000px] absolute right-0 top-full">
+                <NavigationMenu.Viewport className="relative mt-2.5 h-[var(--radix-navigation-menu-viewport-height)] origin-[top_right] overflow-hidden rounded-md bg-brand-white-100 dark:bg-brand-black-800 transition-[width,_height] duration-300 data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn sm:w-[var(--radix-navigation-menu-viewport-width)]" />
             </div>
         </NavigationMenu.Root>
     );
