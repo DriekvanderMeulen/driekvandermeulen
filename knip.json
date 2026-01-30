@@ -1,0 +1,43 @@
+{
+	"$schema": "https://unpkg.com/knip@latest/schema.json",
+	"workspaces": {
+		".": {
+			"entry": ["package.json", "turbo.json", "prettier.config.js"]
+		},
+		"apps/web": {
+			"entry": [
+				"next.config.js",
+				"app/**/*.{ts,tsx}",
+				"middleware.ts",
+				"lib/**/*.ts"
+			],
+			"ignore": ["app/globals.css", "app/layout.tsx", "app/page.tsx"]
+		},
+		"packages/eslint-config": {
+			"entry": ["*.js"]
+		},
+		"packages/typescript-config": {
+			"entry": ["*.json"]
+		},
+		"packages/ui": {
+			"entry": ["src/**/*.{ts,tsx}"]
+		}
+	},
+	"ignore": [
+		"**/*.d.ts",
+		"**/node_modules/**",
+		"**/.next/**",
+		"**/dist/**",
+		"**/build/**",
+		"**/*.config.js",
+		"**/*.config.ts",
+		"**/drizzle/**",
+		"**/test-results/**",
+		"**/public/**",
+		"**/coverage/**",
+		"**/.turbo/**",
+		"**/out/**",
+		"**/.vercel/**"
+	],
+	"ignoreDependencies": ["@types/*", "typescript", "prettier", "turbo"]
+}

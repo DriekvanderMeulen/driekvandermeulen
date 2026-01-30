@@ -1,24 +1,30 @@
 {
-  "name": "kiban",
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
-  },
-  "devDependencies": {
-    "prettier": "^3.7.4",
-    "turbo": "^2.8.1",
-    "typescript": "5.9.2"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "bun@1.2.20",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+	"name": "kiban",
+	"private": true,
+	"scripts": {
+		"build": "prettier --write \"**/*.{ts,tsx,md}\" && (knip --reporter json > knip-report.json || true) && if jq '.deletable | length > 0' knip-report.json | grep -q true; then echo 'Build aborted: knip found deletable files.' && exit 1; else turbo run build; fi",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint && eslint . --max-warnings 0",
+		"knip": "knip",
+		"knip:unused": "knip --reporter json > knip-report.json",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"check-types": "turbo run check-types"
+	},
+	"devDependencies": {
+		"@trivago/prettier-plugin-sort-imports": "^6.0.2",
+		"eslint": "^9.39.2",
+		"knip": "^5.82.1",
+		"prettier": "^3.8.1",
+		"prettier-plugin-tailwindcss": "^0.7.2",
+		"turbo": "^2.8.1",
+		"typescript": "5.9.2"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"packageManager": "bun@1.2.20",
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	]
 }
