@@ -38,4 +38,4 @@ yarn-error.log*
 *.pem
 
 # Knip
-.knip-report.json
+knip-report.json
