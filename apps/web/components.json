@@ -1,0 +1,25 @@
+{
+	"$schema": "https://ui.shadcn.com/schema.json",
+	"style": "default",
+	"rsc": true,
+	"tsx": true,
+	"tailwind": {
+		"config": "",
+		"css": "app/globals.css",
+		"baseColor": "neutral",
+		"cssVariables": true
+	},
+	"aliases": {
+		"components": "@/components",
+		"utils": "../../packages/ui/src/utils",
+		"ui": "../../packages/ui/src",
+		"lib": "../../packages/ui/src",
+		"hooks": "../../packages/ui/src/hooks"
+	},
+	"registries": {
+		"@ai-elements": "https://ai-sdk.dev/elements/api/registry/{name}.json",
+		"@8starlabs-ui": "https://ui.8starlabs.com/r/{name}.json",
+		"@aceternity": "https://ui.aceternity.com/registry/{name}.json",
+		"@bundui": "https://bundui.io/r/{name}.json"
+	}
+}

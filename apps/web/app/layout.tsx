@@ -3,13 +3,35 @@ import localFont from 'next/font/local'
 
 import './globals.css'
 
-const geistSans = localFont({
-	src: './fonts/GeistVF.woff',
-	variable: '--font-geist-sans',
+const quantico = localFont({
+	src: [
+		{
+			path: './fonts/Quantico/Quantico-Regular.ttf',
+			weight: '400',
+			style: 'normal',
+		},
+		{
+			path: './fonts/Quantico/Quantico-Italic.ttf',
+			weight: '400',
+			style: 'italic',
+		},
+		{
+			path: './fonts/Quantico/Quantico-Bold.ttf',
+			weight: '700',
+			style: 'normal',
+		},
+		{
+			path: './fonts/Quantico/Quantico-BoldItalic.ttf',
+			weight: '700',
+			style: 'italic',
+		},
+	],
+	variable: '--font-quantico',
 })
-const geistMono = localFont({
-	src: './fonts/GeistMonoVF.woff',
-	variable: '--font-geist-mono',
+
+const inter = localFont({
+	src: './fonts/Inter/Inter-VariableFont_opsz,wght.ttf',
+	variable: '--font-inter',
 })
 
 export const metadata: Metadata = {
@@ -24,7 +46,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable}`}>
+			<body className={`${quantico.variable} ${inter.variable}`}>
 				{children}
 			</body>
 		</html>
