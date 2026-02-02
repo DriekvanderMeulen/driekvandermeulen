@@ -39,3 +39,6 @@ yarn-error.log*
 
 # Knip
 knip-report.json
+
+# Git worktrees
+.worktrees
