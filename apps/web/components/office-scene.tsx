@@ -381,6 +381,25 @@ function Player() {
 			.multiplyScalar(WALK_SPEED)
 			.applyEuler(camera.rotation)
 
+		// Debug: Log movement calculation when keys are active
+		if (
+			keyState.forward ||
+			keyState.backward ||
+			keyState.left ||
+			keyState.right
+		) {
+			console.log('[DEBUG] Direction calculated:', {
+				frontVector: {
+					x: _frontVector.x,
+					y: _frontVector.y,
+					z: _frontVector.z,
+				},
+				sideVector: { x: _sideVector.x, y: _sideVector.y, z: _sideVector.z },
+				direction: { x: _direction.x, y: _direction.y, z: _direction.z },
+				position: { x: position.x, y: position.y, z: position.z },
+			})
+		}
+
 		// Apply horizontal movement, preserve vertical velocity
 		body.setLinvel({ x: _direction.x, y: velocity.y, z: _direction.z }, true)
 
