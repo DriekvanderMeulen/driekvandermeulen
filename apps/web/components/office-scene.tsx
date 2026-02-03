@@ -1,11 +1,6 @@
 'use client'
 
-import {
-	PointerLockControls,
-	Preload,
-	useGLTF,
-	useProgress,
-} from '@react-three/drei'
+import { PointerLockControls, Preload, useProgress } from '@react-three/drei'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
 import {
@@ -16,10 +11,22 @@ import {
 	RigidBody,
 	TrimeshCollider,
 } from '@react-three/rapier'
-import { Suspense, memo, useCallback, useEffect, useRef, useState } from 'react'
+import {
+	Suspense,
+	createContext,
+	memo,
+	useContext,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react'
 import * as THREE from 'three'
 import type { PointerLockControls as PointerLockControlsImpl } from 'three-stdlib'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+
+import { ZoneDetailPanel } from '@/components/zone-detail-panel'
+import { useZoneInteraction } from '@/hooks/use-zone-interaction'
 
 // Constants
 const WALK_SPEED = 4.5
@@ -33,6 +40,11 @@ const _direction = new THREE.Vector3()
 const _frontVector = new THREE.Vector3()
 const _sideVector = new THREE.Vector3()
 
+// Context for trigger zone data
+const TriggerZoneContext = createContext<{
+	setTriggerZones: (zones: Array<TriggerZoneData>) => void
+} | null>(null)
+
 // Collision mesh data structure
 interface CollisionMeshData {
 	name: string
@@ -43,6 +55,14 @@ interface CollisionMeshData {
 	scale: THREE.Vector3
 }
 
+// Trigger zone data structure
+interface TriggerZoneData {
+	name: string
+	boundingBox: THREE.Box3
+	center: THREE.Vector3
+	size: THREE.Vector3
+}
+
 // Office model with visual processing
 const OfficeModel = memo(function OfficeModel() {
 	const [scene, setScene] = useState<THREE.Group | null>(null)
@@ -50,6 +70,7 @@ const OfficeModel = memo(function OfficeModel() {
 		Array<CollisionMeshData>
 	>([])
 	const hasLoggedRef = useRef(false)
+	const context = useContext(TriggerZoneContext)
 
 	useEffect(() => {
 		const loader = new GLTFLoader()
@@ -65,7 +86,9 @@ const OfficeModel = memo(function OfficeModel() {
 					'Failed to load GLB. The file may have texture reference issues:',
 					error,
 				)
-				console.error('Error details:', error.message, error.stack)
+				if (error instanceof Error) {
+					console.error('Error details:', error.message, error.stack)
+				}
 			},
 		)
 	}, [])
@@ -76,6 +99,8 @@ const OfficeModel = memo(function OfficeModel() {
 
 		const colliders: Array<CollisionMeshData> = []
 		const colliderNames: Array<string> = []
+		const triggers: Array<TriggerZoneData> = []
+		const triggerNames: Array<string> = []
 		const lightNames: Array<string> = []
 
 		scene.traverse((child) => {
@@ -89,7 +114,7 @@ const OfficeModel = memo(function OfficeModel() {
 				) {
 					child.castShadow = true
 					// Set shadow map size if not already set
-					if (!child.shadow.mapSize) {
+					if (!child.shadow.mapSize.width) {
 						child.shadow.mapSize.width = 2048
 						child.shadow.mapSize.height = 2048
 					}
@@ -99,6 +124,43 @@ const OfficeModel = memo(function OfficeModel() {
 
 			if (child instanceof THREE.Mesh) {
 				const isCollider = child.name.startsWith('col_')
+				const isTrigger = child.name.startsWith('range_')
+
+				if (isTrigger) {
+					// Hide trigger zones (invisible, no shadows, no light interaction)
+					child.visible = false
+					child.castShadow = false
+					child.receiveShadow = false
+
+					// Compute world-space bounding box
+					child.updateWorldMatrix(true, false)
+					const geometry = child.geometry
+
+					if (geometry) {
+						// Clone geometry and apply world transform
+						const clonedGeometry = geometry.clone()
+						clonedGeometry.applyMatrix4(child.matrixWorld)
+
+						// Compute bounding box in world space
+						clonedGeometry.computeBoundingBox()
+						const bbox = clonedGeometry.boundingBox
+
+						if (bbox) {
+							const worldBox = new THREE.Box3(
+								bbox.min.clone(),
+								bbox.max.clone(),
+							)
+
+							triggers.push({
+								name: child.name,
+								boundingBox: worldBox,
+								center: worldBox.getCenter(new THREE.Vector3()),
+								size: worldBox.getSize(new THREE.Vector3()),
+							})
+							triggerNames.push(child.name)
+						}
+					}
+				}
 
 				if (isCollider) {
 					// Hide collision objects from view
@@ -172,6 +234,16 @@ const OfficeModel = memo(function OfficeModel() {
 				console.log('===============================')
 			}
 
+			if (triggerNames.length > 0) {
+				console.log('=== TRIGGER ZONES FOUND ===')
+				console.log(`Total: ${triggerNames.length} trigger zones`)
+				console.log('Names:')
+				triggerNames.forEach((name, index) => {
+					console.log(`  ${index + 1}. ${name}`)
+				})
+				console.log('===========================')
+			}
+
 			if (lightNames.length > 0) {
 				console.log('=== LIGHTS FOUND ===')
 				console.log(`Total: ${lightNames.length} lights`)
@@ -186,6 +258,8 @@ const OfficeModel = memo(function OfficeModel() {
 		}
 
 		setCollisionMeshes(colliders)
+		context?.setTriggerZones(triggers)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [scene])
 
 	if (!scene) return null
@@ -223,7 +297,7 @@ interface KeyStateRef {
 	jump: boolean
 }
 
-function useKeyboardControls(): React.RefObject<KeyStateRef> {
+function useKeyboardControls(): React.MutableRefObject<KeyStateRef> {
 	const keys = useRef<KeyStateRef>({
 		forward: false,
 		backward: false,
@@ -339,6 +413,55 @@ function Player() {
 	)
 }
 
+// Trigger zone detector component
+interface TriggerZoneDetectorProps {
+	zones: Array<TriggerZoneData>
+	onEnter?: (zoneName: string) => void
+	onExit?: (zoneName: string) => void
+}
+
+function TriggerZoneDetector({
+	zones,
+	onEnter,
+	onExit,
+}: TriggerZoneDetectorProps) {
+	const { camera } = useThree()
+	const activeZonesRef = useRef<Set<string>>(new Set())
+
+	useFrame(() => {
+		if (zones.length === 0) return
+
+		const cameraPos = camera.position
+		const currentlyActive = new Set<string>()
+
+		// Check each zone
+		for (const zone of zones) {
+			if (zone.boundingBox.containsPoint(cameraPos)) {
+				currentlyActive.add(zone.name)
+
+				// Check if this is a NEW entry (wasn't active before)
+				if (!activeZonesRef.current.has(zone.name)) {
+					console.log(`Entered zone: ${zone.name}`)
+					onEnter?.(zone.name)
+				}
+			}
+		}
+
+		// Check for exits (was active, but no longer)
+		for (const previousZone of activeZonesRef.current) {
+			if (!currentlyActive.has(previousZone)) {
+				console.log(`Exited zone: ${previousZone}`)
+				onExit?.(previousZone)
+			}
+		}
+
+		// Update active set for next frame
+		activeZonesRef.current = currentlyActive
+	})
+
+	return null
+}
+
 // Memoized floor (never changes)
 const Floor = memo(function Floor() {
 	return (
@@ -433,11 +556,19 @@ function CameraPositionReporter({ onUpdate }: CameraPositionReporterProps) {
 
 function Scene({
 	onCameraPosUpdate,
+	onZoneEnter,
+	onZoneExit,
 }: {
 	onCameraPosUpdate?: (pos: { x: number; y: number; z: number }) => void
+	onZoneEnter?: (zoneName: string) => void
+	onZoneExit?: (zoneName: string) => void
 }) {
+	const [triggerZones, setTriggerZones] = useState<Array<TriggerZoneData>>([])
+
+	const contextValue = useMemo(() => ({ setTriggerZones }), [setTriggerZones])
+
 	return (
-		<>
+		<TriggerZoneContext.Provider value={contextValue}>
 			{onCameraPosUpdate ? (
 				<CameraPositionReporter onUpdate={onCameraPosUpdate} />
 			) : null}
@@ -447,8 +578,15 @@ function Scene({
 				<OfficeModel />
 			</Suspense>
 			<Player />
+			{triggerZones.length > 0 ? (
+				<TriggerZoneDetector
+					zones={triggerZones}
+					onEnter={onZoneEnter}
+					onExit={onZoneExit}
+				/>
+			) : null}
 			<Preload all />
-		</>
+		</TriggerZoneContext.Provider>
 	)
 }
 
@@ -558,6 +696,9 @@ export default function OfficeScene() {
 	const { progress, active } = useProgress()
 	const [isLoaded, setIsLoaded] = useState(false)
 
+	const { displayedZone, handleZoneEnter, handleZoneExit } =
+		useZoneInteraction()
+
 	useEffect(() => {
 		if (!active && progress === 100) {
 			// Small delay to ensure smooth transition
@@ -622,7 +763,11 @@ export default function OfficeScene() {
 				flat
 			>
 				<Physics gravity={[0, -9.81, 0]}>
-					<Scene onCameraPosUpdate={setCameraPos} />
+					<Scene
+						onCameraPosUpdate={setCameraPos}
+						onZoneEnter={handleZoneEnter}
+						onZoneExit={handleZoneExit}
+					/>
 				</Physics>
 				<EffectComposer>
 					<Bloom
@@ -632,6 +777,8 @@ export default function OfficeScene() {
 					/>
 				</EffectComposer>
 			</Canvas>
+
+			{started && <ZoneDetailPanel zone={displayedZone} />}
 		</div>
 	)
 }

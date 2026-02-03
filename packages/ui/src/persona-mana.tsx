@@ -1,80 +1,81 @@
-"use client";
+'use client'
 
-import { Persona, type PersonaState } from "@/components/ai-elements/persona";
-import { Button } from "@/registry/default/ui/button";
-import { ButtonGroup } from "@/registry/default/ui/button-group";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/registry/default/ui/tooltip";
+	BrainIcon,
+	CircleIcon,
+	EyeClosedIcon,
+	type LucideIcon,
+	MegaphoneIcon,
+	MicIcon,
+} from 'lucide-react'
+import { useState } from 'react'
+
+import { Persona, type PersonaState } from '@/components/ai-elements/persona'
+import { Button } from '@/registry/default/ui/button'
+import { ButtonGroup } from '@/registry/default/ui/button-group'
 import {
-  BrainIcon,
-  CircleIcon,
-  EyeClosedIcon,
-  type LucideIcon,
-  MegaphoneIcon,
-  MicIcon,
-} from "lucide-react";
-import { useState } from "react";
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from '@/registry/default/ui/tooltip'
 
 const states: {
-  state: PersonaState;
-  icon: LucideIcon;
-  label: string;
+	state: PersonaState
+	icon: LucideIcon
+	label: string
 }[] = [
-  {
-    state: "idle",
-    icon: CircleIcon,
-    label: "Idle",
-  },
-  {
-    state: "listening",
-    icon: MicIcon,
-    label: "Listening",
-  },
-  {
-    state: "thinking",
-    icon: BrainIcon,
-    label: "Thinking",
-  },
-  {
-    state: "speaking",
-    icon: MegaphoneIcon,
-    label: "Speaking",
-  },
-  {
-    state: "asleep",
-    icon: EyeClosedIcon,
-    label: "Asleep",
-  },
-];
+	{
+		state: 'idle',
+		icon: CircleIcon,
+		label: 'Idle',
+	},
+	{
+		state: 'listening',
+		icon: MicIcon,
+		label: 'Listening',
+	},
+	{
+		state: 'thinking',
+		icon: BrainIcon,
+		label: 'Thinking',
+	},
+	{
+		state: 'speaking',
+		icon: MegaphoneIcon,
+		label: 'Speaking',
+	},
+	{
+		state: 'asleep',
+		icon: EyeClosedIcon,
+		label: 'Asleep',
+	},
+]
 
 const Example = () => {
-  const [currentState, setCurrentState] = useState<PersonaState>("idle");
+	const [currentState, setCurrentState] = useState<PersonaState>('idle')
 
-  return (
-    <div className="flex size-full flex-col items-center justify-center gap-4">
-      <Persona className="size-32" state={currentState} variant="mana" />
+	return (
+		<div className="flex size-full flex-col items-center justify-center gap-4">
+			<Persona className="size-32" state={currentState} variant="mana" />
 
-      <ButtonGroup orientation="horizontal">
-        {states.map((state) => (
-          <Tooltip key={state.state}>
-            <TooltipTrigger asChild>
-              <Button
-                onClick={() => setCurrentState(state.state)}
-                size="icon-sm"
-                variant={currentState === state.state ? "default" : "outline"}
-              >
-                <state.icon className="size-4" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{state.label}</TooltipContent>
-          </Tooltip>
-        ))}
-      </ButtonGroup>
-    </div>
-  );
-};
+			<ButtonGroup orientation="horizontal">
+				{states.map((state) => (
+					<Tooltip key={state.state}>
+						<TooltipTrigger asChild>
+							<Button
+								onClick={() => setCurrentState(state.state)}
+								size="icon-sm"
+								variant={currentState === state.state ? 'default' : 'outline'}
+							>
+								<state.icon className="size-4" />
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>{state.label}</TooltipContent>
+					</Tooltip>
+				))}
+			</ButtonGroup>
+		</div>
+	)
+}
 
-export default Example;
+export default Example

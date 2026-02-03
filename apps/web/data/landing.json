@@ -1,0 +1,225 @@
+{
+	"hero": {
+		"greeting": "[ Hi I'm ]",
+		"name": "DRIEK",
+		"tagline": "Creative developer building immersive digital experiences",
+		"studioLink": {
+			"text": "[ Welcome to my studio ]",
+			"href": "/office"
+		},
+		"scrollLabel": "Scroll Down",
+		"brandIndicator": "driek.studio"
+	},
+	"about": {
+		"title": "About Me",
+		"subtitle": "Designer, developer, and creative technologist building the future of digital experiences.",
+		"image": {
+			"src": "/images/about-profile.png",
+			"alt": "Driek - Creative Developer"
+		},
+		"availableBadge": "Available for work",
+		"bioTitle": "Crafting Digital Experiences with Purpose",
+		"bioparagraphs": [
+			"I'm a full-stack developer and designer based in the Netherlands, specializing in creating immersive web experiences that push the boundaries of what's possible in the browser.",
+			"With a background in computer science and a passion for creative technology, I bridge the gap between design and development. From 3D interactions to seamless animations, I build digital products that users love.",
+			"When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community."
+		],
+		"ctas": {
+			"primary": { "text": "View Projects", "href": "#projects" },
+			"secondary": { "text": "Get in Touch", "href": "mailto:contact@driek.studio" }
+		},
+		"accomplishments": [
+			{ "icon": "Code", "value": "50+", "label": "Projects Delivered" },
+			{ "icon": "Users", "value": "30+", "label": "Happy Clients" },
+			{ "icon": "Award", "value": "5+", "label": "Years Experience" },
+			{ "icon": "Rocket", "value": "10+", "label": "Technologies Mastered" }
+		]
+	},
+	"experience": {
+		"title": "Experience",
+		"subtitle": "A track record of building great products with amazing teams.",
+		"jobs": [
+			{
+				"company": "Tech Corp",
+				"role": "Senior Frontend Engineer",
+				"period": "2022 - Present",
+				"description": "Leading the frontend team in building a next-generation SaaS platform using React, Next.js, and WebGL."
+			},
+			{
+				"company": "Creative Agency",
+				"role": "Creative Developer",
+				"period": "2020 - 2022",
+				"description": "Developed award-winning immersive web experiences for global brands. Specialized in GSAP and Three.js animations."
+			},
+			{
+				"company": "StartUp Inc",
+				"role": "Full Stack Developer",
+				"period": "2019 - 2020",
+				"description": "Built the MVP from scratch using the MERN stack. Handled everything from database design to UI implementation."
+			}
+		]
+	},
+	"projects": {
+		"title": "Projects",
+		"subtitle": "A selection of work I'm proud of, from immersive experiences to powerful tools.",
+		"projects": [
+			{
+				"id": 1,
+				"title": "Immersive Portfolio",
+				"description": "A 3D interactive portfolio website built with React Three Fiber and Next.js. Features physics-based interactions and spatial audio.",
+				"tags": ["Next.js", "R3F", "WebGL"],
+				"image": "/images/project-portfolio.png",
+				"large": true,
+				"link": "#"
+			},
+			{
+				"id": 2,
+				"title": "E-Commerce Dashboard",
+				"description": "A comprehensive analytics dashboard for online retailers with real-time data visualization.",
+				"tags": ["React", "D3.js", "Tailwind"],
+				"image": "/images/project-dashboard.png",
+				"large": false,
+				"link": "#"
+			},
+			{
+				"id": 3,
+				"title": "AI Content Generator",
+				"description": "SaaS application leveraging LLMs to help creators generate high-quality blog posts and social media content.",
+				"tags": ["OpenAI", "Node.js", "PostgreSQL"],
+				"image": "/images/project-ai-app.png",
+				"large": false,
+				"link": "#"
+			}
+		]
+	},
+	"skills": {
+		"title": "Skills",
+		"subtitle": "Technologies and tools I use to bring ideas to life.",
+		"categories": [
+			{
+				"name": "Frontend",
+				"icon": "Code",
+				"skills": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js", "WebGL", "GSAP"]
+			},
+			{
+				"name": "Backend",
+				"icon": "Server",
+				"skills": ["Node.js", "Bun", "PostgreSQL", "Drizzle ORM", "GraphQL", "Serverless", "Supabase"]
+			},
+			{
+				"name": "Tools & DevOps",
+				"icon": "Wrench",
+				"skills": ["Git", "Docker", "AWS", "Vercel", "Turborepo", "Figma", "Jest", "CI/CD"]
+			},
+			{
+				"name": "Design",
+				"icon": "Palette",
+				"skills": ["UI/UX", "Wireframing", "Prototyping", "Design Systems", "3D Modeling", "Motion Design"]
+			}
+		]
+	},
+	"education": {
+		"title": "Education",
+		"subtitle": "Foundation of knowledge that powers my craft.",
+		"items": [
+			{
+				"degree": "Bachelor of Computer Science",
+				"institution": "University of Technology",
+				"period": "2018 - 2021",
+				"primary": true
+			},
+			{
+				"degree": "Full Stack Web Development Bootcamp",
+				"institution": "Tech Academy",
+				"period": "2017",
+				"primary": false
+			}
+		]
+	},
+	"whatsNext": {
+		"title": "What's",
+		"titleAccent": "next?",
+		"subtitle": "Let's build something amazing together.",
+		"mainCta": {
+			"title": "Enter my digital\ndesign studio",
+			"description": "Explore a 3D immersive experience of my workspace, projects, and creative process.",
+			"buttonText": "Enter Studio",
+			"href": "/office"
+		},
+		"contactOptions": [
+			{
+				"icon": "Mail",
+				"label": "Get in touch",
+				"href": "mailto:contact@driek.studio",
+				"external": false
+			},
+			{
+				"icon": "FileText",
+				"label": "About me",
+				"href": "#about",
+				"external": false
+			},
+			{
+				"icon": "User",
+				"label": "GitHub",
+				"href": "https://github.com/driekvandermeulen",
+				"external": true
+			}
+		],
+		"tabTitle": "DRIEK.STUDIO",
+		"tabs": {
+			"studio": {
+				"description": "Specialized in creating high-performance, visually stunning web experiences. From 3D interactions to seamless animations, I build the web of tomorrow.",
+				"ctaText": "View Service Offerings"
+			},
+			"freelance": {
+				"description": "Available for contract work and consulting. I verify stack architectures, audit performance, and develop critical components for scaling teams.",
+				"ctaText": "Hire Me"
+			}
+		},
+		"philosophy": {
+			"label": "[ My Philosophy ]",
+			"quote": "\"Code is poetry written for machines to perform.\"",
+			"image": "/images/philosophy.png"
+		}
+	},
+	"footer": {
+		"brand": {
+			"name": "DRIEK.STUDIO",
+			"description": "Building immersive digital experiences that push the boundaries of what's possible on the web."
+		},
+		"quickLinks": {
+			"title": "Quick Links",
+			"links": [
+				{ "text": "Projects", "href": "#projects" },
+				{ "text": "3D Studio", "href": "/office" },
+				{ "text": "Contact", "href": "mailto:contact@driek.studio", "external": false }
+			]
+		},
+		"connect": {
+			"title": "Connect",
+			"links": [
+				{ "icon": "Github", "href": "https://github.com/driekvandermeulen", "label": "GitHub", "external": true },
+				{ "icon": "Twitter", "href": "https://twitter.com/driekvdm", "label": "Twitter", "external": true },
+				{ "icon": "Linkedin", "href": "https://linkedin.com/in/driekvandermeulen", "label": "LinkedIn", "external": true },
+				{ "icon": "Mail", "href": "mailto:contact@driek.studio", "label": "Email" }
+			]
+		},
+		"copyright": "Driek Studio. All rights reserved.",
+		"builtWith": "Built with Next.js, Tailwind, and \u2764\ufe0f"
+	},
+	"navbar": {
+		"brand": "[ D.S ]",
+		"items": [
+			{ "label": "About", "href": "#about" },
+			{ "label": "Experience", "href": "#experience" },
+			{ "label": "Projects", "href": "#projects" },
+			{ "label": "Skills", "href": "#skills" },
+			{ "label": "Education", "href": "#education" }
+		],
+		"cta": {
+			"text": "Enter Studio",
+			"href": "/office"
+		}
+	}
+}

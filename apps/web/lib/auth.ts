@@ -1,10 +1,10 @@
-import { betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "@repo/db";
+import { db } from '@repo/db'
+import { betterAuth } from 'better-auth'
+import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 
 export const auth = betterAuth({
 	database: drizzleAdapter(db, {
-		provider: "pg",
+		provider: 'pg',
 	}),
 	socialProviders: {
 		google: {
@@ -12,7 +12,7 @@ export const auth = betterAuth({
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
 		},
 	},
-});
+})
 
-export type Session = typeof auth.$Infer.Session;
-export type User = typeof auth.$Infer.Session.user;
+export type Session = typeof auth.$Infer.Session
+export type User = typeof auth.$Infer.Session.user

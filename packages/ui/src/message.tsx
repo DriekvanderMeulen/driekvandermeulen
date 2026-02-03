@@ -1,75 +1,76 @@
-"use client";
+'use client'
 
 import {
-  Attachment,
-  AttachmentPreview,
-  AttachmentRemove,
-  Attachments,
-} from "@/components/ai-elements/attachments";
+	CopyIcon,
+	RefreshCcwIcon,
+	ThumbsDownIcon,
+	ThumbsUpIcon,
+} from 'lucide-react'
+import { nanoid } from 'nanoid'
+import { useState } from 'react'
+
 import {
-  Message,
-  MessageAction,
-  MessageActions,
-  MessageBranch,
-  MessageBranchContent,
-  MessageBranchNext,
-  MessageBranchPage,
-  MessageBranchPrevious,
-  MessageBranchSelector,
-  MessageContent,
-  MessageResponse,
-  MessageToolbar,
-} from "@/components/ai-elements/message";
+	Attachment,
+	AttachmentPreview,
+	AttachmentRemove,
+	Attachments,
+} from '@/components/ai-elements/attachments'
 import {
-  CopyIcon,
-  RefreshCcwIcon,
-  ThumbsDownIcon,
-  ThumbsUpIcon,
-} from "lucide-react";
-import { nanoid } from "nanoid";
-import { useState } from "react";
+	Message,
+	MessageAction,
+	MessageActions,
+	MessageBranch,
+	MessageBranchContent,
+	MessageBranchNext,
+	MessageBranchPage,
+	MessageBranchPrevious,
+	MessageBranchSelector,
+	MessageContent,
+	MessageResponse,
+	MessageToolbar,
+} from '@/components/ai-elements/message'
 
 const messages: {
-  key: string;
-  from: "user" | "assistant";
-  versions?: { id: string; content: string }[];
-  content?: string;
-  attachments?: {
-    id: string;
-    type: "file";
-    url: string;
-    mediaType?: string;
-    filename?: string;
-  }[];
+	key: string
+	from: 'user' | 'assistant'
+	versions?: { id: string; content: string }[]
+	content?: string
+	attachments?: {
+		id: string
+		type: 'file'
+		url: string
+		mediaType?: string
+		filename?: string
+	}[]
 }[] = [
-  {
-    key: nanoid(),
-    from: "user",
-    content: "How do React hooks work and when should I use them?",
-    attachments: [
-      {
-        id: nanoid(),
-        type: "file",
-        url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop",
-        mediaType: "image/jpeg",
-        filename: "palace-of-fine-arts.jpg",
-      },
-      {
-        id: nanoid(),
-        type: "file",
-        url: "",
-        mediaType: "application/pdf",
-        filename: "react-hooks-guide.pdf",
-      },
-    ],
-  },
-  {
-    key: nanoid(),
-    from: "assistant",
-    versions: [
-      {
-        id: nanoid(),
-        content: `# React Hooks Guide
+	{
+		key: nanoid(),
+		from: 'user',
+		content: 'How do React hooks work and when should I use them?',
+		attachments: [
+			{
+				id: nanoid(),
+				type: 'file',
+				url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop',
+				mediaType: 'image/jpeg',
+				filename: 'palace-of-fine-arts.jpg',
+			},
+			{
+				id: nanoid(),
+				type: 'file',
+				url: '',
+				mediaType: 'application/pdf',
+				filename: 'react-hooks-guide.pdf',
+			},
+		],
+	},
+	{
+		key: nanoid(),
+		from: 'assistant',
+		versions: [
+			{
+				id: nanoid(),
+				content: `# React Hooks Guide
 
 React hooks are functions that let you "hook into" React state and lifecycle features from function components. Here's what you need to know:
 
@@ -115,10 +116,10 @@ useEffect(() => {
 2. Only call hooks from **React functions** (components or custom hooks)
 
 Would you like to explore more advanced hooks like \`useCallback\` or \`useMemo\`?`,
-      },
-      {
-        id: nanoid(),
-        content: `React hooks are special functions that let you use React features in function components. The most common ones are:
+			},
+			{
+				id: nanoid(),
+				content: `React hooks are special functions that let you use React features in function components. The most common ones are:
 
 - **useState** - for managing component state
 - **useEffect** - for side effects like data fetching
@@ -140,10 +141,10 @@ function Counter() {
 \`\`\`
 
 Which specific hook would you like to learn more about?`,
-      },
-      {
-        id: nanoid(),
-        content: `Absolutely! React hooks are a powerful feature introduced in React 16.8. They solve several problems:
+			},
+			{
+				id: nanoid(),
+				content: `Absolutely! React hooks are a powerful feature introduced in React 16.8. They solve several problems:
 
 ## Key Benefits
 
@@ -163,170 +164,170 @@ Which specific hook would you like to learn more about?`,
 | useMemo | Memoize values |
 
 The beauty of hooks is that they let you reuse stateful logic without changing your component hierarchy. Want to dive into a specific hook?`,
-      },
-    ],
-  },
-];
+			},
+		],
+	},
+]
 
 const Example = () => {
-  const [liked, setLiked] = useState<Record<string, boolean>>({});
-  const [disliked, setDisliked] = useState<Record<string, boolean>>({});
+	const [liked, setLiked] = useState<Record<string, boolean>>({})
+	const [disliked, setDisliked] = useState<Record<string, boolean>>({})
 
-  const handleCopy = (content: string) => {
-    navigator.clipboard.writeText(content);
-  };
+	const handleCopy = (content: string) => {
+		navigator.clipboard.writeText(content)
+	}
 
-  const handleRetry = () => {
-    console.log("Retrying...");
-  };
+	const handleRetry = () => {
+		console.log('Retrying...')
+	}
 
-  return (
-    <div className="flex flex-col gap-4">
-      {/* biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Demo component with complex rendering logic */}
-      {messages.map((message) => (
-        <Message from={message.from} key={message.key}>
-          {message.versions?.length && message.versions.length > 1 ? (
-            <MessageBranch defaultBranch={0} key={message.key}>
-              <MessageBranchContent>
-                {message.versions?.map((version) => (
-                  <MessageContent key={version.id}>
-                    <MessageResponse>{version.content}</MessageResponse>
-                  </MessageContent>
-                ))}
-              </MessageBranchContent>
-              {message.from === "assistant" && (
-                <MessageToolbar>
-                  <MessageBranchSelector from={message.from}>
-                    <MessageBranchPrevious />
-                    <MessageBranchPage />
-                    <MessageBranchNext />
-                  </MessageBranchSelector>
-                  <MessageActions>
-                    <MessageAction
-                      label="Retry"
-                      onClick={handleRetry}
-                      tooltip="Regenerate response"
-                    >
-                      <RefreshCcwIcon className="size-4" />
-                    </MessageAction>
-                    <MessageAction
-                      label="Like"
-                      onClick={() =>
-                        setLiked((prev) => ({
-                          ...prev,
-                          [message.key]: !prev[message.key],
-                        }))
-                      }
-                      tooltip="Like this response"
-                    >
-                      <ThumbsUpIcon
-                        className="size-4"
-                        fill={liked[message.key] ? "currentColor" : "none"}
-                      />
-                    </MessageAction>
-                    <MessageAction
-                      label="Dislike"
-                      onClick={() =>
-                        setDisliked((prev) => ({
-                          ...prev,
-                          [message.key]: !prev[message.key],
-                        }))
-                      }
-                      tooltip="Dislike this response"
-                    >
-                      <ThumbsDownIcon
-                        className="size-4"
-                        fill={disliked[message.key] ? "currentColor" : "none"}
-                      />
-                    </MessageAction>
-                    <MessageAction
-                      label="Copy"
-                      onClick={() =>
-                        handleCopy(
-                          message.versions?.find((v) => v.id)?.content || ""
-                        )
-                      }
-                      tooltip="Copy to clipboard"
-                    >
-                      <CopyIcon className="size-4" />
-                    </MessageAction>
-                  </MessageActions>
-                </MessageToolbar>
-              )}
-            </MessageBranch>
-          ) : (
-            <div key={message.key}>
-              {message.attachments && message.attachments.length > 0 && (
-                <Attachments className="mb-2" variant="grid">
-                  {message.attachments.map((attachment) => (
-                    <Attachment data={attachment} key={attachment.id}>
-                      <AttachmentPreview />
-                      <AttachmentRemove />
-                    </Attachment>
-                  ))}
-                </Attachments>
-              )}
-              <MessageContent>
-                {message.from === "assistant" ? (
-                  <MessageResponse>{message.content}</MessageResponse>
-                ) : (
-                  message.content
-                )}
-              </MessageContent>
-              {message.from === "assistant" && message.versions && (
-                <MessageActions>
-                  <MessageAction
-                    label="Retry"
-                    onClick={handleRetry}
-                    tooltip="Regenerate response"
-                  >
-                    <RefreshCcwIcon className="size-4" />
-                  </MessageAction>
-                  <MessageAction
-                    label="Like"
-                    onClick={() =>
-                      setLiked((prev) => ({
-                        ...prev,
-                        [message.key]: !prev[message.key],
-                      }))
-                    }
-                    tooltip="Like this response"
-                  >
-                    <ThumbsUpIcon
-                      className="size-4"
-                      fill={liked[message.key] ? "currentColor" : "none"}
-                    />
-                  </MessageAction>
-                  <MessageAction
-                    label="Dislike"
-                    onClick={() =>
-                      setDisliked((prev) => ({
-                        ...prev,
-                        [message.key]: !prev[message.key],
-                      }))
-                    }
-                    tooltip="Dislike this response"
-                  >
-                    <ThumbsDownIcon
-                      className="size-4"
-                      fill={disliked[message.key] ? "currentColor" : "none"}
-                    />
-                  </MessageAction>
-                  <MessageAction
-                    label="Copy"
-                    onClick={() => handleCopy(message.content || "")}
-                    tooltip="Copy to clipboard"
-                  >
-                    <CopyIcon className="size-4" />
-                  </MessageAction>
-                </MessageActions>
-              )}
-            </div>
-          )}
-        </Message>
-      ))}
-    </div>
-  );
-};
+	return (
+		<div className="flex flex-col gap-4">
+			{/* biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Demo component with complex rendering logic */}
+			{messages.map((message) => (
+				<Message from={message.from} key={message.key}>
+					{message.versions?.length && message.versions.length > 1 ? (
+						<MessageBranch defaultBranch={0} key={message.key}>
+							<MessageBranchContent>
+								{message.versions?.map((version) => (
+									<MessageContent key={version.id}>
+										<MessageResponse>{version.content}</MessageResponse>
+									</MessageContent>
+								))}
+							</MessageBranchContent>
+							{message.from === 'assistant' && (
+								<MessageToolbar>
+									<MessageBranchSelector from={message.from}>
+										<MessageBranchPrevious />
+										<MessageBranchPage />
+										<MessageBranchNext />
+									</MessageBranchSelector>
+									<MessageActions>
+										<MessageAction
+											label="Retry"
+											onClick={handleRetry}
+											tooltip="Regenerate response"
+										>
+											<RefreshCcwIcon className="size-4" />
+										</MessageAction>
+										<MessageAction
+											label="Like"
+											onClick={() =>
+												setLiked((prev) => ({
+													...prev,
+													[message.key]: !prev[message.key],
+												}))
+											}
+											tooltip="Like this response"
+										>
+											<ThumbsUpIcon
+												className="size-4"
+												fill={liked[message.key] ? 'currentColor' : 'none'}
+											/>
+										</MessageAction>
+										<MessageAction
+											label="Dislike"
+											onClick={() =>
+												setDisliked((prev) => ({
+													...prev,
+													[message.key]: !prev[message.key],
+												}))
+											}
+											tooltip="Dislike this response"
+										>
+											<ThumbsDownIcon
+												className="size-4"
+												fill={disliked[message.key] ? 'currentColor' : 'none'}
+											/>
+										</MessageAction>
+										<MessageAction
+											label="Copy"
+											onClick={() =>
+												handleCopy(
+													message.versions?.find((v) => v.id)?.content || '',
+												)
+											}
+											tooltip="Copy to clipboard"
+										>
+											<CopyIcon className="size-4" />
+										</MessageAction>
+									</MessageActions>
+								</MessageToolbar>
+							)}
+						</MessageBranch>
+					) : (
+						<div key={message.key}>
+							{message.attachments && message.attachments.length > 0 && (
+								<Attachments className="mb-2" variant="grid">
+									{message.attachments.map((attachment) => (
+										<Attachment data={attachment} key={attachment.id}>
+											<AttachmentPreview />
+											<AttachmentRemove />
+										</Attachment>
+									))}
+								</Attachments>
+							)}
+							<MessageContent>
+								{message.from === 'assistant' ? (
+									<MessageResponse>{message.content}</MessageResponse>
+								) : (
+									message.content
+								)}
+							</MessageContent>
+							{message.from === 'assistant' && message.versions && (
+								<MessageActions>
+									<MessageAction
+										label="Retry"
+										onClick={handleRetry}
+										tooltip="Regenerate response"
+									>
+										<RefreshCcwIcon className="size-4" />
+									</MessageAction>
+									<MessageAction
+										label="Like"
+										onClick={() =>
+											setLiked((prev) => ({
+												...prev,
+												[message.key]: !prev[message.key],
+											}))
+										}
+										tooltip="Like this response"
+									>
+										<ThumbsUpIcon
+											className="size-4"
+											fill={liked[message.key] ? 'currentColor' : 'none'}
+										/>
+									</MessageAction>
+									<MessageAction
+										label="Dislike"
+										onClick={() =>
+											setDisliked((prev) => ({
+												...prev,
+												[message.key]: !prev[message.key],
+											}))
+										}
+										tooltip="Dislike this response"
+									>
+										<ThumbsDownIcon
+											className="size-4"
+											fill={disliked[message.key] ? 'currentColor' : 'none'}
+										/>
+									</MessageAction>
+									<MessageAction
+										label="Copy"
+										onClick={() => handleCopy(message.content || '')}
+										tooltip="Copy to clipboard"
+									>
+										<CopyIcon className="size-4" />
+									</MessageAction>
+								</MessageActions>
+							)}
+						</div>
+					)}
+				</Message>
+			))}
+		</div>
+	)
+}
 
-export default Example;
+export default Example

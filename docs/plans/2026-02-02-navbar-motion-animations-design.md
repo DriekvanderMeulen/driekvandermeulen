@@ -10,6 +10,7 @@ Refactor the navbar component to use Motion (framer-motion) library for fluid an
 ## Design Decisions
 
 ### Animation Timing
+
 - **Duration:** 200ms (fast and snappy)
 - **Easing:** ease-out for all animations
 - **Stagger:** 25ms delay between individual links for cascade effect
@@ -17,12 +18,14 @@ Refactor the navbar component to use Motion (framer-motion) library for fluid an
 ### Animation Architecture
 
 #### 1. Motion Integration
+
 - Replace static elements with `motion.*` components
 - Use `AnimatePresence` for enter/exit animations
 - Define reusable animation variants for each element type
 - Use `layout` prop for automatic size transitions
 
 #### 2. Component Structure
+
 ```
 motion.nav (with layout prop)
 └── container
@@ -43,11 +46,13 @@ motion.nav (with layout prop)
 ### Logo Morph Transition
 
 **Logo Image:**
+
 - Expanded state: `opacity: 1, scale: 1`
 - Exit (scrolling down): `opacity: 0, scale: 0.5`
 - Transform origin: `top left`
 
 **Logo Text:**
+
 - Initial (appearing): `opacity: 0, scale: 0.5`
 - Compact state: `opacity: 1, scale: 1`
 - Exit (scrolling up): `opacity: 0, scale: 0.5`
@@ -58,16 +63,19 @@ motion.nav (with layout prop)
 ### Links Staggered Animation
 
 **Container (motion.div):**
+
 - Variants with `staggerChildren: 0.025` (25ms)
 - Controls cascade timing for child links
 
 **Individual Links:**
+
 - Visible state: `opacity: 1, y: 0`
 - Hidden state: `opacity: 0, y: -8`
 - Slight upward slide adds directionality
 - Each link starts animation 25ms after previous
 
 **Flow:**
+
 - Scrolling down: First link fades/slides, then second after 25ms
 - Scrolling up: Reverse cascade with same timing
 - Total animation completes within 200ms window
@@ -75,6 +83,7 @@ motion.nav (with layout prop)
 ### Navbar Shrink/Grow
 
 **Container Animation:**
+
 - Use `layout` prop on `motion.nav`
 - Automatically animates padding changes:
   - Expanded: `padding: 0.75rem 2rem`
@@ -84,17 +93,21 @@ motion.nav (with layout prop)
 ## Implementation Details
 
 ### Scroll Detection
+
 - Keep existing scroll logic unchanged
 - State changes at scrollY <= 10 and scrollY > 100
 - State triggers all Motion animations simultaneously
 
 ### Performance Optimizations
+
 - Add `will-change: transform, opacity` for animating elements
 - Keep `passive: true` on scroll listener
 - Optional: Use `layoutId` for transforming elements
 
 ### CSS Cleanup
+
 Remove CSS transitions (Motion handles all animations):
+
 - Remove `transition: color 0.2s ease` from `.column`
 - Remove `transition: color 0.2s ease` from `.link`
 - Consider moving hover effects to Motion gestures or keep instant

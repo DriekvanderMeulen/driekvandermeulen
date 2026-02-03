@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
 import {
-  StackTrace,
-  StackTraceActions,
-  StackTraceContent,
-  StackTraceCopyButton,
-  StackTraceError,
-  StackTraceErrorMessage,
-  StackTraceErrorType,
-  StackTraceExpandButton,
-  StackTraceFrames,
-  StackTraceHeader,
-} from "@/components/ai-elements/stack-trace";
+	StackTrace,
+	StackTraceActions,
+	StackTraceContent,
+	StackTraceCopyButton,
+	StackTraceError,
+	StackTraceErrorMessage,
+	StackTraceErrorType,
+	StackTraceExpandButton,
+	StackTraceFrames,
+	StackTraceHeader,
+} from '@/components/ai-elements/stack-trace'
 
 const sampleStackTrace = `TypeError: Cannot read properties of undefined (reading 'map')
     at UserList (/app/components/UserList.tsx:15:23)
@@ -23,32 +23,32 @@ const sampleStackTrace = `TypeError: Cannot read properties of undefined (readin
     at invokeGuardedCallback (node_modules/react-dom/cjs/react-dom.development.js:4056:31)
     at beginWork$1 (node_modules/react-dom/cjs/react-dom.development.js:23964:7)
     at performUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:22776:12)
-    at workLoopSync (node_modules/react-dom/cjs/react-dom.development.js:22707:5)`;
+    at workLoopSync (node_modules/react-dom/cjs/react-dom.development.js:22707:5)`
 
 const Example = () => (
-  <StackTrace
-    defaultOpen
-    onFilePathClick={(path, line, col) =>
-      console.log(`Open file: ${path}:${line}:${col}`)
-    }
-    trace={sampleStackTrace}
-  >
-    <StackTraceHeader>
-      <StackTraceError>
-        <StackTraceErrorType />
-        <StackTraceErrorMessage />
-      </StackTraceError>
-      <StackTraceActions>
-        <StackTraceCopyButton
-          onCopy={() => console.log("Stack trace copied")}
-        />
-        <StackTraceExpandButton />
-      </StackTraceActions>
-    </StackTraceHeader>
-    <StackTraceContent>
-      <StackTraceFrames />
-    </StackTraceContent>
-  </StackTrace>
-);
+	<StackTrace
+		defaultOpen
+		onFilePathClick={(path, line, col) =>
+			console.log(`Open file: ${path}:${line}:${col}`)
+		}
+		trace={sampleStackTrace}
+	>
+		<StackTraceHeader>
+			<StackTraceError>
+				<StackTraceErrorType />
+				<StackTraceErrorMessage />
+			</StackTraceError>
+			<StackTraceActions>
+				<StackTraceCopyButton
+					onCopy={() => console.log('Stack trace copied')}
+				/>
+				<StackTraceExpandButton />
+			</StackTraceActions>
+		</StackTraceHeader>
+		<StackTraceContent>
+			<StackTraceFrames />
+		</StackTraceContent>
+	</StackTrace>
+)
 
-export default Example;
+export default Example

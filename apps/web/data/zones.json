@@ -1,0 +1,70 @@
+{
+	"zones": [
+		{
+			"id": "default",
+			"title": "Welcome to Driek Studio",
+			"description": "Welcome to the digital headquarters of Driek Studio. This space is a virtual manifestation of my ideal workspace, curated with a few personal essentials. Navigate using WASD and use ctrl/cmd + W when you are ready to exit.",
+			"type": "Introduction"
+		},
+		{
+			"id": "range_ableton",
+			"title": "Music Production",
+			"description": "Music production is my primary creative outlet outside of design. I have been honing my craft for over five years under the alias Doriku, focusing on electronic compositions. My sound is heavily informed by the energy of techno, the drive of hardstyle, and the complex rhythms of drum & bass.",
+			"type": "Hobby"
+		},
+		{
+			"id": "range_band",
+			"title": "Gorillaz",
+			"description": "I have a deep appreciation for Gorillaz and their ability to blend disparate genres with immersive visual storytelling. While Feel Good Inc. remains my favorite track, I am most inspired by how the project functions as a cohesive, evolving narrative universe.",
+			"type": "Hobby"
+		},
+		{
+			"id": "range_bulletin",
+			"title": "Bulletin Board",
+			"description": "This board serves as a roadmap for my upcoming ventures. While these projects remain under wraps for now, they represent the next evolution of my creative work. Check back soon for official updates and reveals.",
+			"type": "Work"
+		},
+		{
+			"id": "range_computer",
+			"title": "Work Desk",
+			"description": "This is my primary production hub. I rely on MacOS for its stability and seamless workflow integration. To maintain long term physical health and focus, this setup is centered around a standing desk configuration.",
+			"type": "Work"
+		},
+		{
+			"id": "range_fma",
+			"title": "Fullmetal Alchemist",
+			"description": "Fullmetal Alchemist stands as my definitive favorite in the medium. It is a profound exploration of the Law of Equivalent Exchange, following two brothers through a narrative defined by sacrifice, the bonds of family, and the ethical weight of playing God.",
+			"type": "Hobby"
+		},
+		{
+			"id": "range_gamepc",
+			"title": "Home PC",
+			"description": "My personal rig is dedicated to programming and deep-dive gaming. I am particularly drawn to 4X strategy titles like Europa Universalis 5, Victoria 2, and Crusader Kings 3. I also frequently lose track of time in Civilization 6. I run Arch Linux on this machine for maximum control over my environment.",
+			"type": "Hobby"
+		},
+		{
+			"id": "range_japan",
+			"title": "Japan",
+			"description": "The ultimate goal is to relocate this office to Japan. I have spent years studying the language and culture with the intent of living there permanently. To balance my lifestyle, I plan to work for a Western firm to enjoy the environment without the traditional 60-hour local work week.",
+			"type": "Lifestyle"
+		},
+		{
+			"id": "range_onepiece",
+			"title": "One Piece",
+			"description": "One Piece serves as a powerful deconstruction of systemic oppression and fascist hierarchies. It illustrates how power structures weaponize the concept of justice to criminalize existence. Understanding its symbolism is essential for recognizing the sociopolitical shifts occurring in 2026.",
+			"type": "Lifestyle"
+		},
+		{
+			"id": "range_steamdeck",
+			"title": "Steam Deck",
+			"description": "The Steam Deck is my favorite piece of handheld hardware. It provides a perfect, portable way to manage my farm in Stardew Valley or clear my backlog when I am away from my desk.",
+			"type": "Hobby"
+		},
+		{
+			"id": "range_tv",
+			"title": "Presentation TV",
+			"description": "A high-resolution display is a necessity for any professional environment. This screen is dedicated to client presentations, ensuring that every detail of a project is communicated with clarity and impact.",
+			"type": "Work"
+		}
+	]
+}

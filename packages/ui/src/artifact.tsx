@@ -1,22 +1,23 @@
-"use client";
+'use client'
 
 import {
-  Artifact,
-  ArtifactAction,
-  ArtifactActions,
-  ArtifactContent,
-  ArtifactDescription,
-  ArtifactHeader,
-  ArtifactTitle,
-} from "@/components/ai-elements/artifact";
-import { CodeBlock } from "@/components/ai-elements/code-block";
+	CopyIcon,
+	DownloadIcon,
+	PlayIcon,
+	RefreshCwIcon,
+	ShareIcon,
+} from 'lucide-react'
+
 import {
-  CopyIcon,
-  DownloadIcon,
-  PlayIcon,
-  RefreshCwIcon,
-  ShareIcon,
-} from "lucide-react";
+	Artifact,
+	ArtifactAction,
+	ArtifactActions,
+	ArtifactContent,
+	ArtifactDescription,
+	ArtifactHeader,
+	ArtifactTitle,
+} from '@/components/ai-elements/artifact'
+import { CodeBlock } from '@/components/ai-elements/code-block'
 
 const code = `# Dijkstra's Algorithm implementation
 import heapq
@@ -49,59 +50,59 @@ def dijkstra(graph, start):
     'D': {'B': 5, 'C': 1}
 }
 
-print(dijkstra(graph, 'A'))`;
+print(dijkstra(graph, 'A'))`
 
 const Example = () => (
-  <Artifact>
-    <ArtifactHeader>
-      <div>
-        <ArtifactTitle>Dijkstra's Algorithm Implementation</ArtifactTitle>
-        <ArtifactDescription>Updated 1 minute ago</ArtifactDescription>
-      </div>
-      <div className="flex items-center gap-2">
-        <ArtifactActions>
-          <ArtifactAction
-            icon={PlayIcon}
-            label="Run"
-            onClick={() => console.log("Run")}
-            tooltip="Run code"
-          />
-          <ArtifactAction
-            icon={CopyIcon}
-            label="Copy"
-            onClick={() => console.log("Copy")}
-            tooltip="Copy to clipboard"
-          />
-          <ArtifactAction
-            icon={RefreshCwIcon}
-            label="Regenerate"
-            onClick={() => console.log("Regenerate")}
-            tooltip="Regenerate content"
-          />
-          <ArtifactAction
-            icon={DownloadIcon}
-            label="Download"
-            onClick={() => console.log("Download")}
-            tooltip="Download file"
-          />
-          <ArtifactAction
-            icon={ShareIcon}
-            label="Share"
-            onClick={() => console.log("Share")}
-            tooltip="Share artifact"
-          />
-        </ArtifactActions>
-      </div>
-    </ArtifactHeader>
-    <ArtifactContent className="p-0">
-      <CodeBlock
-        className="border-none"
-        code={code}
-        language="python"
-        showLineNumbers
-      />
-    </ArtifactContent>
-  </Artifact>
-);
+	<Artifact>
+		<ArtifactHeader>
+			<div>
+				<ArtifactTitle>Dijkstra's Algorithm Implementation</ArtifactTitle>
+				<ArtifactDescription>Updated 1 minute ago</ArtifactDescription>
+			</div>
+			<div className="flex items-center gap-2">
+				<ArtifactActions>
+					<ArtifactAction
+						icon={PlayIcon}
+						label="Run"
+						onClick={() => console.log('Run')}
+						tooltip="Run code"
+					/>
+					<ArtifactAction
+						icon={CopyIcon}
+						label="Copy"
+						onClick={() => console.log('Copy')}
+						tooltip="Copy to clipboard"
+					/>
+					<ArtifactAction
+						icon={RefreshCwIcon}
+						label="Regenerate"
+						onClick={() => console.log('Regenerate')}
+						tooltip="Regenerate content"
+					/>
+					<ArtifactAction
+						icon={DownloadIcon}
+						label="Download"
+						onClick={() => console.log('Download')}
+						tooltip="Download file"
+					/>
+					<ArtifactAction
+						icon={ShareIcon}
+						label="Share"
+						onClick={() => console.log('Share')}
+						tooltip="Share artifact"
+					/>
+				</ArtifactActions>
+			</div>
+		</ArtifactHeader>
+		<ArtifactContent className="p-0">
+			<CodeBlock
+				className="border-none"
+				code={code}
+				language="python"
+				showLineNumbers
+			/>
+		</ArtifactContent>
+	</Artifact>
+)
 
-export default Example;
+export default Example
