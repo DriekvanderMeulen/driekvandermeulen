@@ -42,3 +42,11 @@ knip-report.json
 
 # Git worktrees
 .worktrees
+
+# Agent / IDE skills
+.agents
+skills
+.claude
+.cursor
+.gemini
+.windsurf

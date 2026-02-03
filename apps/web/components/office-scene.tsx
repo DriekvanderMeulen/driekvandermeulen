@@ -1,19 +1,25 @@
 'use client'
 
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { PointerLockControls, useGLTF, Preload, useProgress } from '@react-three/drei'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import {
-	Physics,
-	RigidBody,
+	PointerLockControls,
+	Preload,
+	useGLTF,
+	useProgress,
+} from '@react-three/drei'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Bloom, EffectComposer } from '@react-three/postprocessing'
+import {
 	CapsuleCollider,
 	CuboidCollider,
-	TrimeshCollider,
+	Physics,
 	RapierRigidBody,
+	RigidBody,
+	TrimeshCollider,
 } from '@react-three/rapier'
-import { Suspense, useRef, useEffect, useState, useCallback, memo } from 'react'
-import type { PointerLockControls as PointerLockControlsImpl } from 'three-stdlib'
+import { Suspense, memo, useCallback, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
+import type { PointerLockControls as PointerLockControlsImpl } from 'three-stdlib'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 // Constants
 const WALK_SPEED = 4.5
@@ -37,15 +43,17 @@ interface CollisionMeshData {
 	scale: THREE.Vector3
 }
 
-// Office model with visual processing  
+// Office model with visual processing
 const OfficeModel = memo(function OfficeModel() {
 	const [scene, setScene] = useState<THREE.Group | null>(null)
-	const [collisionMeshes, setCollisionMeshes] = useState<Array<CollisionMeshData>>([])
+	const [collisionMeshes, setCollisionMeshes] = useState<
+		Array<CollisionMeshData>
+	>([])
 	const hasLoggedRef = useRef(false)
 
 	useEffect(() => {
 		const loader = new GLTFLoader()
-		
+
 		loader.load(
 			'/three/office.glb',
 			(gltf) => {
@@ -53,9 +61,12 @@ const OfficeModel = memo(function OfficeModel() {
 			},
 			undefined,
 			(error) => {
-				console.error('Failed to load GLB. The file may have texture reference issues:', error)
+				console.error(
+					'Failed to load GLB. The file may have texture reference issues:',
+					error,
+				)
 				console.error('Error details:', error.message, error.stack)
-			}
+			},
 		)
 	}, [])
 
@@ -72,7 +83,10 @@ const OfficeModel = memo(function OfficeModel() {
 			if (child instanceof THREE.Light) {
 				child.visible = true
 				// Enable shadows for directional and spot lights
-				if (child instanceof THREE.DirectionalLight || child instanceof THREE.SpotLight) {
+				if (
+					child instanceof THREE.DirectionalLight ||
+					child instanceof THREE.SpotLight
+				) {
 					child.castShadow = true
 					// Set shadow map size if not already set
 					if (!child.shadow.mapSize) {
@@ -157,7 +171,7 @@ const OfficeModel = memo(function OfficeModel() {
 				})
 				console.log('===============================')
 			}
-			
+
 			if (lightNames.length > 0) {
 				console.log('=== LIGHTS FOUND ===')
 				console.log(`Total: ${lightNames.length} lights`)
@@ -167,7 +181,7 @@ const OfficeModel = memo(function OfficeModel() {
 				})
 				console.log('===================')
 			}
-			
+
 			hasLoggedRef.current = true
 		}
 
@@ -185,7 +199,11 @@ const OfficeModel = memo(function OfficeModel() {
 					key={meshData.name}
 					type="fixed"
 					colliders={false}
-					position={[meshData.position.x, meshData.position.y, meshData.position.z]}
+					position={[
+						meshData.position.x,
+						meshData.position.y,
+						meshData.position.z,
+					]}
 				>
 					<TrimeshCollider args={[meshData.vertices, meshData.indices]} />
 				</RigidBody>
@@ -261,7 +279,7 @@ function Player() {
 		camera.position.set(
 			START_POSITION[0],
 			START_POSITION[1] + CAMERA_EYE_HEIGHT,
-			START_POSITION[2]
+			START_POSITION[2],
 		)
 		camera.rotation.set(0.01, 0.02, 0)
 	}, [camera])
@@ -330,6 +348,41 @@ const Floor = memo(function Floor() {
 	)
 })
 
+// Reusable Physical Bulb Component
+function PhysicalBulb({
+	position,
+	color,
+	intensity,
+}: {
+	position: [number, number, number]
+	color: string
+	intensity: number
+}) {
+	return (
+		<group position={position}>
+			<mesh>
+				<sphereGeometry args={[0.2, 32, 32]} />
+				<meshStandardMaterial
+					emissive={color}
+					emissiveIntensity={15} // High emissive intensity for bloom
+					color="#000000"
+					toneMapped={false}
+				/>
+			</mesh>
+			<pointLight
+				color={color}
+				intensity={intensity}
+				decay={2}
+				distance={20}
+				castShadow
+				shadow-mapSize={[2048, 2048]}
+				shadow-bias={-0.0005}
+				shadow-normalBias={0.1}
+			/>
+		</group>
+	)
+}
+
 // Optimized lighting: HemisphereLight + single DirectionalLight
 // Replaces: ambient + 2 directional + 1 point = 4 lights → 2 lights
 const Lighting = memo(function Lighting() {
@@ -337,27 +390,57 @@ const Lighting = memo(function Lighting() {
 		<>
 			{/* HemisphereLight: cheap ambient + ground bounce simulation */}
 			<hemisphereLight
-				args={['#ffb84d', '#8b7355', 0.6]} // sky, ground, intensity
+				args={['#ffb84d', '#8b7355', 0.2]} // Lowered intensity to let bulbs shine
 			/>
 			{/* Single directional for main sun with shadows */}
 			<directionalLight
 				position={[10, 15, -10]}
-				intensity={1.0}
+				intensity={0.5} // Lowered intensity
 				color="#ffb84d"
 				castShadow
-				shadow-mapSize={[1024, 1024]}
+				shadow-mapSize={[2048, 2048]}
+				shadow-bias={-0.0005}
+				shadow-normalBias={0.1}
 				shadow-camera-left={-20}
 				shadow-camera-right={20}
 				shadow-camera-top={20}
 				shadow-camera-bottom={-20}
 			/>
+
+			{/* Central axis lighting */}
+			<PhysicalBulb position={[0, 5, 5.5]} color="#FFD6AA" intensity={15} />
+			<PhysicalBulb position={[0, 5, 0]} color="#FFD6AA" intensity={15} />
+			<PhysicalBulb position={[0, 5, -14]} color="#FFD6AA" intensity={15} />
 		</>
 	)
 })
 
-function Scene() {
+interface CameraPositionReporterProps {
+	onUpdate: (pos: { x: number; y: number; z: number }) => void
+}
+
+function CameraPositionReporter({ onUpdate }: CameraPositionReporterProps) {
+	const { camera } = useThree()
+	useFrame(() => {
+		onUpdate({
+			x: camera.position.x,
+			y: camera.position.y,
+			z: camera.position.z,
+		})
+	})
+	return null
+}
+
+function Scene({
+	onCameraPosUpdate,
+}: {
+	onCameraPosUpdate?: (pos: { x: number; y: number; z: number }) => void
+}) {
 	return (
 		<>
+			{onCameraPosUpdate ? (
+				<CameraPositionReporter onUpdate={onCameraPosUpdate} />
+			) : null}
 			<Lighting />
 			<Floor />
 			<Suspense fallback={null}>
@@ -389,7 +472,14 @@ function LoadingScreen() {
 				fontFamily: 'system-ui, sans-serif',
 			}}
 		>
-			<div style={{ width: '200px', height: '2px', background: '#333', marginBottom: '1rem' }}>
+			<div
+				style={{
+					width: '200px',
+					height: '2px',
+					background: '#333',
+					marginBottom: '1rem',
+				}}
+			>
 				<div
 					style={{
 						width: `${progress}%`,
@@ -399,7 +489,13 @@ function LoadingScreen() {
 					}}
 				/>
 			</div>
-			<p style={{ fontSize: '0.875rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+			<p
+				style={{
+					fontSize: '0.875rem',
+					letterSpacing: '0.1em',
+					textTransform: 'uppercase',
+				}}
+			>
 				Loading {Math.round(progress)}%
 			</p>
 		</div>
@@ -438,7 +534,13 @@ function ClickToStart({ onStart }: { onStart: () => void }) {
 			}}
 		>
 			<div style={{ textAlign: 'center' }}>
-				<p style={{ marginBottom: '1.5rem', fontSize: '2rem', fontWeight: 'bold' }}>
+				<p
+					style={{
+						marginBottom: '1.5rem',
+						fontSize: '2rem',
+						fontWeight: 'bold',
+					}}
+				>
 					Office Ready
 				</p>
 				<p style={{ marginBottom: '0.5rem' }}>Press ENTER or CLICK to enter</p>
@@ -452,6 +554,7 @@ function ClickToStart({ onStart }: { onStart: () => void }) {
 
 export default function OfficeScene() {
 	const [started, setStarted] = useState(false)
+	const [cameraPos, setCameraPos] = useState({ x: 0, y: 0, z: 0 })
 	const { progress, active } = useProgress()
 	const [isLoaded, setIsLoaded] = useState(false)
 
@@ -483,6 +586,24 @@ export default function OfficeScene() {
 				<ClickToStart onStart={() => setStarted(true)} />
 			) : null}
 
+			{started ? (
+				<div
+					style={{
+						position: 'fixed',
+						top: 8,
+						left: 8,
+						zIndex: 10,
+						fontFamily: 'monospace',
+						fontSize: 14,
+						color: '#fff',
+						textShadow: '0 0 2px #000',
+					}}
+				>
+					Camera: x {cameraPos.x.toFixed(2)} y {cameraPos.y.toFixed(2)} z{' '}
+					{cameraPos.z.toFixed(2)}
+				</div>
+			) : null}
+
 			<Canvas
 				shadows
 				style={{
@@ -501,8 +622,15 @@ export default function OfficeScene() {
 				flat
 			>
 				<Physics gravity={[0, -9.81, 0]}>
-					<Scene />
+					<Scene onCameraPosUpdate={setCameraPos} />
 				</Physics>
+				<EffectComposer>
+					<Bloom
+						luminanceThreshold={1.0}
+						luminanceSmoothing={0.025}
+						intensity={1.5}
+					/>
+				</EffectComposer>
 			</Canvas>
 		</div>
 	)

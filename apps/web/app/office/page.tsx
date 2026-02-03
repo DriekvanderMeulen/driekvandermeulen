@@ -1,9 +1,8 @@
 import OfficeScene from '@/components/office-scene'
-import styles from './page.module.css'
 
 export default function OfficePage() {
 	return (
-		<div className={styles.container}>
+		<div className="fixed inset-0 m-0 h-[var(--viewport-height)] w-[var(--viewport-width)] overflow-hidden p-0">
 			<OfficeScene />
 		</div>
 	)
