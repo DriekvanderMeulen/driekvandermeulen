@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 
-import StudioFloat from '@/components/landing/studio-float'
-
 import './globals.css'
 
 const quantico = localFont({
@@ -52,7 +50,6 @@ export default function RootLayout({
 			<body
 				className={`${quantico.variable} ${inter.variable} max-w-screen overflow-x-hidden antialiased`}
 			>
-				<StudioFloat />
 				{children}
 			</body>
 		</html>
