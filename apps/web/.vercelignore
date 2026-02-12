@@ -1,0 +1,3 @@
+# Large 3D assets (hosted externally)
+*.glb
+public/three/*.glb

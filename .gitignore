@@ -50,3 +50,6 @@ skills
 .cursor
 .gemini
 .windsurf
+.env*.local
+# Nightshift plan artifacts (keep out of version control)
+.nightshift-plan

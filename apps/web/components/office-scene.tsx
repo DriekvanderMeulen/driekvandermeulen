@@ -28,6 +28,9 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { ZoneDetailPanel } from '@/components/zone-detail-panel'
 import { useZoneInteraction } from '@/hooks/use-zone-interaction'
 
+// GLB asset URL: uses Vercel Blob CDN in production, local file in development
+const GLB_URL = process.env.NEXT_PUBLIC_GLB_URL || '/three/office.glb'
+
 // Constants
 const WALK_SPEED = 4.5
 const JUMP_FORCE = 3
@@ -76,7 +79,7 @@ const OfficeModel = memo(function OfficeModel() {
 		const loader = new GLTFLoader()
 
 		loader.load(
-			'/three/office.glb',
+			GLB_URL,
 			(gltf) => {
 				setScene(gltf.scene)
 			},
@@ -726,6 +729,19 @@ export default function OfficeScene() {
 		}
 	}, [active, progress])
 
+	// Console log camera position every 5 seconds
+	useEffect(() => {
+		if (!started) return
+
+		const interval = setInterval(() => {
+			console.log(
+				`Camera position: x ${cameraPos.x.toFixed(2)} y ${cameraPos.y.toFixed(2)} z ${cameraPos.z.toFixed(2)}`,
+			)
+		}, 5000)
+
+		return () => clearInterval(interval)
+	}, [started, cameraPos])
+
 	return (
 		<div
 			style={{
@@ -744,24 +760,6 @@ export default function OfficeScene() {
 				<LoadingScreen />
 			) : !started ? (
 				<ClickToStart onStart={() => setStarted(true)} />
-			) : null}
-
-			{started ? (
-				<div
-					style={{
-						position: 'fixed',
-						top: 8,
-						left: 8,
-						zIndex: 10,
-						fontFamily: 'monospace',
-						fontSize: 14,
-						color: '#fff',
-						textShadow: '0 0 2px #000',
-					}}
-				>
-					Camera: x {cameraPos.x.toFixed(2)} y {cameraPos.y.toFixed(2)} z{' '}
-					{cameraPos.z.toFixed(2)}
-				</div>
 			) : null}
 
 			<Canvas

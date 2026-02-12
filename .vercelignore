@@ -1,53 +1,58 @@
-# macOS
+# Vercel Ignore File
 .DS_Store
 *.DS_Store
+**/.DS_Store
 
-# Dependencies
-node_modules
-
-# Local env files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Testing
-coverage
-
-# Turbo
-.turbo
-
-# Vercel
-.vercel
-
-# Debug
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# Misc
-*.pem
+# Dependencies
+node_modules
+**/node_modules
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+bun.lockb
+bun.lock
 
-# Knip
-knip-report.json
+# Build outputs
+.next
+**/.next
+dist
+**/dist
+build
+**/build
+out
+**/out
 
-# Git
+# Version Control
 .git
 .worktrees
 
-# Agent / IDE skills
-.agents
-skills
-.claude
-.cursor
-.gemini
-.windsurf
+# IDEs
 .vscode
-.github
+.idea
+.cursor
+.windsurf
+.claude
+.gemini
+*.swp
+*.swo
 
-# Large files
-*.mp4
-*.mov
-*.avi
-*.webm
+# Project specific
+.turbo
+**/.turbo
+.vercel
+**/.vercel
+input
+recorded_tasks
+knip-report.json
+
+# Large Assets (exceeds Vercel 100MB file limit)
+*.glb
+
