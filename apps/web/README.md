@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Kiban Web
 
-## Getting Started
+Main Next.js application for the Kiban monorepo. Features 3D scenes with Three.js, Better Auth authentication, and a comprehensive component library.
 
-First, run the development server:
+## Development
+
+From the monorepo root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# Start the web app (recommended)
 bun dev
+
+# Or start only this app
+turbo dev --filter=web
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+### 3D Scenes
 
-## Learn More
+Built with @react-three/fiber and related libraries:
 
-To learn more about Next.js, take a look at the following resources:
+- **Office Scene** (`/office`): Interactive 3D office with physics, collision detection, and player movement
+- **Landing Page**: 3D elements integrated into the main page
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+GLB models are stored in `public/three/` (office.glb, logo.glb).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Authentication
 
-## Deploy on Vercel
+Better Auth handles user authentication:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Server config**: `lib/auth.ts`
+- **Client hooks**: `lib/auth-client.ts`
+- **API routes**: `app/api/auth/[...all]/route.ts`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Supports Google OAuth and email/password authentication.
+
+### Styling
+
+- Tailwind CSS v4 with PostCSS
+- Component variants via CVA
+- `cn()` utility in `lib/utils.ts` for class merging
+- Custom fonts in `app/fonts/`
+
+## Project Structure
+
+```
+app/
+  api/auth/        # Better Auth API routes
+  office/          # 3D office scene page
+  page.tsx         # Landing page
+components/        # App-specific components
+  office-scene.tsx # Main 3D scene
+lib/
+  auth.ts          # Better Auth server config
+  auth-client.ts   # Better Auth client hooks
+  utils.ts         # Utility functions (cn, etc.)
+public/
+  three/           # GLB models and 3D assets
+```
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+```bash
+DATABASE_URL="postgresql://..."
+BETTER_AUTH_SECRET="your-secret-key-min-32-chars"
+BETTER_AUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_BETTER_AUTH_URL="http://localhost:3000"
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+```
+
+## Using Shared Packages
+
+Import from workspace packages:
+
+```tsx
+// Components from @repo/ui
+import { Button } from "@repo/ui/button";
+import { cn } from "@repo/ui/utils";
+
+// Database access from @repo/db
+import { db } from "@repo/db";
+import { user } from "@repo/db/schema";
+```
+
+## Configuration
+
+- **Turbopack**: Enabled with monorepo root set to `../../` for proper workspace resolution
+- **PostCSS**: Configured for Tailwind CSS v4
+- **TypeScript**: Extends `@repo/typescript-config/nextjs.json`
