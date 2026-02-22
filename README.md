@@ -1,135 +1,135 @@
-# Turborepo starter
+# Kiban
 
-This Turborepo starter is maintained by the Turborepo core team.
+A Next.js web application featuring interactive 3D scenes, authentication, and a comprehensive shared component library. Built as a Turborepo monorepo.
 
-## Using this example
+## Tech Stack
 
-Run the following command:
+- **Framework**: Next.js 16 with React 19
+- **3D Graphics**: Three.js with @react-three/fiber, drei, rapier (physics), and postprocessing
+- **Authentication**: Better Auth with Drizzle adapter
+- **Database**: PostgreSQL with Drizzle ORM
+- **Styling**: Tailwind CSS v4 with Motion (Framer Motion v12)
+- **Package Manager**: Bun
 
-```sh
-npx create-turbo@latest
-```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## Monorepo Structure
 
 ```
-cd my-turborepo
+apps/
+  web/              # Main Next.js application (port 3000)
 
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+packages/
+  db/               # Drizzle ORM database layer
+  ui/               # 300+ shared React components
+  brand/            # Brand assets and design tokens
+  eslint-config/    # Shared ESLint configuration
+  typescript-config/# Shared TypeScript configuration
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+## Getting Started
 
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+### Prerequisites
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+- [Bun](https://bun.sh/) (v1.2.20 or later)
+- PostgreSQL database
 
-### Develop
+### Installation
 
-To develop all apps and packages, run the following command:
+```bash
+# Install dependencies
+bun install
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+# Set up environment variables
+cp apps/web/.env.example apps/web/.env
+cp packages/db/.env.example packages/db/.env
+# Edit .env files with your configuration
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### Development
 
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+```bash
+# Start all apps in development mode
+bun dev
+
+# Start specific app only
 turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
 ```
 
-### Remote Caching
+### Database
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+```bash
+# Navigate to db package
+cd packages/db
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+# Push schema to database (development)
+bun run push
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+# Or run migrations (production)
+bun run migrate
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+# Open Drizzle Studio
+bun run studio
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## Scripts
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+| Command | Description |
+|---------|-------------|
+| `bun dev` | Start development servers |
+| `bun run build` | Build all apps and packages |
+| `bun run lint` | Run ESLint across all workspaces |
+| `bun run check-types` | Type check all workspaces |
+| `bun run format` | Format code with Prettier |
+| `bun run knip` | Check for unused code |
 
+## Environment Variables
+
+### apps/web
+
+```bash
+DATABASE_URL="postgresql://..."
+BETTER_AUTH_SECRET="your-32-char-secret"
+BETTER_AUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_BETTER_AUTH_URL="http://localhost:3000"
+GOOGLE_CLIENT_ID="..."
+GOOGLE_CLIENT_SECRET="..."
 ```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
+See `apps/web/.env.example` for full template.
 
-## Useful Links
+## Features
 
-Learn more about the power of Turborepo:
+### 3D Scenes
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+The application includes interactive Three.js scenes with:
+- Physics simulation via Rapier
+- Custom camera controls
+- GLB model loading
+- Post-processing effects
+
+### Authentication
+
+Built with Better Auth supporting:
+- Google OAuth
+- Session management
+- Secure token handling
+
+### Component Library
+
+300+ reusable components including:
+- Radix UI primitives (dialogs, menus, forms)
+- Animated components (beams, gradients, cards)
+- Data visualization (charts, tables)
+- Specialty components (code blocks, file trees)
+
+## Code Quality
+
+- **Formatting**: Prettier with import sorting
+- **Linting**: ESLint with strict rules (0 warnings allowed)
+- **Dead Code**: Knip checks during build
+- **Types**: Strict TypeScript throughout
+
+## Documentation
+
+- Design plans: `docs/plans/`
+- Package documentation: See individual package READMEs
+- Configuration: `CLAUDE.md` contains detailed project guidelines
