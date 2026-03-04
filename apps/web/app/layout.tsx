@@ -48,7 +48,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${quantico.variable} ${inter.variable} max-w-screen overflow-x-hidden antialiased`}
+				className={`${quantico.variable} ${inter.variable} max-w-screen overflow-x-hidden bg-[var(--background)] antialiased`}
 			>
 				{children}
 			</body>

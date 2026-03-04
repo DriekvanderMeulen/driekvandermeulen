@@ -20,6 +20,7 @@
 		"@ai-elements": "https://ai-sdk.dev/elements/api/registry/{name}.json",
 		"@8starlabs-ui": "https://ui.8starlabs.com/r/{name}.json",
 		"@aceternity": "https://ui.aceternity.com/registry/{name}.json",
-		"@bundui": "https://bundui.io/r/{name}.json"
+		"@bundui": "https://bundui.io/r/{name}.json",
+		"@react-bits": "https://reactbits.dev/r/{name}.json"
 	}
 }
