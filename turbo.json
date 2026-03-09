@@ -10,7 +10,7 @@
     },
     "lint": {
       "dependsOn": ["^lint"],
-      "env": ["DATABASE_URL"]
+      "env": ["DATABASE_URL", "NEXT_PUBLIC_OPENAI_API_KEY"]
     },
     "check-types": {
       "dependsOn": ["^check-types"]
