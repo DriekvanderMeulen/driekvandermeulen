@@ -2,26 +2,26 @@
 import {
 	IconBrightnessDown,
 	IconBrightnessUp,
+	IconCaretDownFilled,
+	IconCaretLeftFilled,
 	IconCaretRightFilled,
 	IconCaretUpFilled,
 	IconChevronUp,
+	IconCommand,
 	IconMicrophone,
 	IconMoon,
 	IconPlayerSkipForward,
 	IconPlayerTrackNext,
 	IconPlayerTrackPrev,
+	IconSearch,
 	IconTable,
 	IconVolume,
 	IconVolume2,
 	IconVolume3,
+	IconWorld,
 } from '@tabler/icons-react'
-import { IconSearch } from '@tabler/icons-react'
-import { IconWorld } from '@tabler/icons-react'
-import { IconCommand } from '@tabler/icons-react'
-import { IconCaretLeftFilled } from '@tabler/icons-react'
-import { IconCaretDownFilled } from '@tabler/icons-react'
 import { MotionValue, motion, useScroll, useTransform } from 'motion/react'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 

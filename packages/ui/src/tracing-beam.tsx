@@ -4,7 +4,6 @@ import {
 	useScroll,
 	useSpring,
 	useTransform,
-	useVelocity,
 } from 'motion/react'
 import React, { useEffect, useRef, useState } from 'react'
 

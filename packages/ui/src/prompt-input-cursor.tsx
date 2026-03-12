@@ -103,7 +103,7 @@ const models = [
 const SUBMITTING_TIMEOUT = 200
 const STREAMING_TIMEOUT = 2000
 
-const sampleSources: SourceDocumentUIPart[] = [
+const sampleSources: Array<SourceDocumentUIPart> = [
 	{
 		type: 'source-document',
 		sourceId: '1',

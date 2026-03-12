@@ -73,26 +73,26 @@ import { Suggestion, Suggestions } from '@/components/ai-elements/suggestion'
 interface MessageType {
 	key: string
 	from: 'user' | 'assistant'
-	sources?: { href: string; title: string }[]
-	versions: {
+	sources?: Array<{ href: string; title: string }>
+	versions: Array<{
 		id: string
 		content: string
-	}[]
+	}>
 	reasoning?: {
 		content: string
 		duration: number
 	}
-	tools?: {
+	tools?: Array<{
 		name: string
 		description: string
 		status: ToolUIPart['state']
 		parameters: Record<string, unknown>
 		result: string | undefined
 		error: string | undefined
-	}[]
+	}>
 }
 
-const initialMessages: MessageType[] = [
+const initialMessages: Array<MessageType> = [
 	{
 		key: nanoid(),
 		from: 'user',
@@ -366,8 +366,8 @@ const Example = () => {
 	const [status, setStatus] = useState<
 		'submitted' | 'streaming' | 'ready' | 'error'
 	>('ready')
-	const [messages, setMessages] = useState<MessageType[]>(initialMessages)
-	const [_streamingMessageId, setStreamingMessageId] = useState<string | null>(
+	const [messages, setMessages] = useState<Array<MessageType>>(initialMessages)
+	const [, setStreamingMessageId] = useState<string | null>(
 		null,
 	)
 

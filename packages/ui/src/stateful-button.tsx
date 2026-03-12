@@ -1,5 +1,5 @@
 'use client'
-import { AnimatePresence, motion, useAnimate } from 'motion/react'
+import { motion, useAnimate } from 'motion/react'
 import React from 'react'
 
 import { cn } from '@/lib/utils'
@@ -71,12 +71,8 @@ export const Button = ({ className, children, ...props }: ButtonProps) => {
 	}
 
 	const {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		onClick,
-		onDrag,
-		onDragStart,
-		onDragEnd,
-		onAnimationStart,
-		onAnimationEnd,
 		...buttonProps
 	} = props
 

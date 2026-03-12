@@ -92,7 +92,7 @@ const models = [
 const SUBMITTING_TIMEOUT = 200
 const STREAMING_TIMEOUT = 2000
 
-const sampleTodos: QueueTodo[] = [
+const sampleTodos: Array<QueueTodo> = [
 	{
 		id: 'todo-1',
 		title: 'Write project documentation',

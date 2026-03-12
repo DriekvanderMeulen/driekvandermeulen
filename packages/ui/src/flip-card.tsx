@@ -4,7 +4,7 @@ import { AnimatePresence, PanInfo, motion } from 'motion/react'
 import React, { ReactNode, useCallback, useMemo, useState } from 'react'
 
 type FlipCardProps = {
-	children: ReactNode[]
+	children: Array<ReactNode>
 	stackOffset?: number
 	stackRotation?: number
 	dragThreshold?: number
@@ -42,7 +42,7 @@ export default function FlipCard({
 	)
 
 	const handleDragEnd = useCallback(
-		(event: any, info: PanInfo, cardIndex: number) => {
+		(event: React.PointerEvent, info: PanInfo, cardIndex: number) => {
 			const dragDistance = Math.abs(info.offset.x) + Math.abs(info.offset.y)
 			const velocity = Math.abs(info.velocity.x) + Math.abs(info.velocity.y)
 
@@ -59,9 +59,18 @@ export default function FlipCard({
 		[dragThreshold],
 	)
 
+	interface CardCustom {
+		x?: number
+		y?: number
+		rotate?: number
+		scale?: number
+		opacity?: number
+		zIndex?: number
+	}
+
 	const cardVariants = {
-		initial: (custom: any) => ({ ...custom, x: 0, y: custom.y }),
-		animate: (custom: any) => ({
+		initial: (custom: CardCustom) => ({ ...custom, x: 0, y: custom.y }),
+		animate: (custom: CardCustom) => ({
 			...custom,
 			x: 0,
 			y: custom.y,

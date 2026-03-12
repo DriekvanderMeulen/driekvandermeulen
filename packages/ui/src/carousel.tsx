@@ -150,7 +150,7 @@ const CarouselControl = ({
 }
 
 interface CarouselProps {
-	slides: SlideData[]
+	slides: Array<SlideData>
 }
 
 export default function Carousel({ slides }: CarouselProps) {

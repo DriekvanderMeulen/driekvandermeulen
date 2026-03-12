@@ -2,7 +2,7 @@
 import { motion } from 'motion/react'
 import { useEffect, useState } from 'react'
 
-let interval: any
+let interval: NodeJS.Timeout | undefined
 
 type Card = {
 	id: number
@@ -16,13 +16,13 @@ export const CardStack = ({
 	offset,
 	scaleFactor,
 }: {
-	items: Card[]
+	items: Array<Card>
 	offset?: number
 	scaleFactor?: number
 }) => {
 	const CARD_OFFSET = offset || 10
 	const SCALE_FACTOR = scaleFactor || 0.06
-	const [cards, setCards] = useState<Card[]>(items)
+	const [cards, setCards] = useState<Array<Card>>(items)
 
 	useEffect(() => {
 		startFlipping()
@@ -31,7 +31,7 @@ export const CardStack = ({
 	}, [])
 	const startFlipping = () => {
 		interval = setInterval(() => {
-			setCards((prevCards: Card[]) => {
+			setCards((prevCards: Array<Card>) => {
 				const newArray = [...prevCards] // create a copy of the array
 				newArray.unshift(newArray.pop()!) // move the last element to the front
 				return newArray

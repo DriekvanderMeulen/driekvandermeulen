@@ -133,7 +133,7 @@ const sizeClasses: Record<BadgeSize, string> = {
 }
 
 interface TransportBadgeProps {
-	stationCode: string | string[]
+	stationCode: string | Array<string>
 	system: SystemKey
 	className?: string
 	stationName?: string

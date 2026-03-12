@@ -24,7 +24,7 @@ interface DitherShaderProps {
 	/** Secondary color for duotone mode */
 	secondaryColor?: string
 	/** Custom color palette array for custom mode */
-	customPalette?: string[]
+	customPalette?: Array<string>
 	/** Brightness adjustment (-1 to 1) */
 	brightness?: number
 	/** Contrast adjustment (0 to 2, 1 = normal) */

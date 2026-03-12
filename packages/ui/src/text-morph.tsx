@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 interface TextMorphAnimationProps {
-	texts: string[]
+	texts: Array<string>
 	morphTime?: number
 	cooldownTime?: number
 	className?: string

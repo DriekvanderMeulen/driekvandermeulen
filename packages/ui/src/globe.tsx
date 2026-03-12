@@ -59,10 +59,10 @@ export type GlobeConfig = {
 
 interface WorldProps {
 	globeConfig: GlobeConfig
-	data: Position[]
+	data: Array<Position>
 }
 
-let numbersOfRings = [0]
+// const numbersOfRings = [0]
 
 export function Globe({ globeConfig, data }: WorldProps) {
 	const globeRef = useRef<ThreeGlobe | null>(null)
@@ -90,7 +90,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
 	useEffect(() => {
 		if (!globeRef.current && groupRef.current) {
 			globeRef.current = new ThreeGlobe()
-			;(groupRef.current as any).add(globeRef.current)
+			;(groupRef.current as { add: (obj: unknown) => void }).add(globeRef.current)
 			setIsInitialized(true)
 		}
 	}, [])
@@ -122,10 +122,10 @@ export function Globe({ globeConfig, data }: WorldProps) {
 		if (!globeRef.current || !isInitialized || !data) return
 
 		const arcs = data
-		let points = []
+		const points = []
 		for (let i = 0; i < arcs.length; i++) {
 			const arc = arcs[i]
-			const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number }
+			// const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number }
 			points.push({
 				size: defaultProps.pointSize,
 				order: arc.order,
@@ -167,7 +167,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
 			.arcStartLng((d) => (d as { startLng: number }).startLng * 1)
 			.arcEndLat((d) => (d as { endLat: number }).endLat * 1)
 			.arcEndLng((d) => (d as { endLng: number }).endLng * 1)
-			.arcColor((e: any) => (e as { color: string }).color)
+			.arcColor((e: { color: string }) => e.color)
 			.arcAltitude((e) => (e as { arcAlt: number }).arcAlt * 1)
 			.arcStroke(() => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
 			.arcDashLength(defaultProps.arcLength)
@@ -285,12 +285,12 @@ export function World(props: WorldProps) {
 }
 
 export function hexToRgb(hex: string) {
-	var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
+	const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
 	hex = hex.replace(shorthandRegex, function (m, r, g, b) {
 		return r + r + g + g + b + b
 	})
 
-	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
 	return result
 		? {
 				r: parseInt(result[1], 16),

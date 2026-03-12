@@ -3,7 +3,7 @@ import type { Container, SingleOrMultiple } from '@tsparticles/engine'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
 import { motion, useAnimation } from 'motion/react'
-import React, { useId, useMemo } from 'react'
+import React, { useId } from 'react'
 import { useEffect, useState } from 'react'
 
 import { cn } from '@/lib/utils'
@@ -81,7 +81,7 @@ export const SparklesCore = (props: ParticlesProps) => {
 									enable: false,
 									mode: 'repulse',
 								},
-								resize: true as any,
+								resize: true as unknown as boolean,
 							},
 							modes: {
 								push: {

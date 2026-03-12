@@ -30,19 +30,19 @@ import {
 	MessageToolbar,
 } from '@/components/ai-elements/message'
 
-const messages: {
+const messages: Array<{
 	key: string
 	from: 'user' | 'assistant'
-	versions?: { id: string; content: string }[]
+	versions?: Array<{ id: string; content: string }>
 	content?: string
-	attachments?: {
+	attachments?: Array<{
 		id: string
 		type: 'file'
 		url: string
 		mediaType?: string
 		filename?: string
-	}[]
-}[] = [
+	}>
+}> = [
 	{
 		key: nanoid(),
 		from: 'user',

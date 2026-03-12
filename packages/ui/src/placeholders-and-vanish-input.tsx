@@ -10,7 +10,7 @@ export function PlaceholdersAndVanishInput({
 	onChange,
 	onSubmit,
 }: {
-	placeholders: string[]
+	placeholders: Array<string>
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }) {
@@ -44,7 +44,7 @@ export function PlaceholdersAndVanishInput({
 	}, [placeholders])
 
 	const canvasRef = useRef<HTMLCanvasElement>(null)
-	const newDataRef = useRef<any[]>([])
+	const newDataRef = useRef<Array<{ x: number; y: number; r: number; color: string }>>([])
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [value, setValue] = useState('')
 	const [animating, setAnimating] = useState(false)
@@ -68,12 +68,12 @@ export function PlaceholdersAndVanishInput({
 
 		const imageData = ctx.getImageData(0, 0, 800, 800)
 		const pixelData = imageData.data
-		const newData: any[] = []
+		const newData: Array<{ x: number; y: number; color: Array<number> }> = []
 
 		for (let t = 0; t < 800; t++) {
-			let i = 4 * t * 800
+			const i = 4 * t * 800
 			for (let n = 0; n < 800; n++) {
-				let e = i + 4 * n
+				const e = i + 4 * n
 				if (
 					pixelData[e] !== 0 &&
 					pixelData[e + 1] !== 0 &&
@@ -173,7 +173,7 @@ export function PlaceholdersAndVanishInput({
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		vanishAndSubmit()
-		onSubmit && onSubmit(e)
+		onSubmit?.(e)
 	}
 	return (
 		<form
@@ -194,7 +194,7 @@ export function PlaceholdersAndVanishInput({
 				onChange={(e) => {
 					if (!animating) {
 						setValue(e.target.value)
-						onChange && onChange(e)
+						onChange?.(e)
 					}
 				}}
 				onKeyDown={handleKeyDown}

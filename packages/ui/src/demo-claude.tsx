@@ -75,29 +75,29 @@ import {
 interface MessageType {
 	key: string
 	from: 'user' | 'assistant'
-	sources?: { href: string; title: string }[]
-	versions: {
+	sources?: Array<{ href: string; title: string }>
+	versions: Array<{
 		id: string
 		content: string
-	}[]
+	}>
 	reasoning?: {
 		content: string
 		duration: number
 	}
-	tools?: {
+	tools?: Array<{
 		name: string
 		description: string
 		status: ToolUIPart['state']
 		parameters: Record<string, unknown>
 		result: string | undefined
 		error: string | undefined
-	}[]
+	}>
 	isReasoningComplete?: boolean
 	isContentComplete?: boolean
 	isReasoningStreaming?: boolean
 }
 
-const mockMessages: MessageType[] = [
+const mockMessages: Array<MessageType> = [
 	{
 		key: nanoid(),
 		from: 'user',
@@ -324,12 +324,15 @@ const Example = () => {
 	const [model, setModel] = useState<string>(models[0].id)
 	const [modelSelectorOpen, setModelSelectorOpen] = useState(false)
 	const [text, setText] = useState<string>('')
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [_useWebSearch, _setUseWebSearch] = useState<boolean>(false)
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [_useMicrophone, _setUseMicrophone] = useState<boolean>(false)
 	const [status, setStatus] = useState<
 		'submitted' | 'streaming' | 'ready' | 'error'
 	>('ready')
-	const [messages, setMessages] = useState<MessageType[]>([])
+	const [messages, setMessages] = useState<Array<MessageType>>([])
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [_streamingMessageId, setStreamingMessageId] = useState<string | null>(
 		null,
 	)
@@ -591,6 +594,7 @@ const Example = () => {
 		})
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const _handleSuggestionClick = (suggestion: string) => {
 		setStatus('submitted')
 		addUserMessage(suggestion)

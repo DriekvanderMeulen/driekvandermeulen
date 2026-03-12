@@ -4,13 +4,13 @@ import { nanoid } from 'nanoid'
 
 import { Message, MessageContent } from '@/components/ai-elements/message'
 
-const messages: {
+const messages: Array<{
 	key: string
 	from: 'user' | 'assistant'
 	content: string
 	avatar: string
 	name: string
-}[] = [
+}> = [
 	{
 		key: nanoid(),
 		from: 'user',

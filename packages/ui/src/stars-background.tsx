@@ -34,12 +34,12 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
 	maxTwinkleSpeed = 1,
 	className,
 }) => {
-	const [stars, setStars] = useState<StarProps[]>([])
+	const [stars, setStars] = useState<Array<StarProps>>([])
 	const canvasRef: RefObject<HTMLCanvasElement> =
 		useRef<HTMLCanvasElement>(null)
 
 	const generateStars = useCallback(
-		(width: number, height: number): StarProps[] => {
+		(width: number, height: number): Array<StarProps> => {
 			const area = width * height
 			const numStars = Math.floor(area * starDensity)
 			return Array.from({ length: numStars }, () => {

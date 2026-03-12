@@ -1,6 +1,5 @@
 import {
 	motion,
-	useMotionValueEvent,
 	useScroll,
 	useSpring,
 	useTransform,
@@ -13,7 +12,7 @@ const MovingLine = () => {
 		ease: 'easeInOut',
 	}
 
-	const ref = useRef<any>(null)
+	const ref = useRef<HTMLDivElement>(null)
 
 	// Track scroll progress, lies between 0 and 1.
 	const { scrollYProgress } = useScroll({

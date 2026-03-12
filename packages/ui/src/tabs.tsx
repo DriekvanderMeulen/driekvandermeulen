@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 type Tab = {
 	title: string
 	value: string
-	content?: string | React.ReactNode | any
+	content?: string | React.ReactNode
 }
 
 export const Tabs = ({
@@ -18,14 +18,14 @@ export const Tabs = ({
 	tabClassName,
 	contentClassName,
 }: {
-	tabs: Tab[]
+	tabs: Array<Tab>
 	containerClassName?: string
 	activeTabClassName?: string
 	tabClassName?: string
 	contentClassName?: string
 }) => {
 	const [active, setActive] = useState<Tab>(propTabs[0])
-	const [tabs, setTabs] = useState<Tab[]>(propTabs)
+	const [tabs, setTabs] = useState<Array<Tab>>(propTabs)
 
 	const moveSelectedTabToTop = (idx: number) => {
 		const newTabs = [...propTabs]
@@ -93,7 +93,7 @@ export const FadeInDiv = ({
 }: {
 	className?: string
 	key?: string
-	tabs: Tab[]
+	tabs: Array<Tab>
 	active: Tab
 	hovering?: boolean
 }) => {

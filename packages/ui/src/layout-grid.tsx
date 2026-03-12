@@ -11,7 +11,7 @@ type Card = {
 	thumbnail: string
 }
 
-export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
+export const LayoutGrid = ({ cards }: { cards: Array<Card> }) => {
 	const [selected, setSelected] = useState<Card | null>(null)
 	const [lastSelected, setLastSelected] = useState<Card | null>(null)
 

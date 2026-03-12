@@ -22,10 +22,10 @@ interface NavBodyProps {
 }
 
 interface NavItemsProps {
-	items: {
+	items: Array<{
 		name: string
 		link: string
-	}[]
+	}>
 	className?: string
 	onItemClick?: () => void
 }
@@ -194,7 +194,6 @@ export const MobileNavMenu = ({
 	children,
 	className,
 	isOpen,
-	onClose,
 }: MobileNavMenuProps) => {
 	return (
 		<AnimatePresence>

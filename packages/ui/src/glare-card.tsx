@@ -38,7 +38,7 @@ export const GlareCard = ({
 		'--radius': '48px',
 		'--easing': 'ease',
 		'--transition': 'var(--duration) var(--easing)',
-	} as any
+	} as React.CSSProperties & { '--radius': string; '--easing': string; '--transition': string }
 
 	const backgroundStyle = {
 		'--step': '5%',

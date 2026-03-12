@@ -29,14 +29,14 @@ const secondaryVariant = {
 export const FileUpload = ({
 	onChange,
 }: {
-	onChange?: (files: File[]) => void
+	onChange?: (files: Array<File>) => void
 }) => {
-	const [files, setFiles] = useState<File[]>([])
+	const [files, setFiles] = useState<Array<File>>([])
 	const fileInputRef = useRef<HTMLInputElement>(null)
 
-	const handleFileChange = (newFiles: File[]) => {
+	const handleFileChange = (newFiles: Array<File>) => {
 		setFiles((prevFiles) => [...prevFiles, ...newFiles])
-		onChange && onChange(newFiles)
+		onChange?.(newFiles)
 	}
 
 	const handleClick = () => {

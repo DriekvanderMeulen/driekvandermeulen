@@ -222,10 +222,10 @@ const CloseIcon = () => {
 // Add it in a separate file, I've added here for simplicity
 export const useOutsideClick = (
 	ref: React.RefObject<HTMLDivElement>,
-	callback: Function,
+	callback: (event: MouseEvent) => void,
 ) => {
 	useEffect(() => {
-		const listener = (event: any) => {
+		const listener = (event: MouseEvent) => {
 			// DO NOTHING if the element being clicked is the target element or their children
 			if (!ref.current || ref.current.contains(event.target)) {
 				return

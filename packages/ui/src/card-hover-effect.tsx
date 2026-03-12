@@ -7,14 +7,14 @@ export const HoverEffect = ({
 	items,
 	className,
 }: {
-	items: {
+	items: Array<{
 		title: string
 		description: string
 		link: string
-	}[]
+	}>
 	className?: string
 }) => {
-	let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
 	return (
 		<div

@@ -8,7 +8,7 @@ type AnimatedTab = {
 	content: React.ReactNode | string
 }
 
-export function AnimatedTab({ tabs }: { tabs: AnimatedTab[] }) {
+export function AnimatedTab({ tabs }: { tabs: Array<AnimatedTab> }) {
 	const [selected, setSelected] = useState(0)
 	const duration = 0.3
 

@@ -67,9 +67,9 @@ export const Illustration = ({ mouseEnter }: { mouseEnter: boolean }) => {
 	const stars = 108
 	const columns = 18
 
-	const [glowingStars, setGlowingStars] = useState<number[]>([])
+	const [glowingStars, setGlowingStars] = useState<Array<number>>([])
 
-	const highlightedStars = useRef<number[]>([])
+	const highlightedStars = useRef<Array<number>>([])
 
 	useEffect(() => {
 		const interval = setInterval(() => {

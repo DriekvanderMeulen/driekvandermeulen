@@ -50,7 +50,7 @@ interface PartitionBar
 		VariantProps<typeof partitionBarVariants> {
 	children?:
 		| ReactElement<PartitionBarSegment>
-		| ReactElement<PartitionBarSegment>[]
+		| Array<ReactElement<PartitionBarSegment>>
 	gap?: number
 }
 

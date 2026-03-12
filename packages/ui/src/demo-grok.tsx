@@ -76,23 +76,23 @@ import {
 interface MessageType {
 	key: string
 	from: 'user' | 'assistant'
-	sources?: { href: string; title: string }[]
-	versions: {
+	sources?: Array<{ href: string; title: string }>
+	versions: Array<{
 		id: string
 		content: string
-	}[]
+	}>
 	reasoning?: {
 		content: string
 		duration: number
 	}
-	tools?: {
+	tools?: Array<{
 		name: string
 		description: string
 		status: ToolUIPart['state']
 		parameters: Record<string, unknown>
 		result: string | undefined
 		error: string | undefined
-	}[]
+	}>
 	isReasoningComplete?: boolean
 	isContentComplete?: boolean
 	isReasoningStreaming?: boolean
@@ -115,7 +115,7 @@ const models = [
 	},
 ]
 
-const mockMessages: MessageType[] = [
+const mockMessages: Array<MessageType> = [
 	{
 		key: nanoid(),
 		from: 'user',
@@ -320,11 +320,11 @@ const Example = () => {
 	const [text, setText] = useState<string>('')
 	const [useWebSearch, setUseWebSearch] = useState<boolean>(false)
 	const [useMicrophone, setUseMicrophone] = useState<boolean>(false)
-	const [_status, setStatus] = useState<
+	const [, setStatus] = useState<
 		'submitted' | 'streaming' | 'ready' | 'error'
 	>('ready')
-	const [messages, setMessages] = useState<MessageType[]>([])
-	const [_streamingMessageId, setStreamingMessageId] = useState<string | null>(
+	const [messages, setMessages] = useState<Array<MessageType>>([])
+	const [, setStreamingMessageId] = useState<string | null>(
 		null,
 	)
 
@@ -585,10 +585,10 @@ const Example = () => {
 		})
 	}
 
-	const _handleSuggestionClick = (suggestion: string) => {
-		setStatus('submitted')
-		addUserMessage(suggestion)
-	}
+	// const _handleSuggestionClick = (suggestion: string) => {
+	// 	setStatus('submitted')
+	// 	addUserMessage(suggestion)
+	// }
 
 	return (
 		<div className="relative flex size-full flex-col divide-y overflow-hidden bg-secondary">

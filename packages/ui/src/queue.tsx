@@ -23,7 +23,7 @@ import {
 	type QueueTodo,
 } from '@/components/ai-elements/queue'
 
-const sampleMessages: QueueMessage[] = [
+const sampleMessages: Array<QueueMessage> = [
 	{
 		id: 'msg-1',
 		parts: [{ type: 'text', text: 'How do I set up the project?' }],
@@ -62,7 +62,7 @@ const sampleMessages: QueueMessage[] = [
 	},
 ]
 
-const sampleTodos: QueueTodo[] = [
+const sampleTodos: Array<QueueTodo> = [
 	{
 		id: 'todo-1',
 		title: 'Write project documentation',

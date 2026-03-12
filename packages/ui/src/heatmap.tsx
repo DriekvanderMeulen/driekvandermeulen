@@ -13,14 +13,14 @@ export type HeatmapValue = {
 	value: number
 }
 
-export type HeatmapData = HeatmapValue[]
+export type HeatmapData = Array<HeatmapValue>
 
 type InterpolationModes = 'linear' | 'sqrt' | 'log'
 
 type ColorOptions =
 	| {
 			colorMode: 'discrete'
-			colorScale?: string[]
+			colorScale?: Array<string>
 			customColorMap?: (
 				value: number,
 				max: number,
@@ -47,10 +47,10 @@ type HeatmapProps = HTMLAttributes<HTMLDivElement> &
 		valueDisplayFunction?: (value: number) => ReactNode
 	}
 
-function getAllDays(start: string, end: string): string[] {
+function getAllDays(start: string, end: string): Array<string> {
 	// Generate all days between start and end dates (inclusive)
-	const days: string[] = []
-	let curr = new Date(start + 'T00:00:00')
+	const days: Array<string> = []
+	const curr = new Date(start + 'T00:00:00')
 
 	const endDate = new Date(end + 'T00:00:00')
 
@@ -62,7 +62,7 @@ function getAllDays(start: string, end: string): string[] {
 	return days
 }
 
-function padToWeekStart(days: string[]): (string | null)[] {
+function padToWeekStart(days: Array<string>): Array<string | null> {
 	// Pad the start of the days array with nulls to align to week start (Sunday)
 	// eg. if first day is Wednesday (3), add 3 nulls at start
 	const firstDay = new Date(days[0] + 'T00:00:00').getDay()
@@ -70,16 +70,16 @@ function padToWeekStart(days: string[]): (string | null)[] {
 	return [...padding, ...days]
 }
 
-function chunkByWeek(days: (string | null)[]): (string | null)[][] {
+function chunkByWeek(days: Array<string | null>): Array<Array<string | null>> {
 	// Chunk the days into weeks (arrays of 7 days)
-	const weeks: (string | null)[][] = []
+	const weeks: Array<Array<string | null>> = []
 	for (let i = 0; i < days.length; i += 7) {
 		weeks.push(days.slice(i, i + 7))
 	}
 	return weeks
 }
 
-function getMonthLabel(week: (string | null)[]) {
+function getMonthLabel(week: Array<string | null>) {
 	// Get month label for the week (based on last non-null day)
 	const lastDay = [...week].reverse().find(Boolean)
 	return !lastDay
@@ -279,42 +279,46 @@ export default function Heatmap(props: HeatmapProps) {
 	let safeProps: HTMLAttributes<HTMLDivElement> = {}
 
 	if (colorMode === 'discrete') {
+		/* eslint-disable @typescript-eslint/no-unused-vars */
 		const {
-			data,
-			startDate,
-			endDate,
-			cellSize,
-			daysOfTheWeek,
-			gap,
-			displayStyle,
-			valueDisplayFunction,
-			dateDisplayFunction,
-			className,
-			colorMode,
-			customColorMap,
-			colorScale,
+			data: _data,
+			startDate: _startDate,
+			endDate: _endDate,
+			cellSize: _cellSize,
+			daysOfTheWeek: _daysOfTheWeek,
+			gap: _gap,
+			displayStyle: _displayStyle,
+			valueDisplayFunction: _valueDisplayFunction,
+			dateDisplayFunction: _dateDisplayFunction,
+			className: _className,
+			colorMode: _colorMode,
+			customColorMap: _customColorMap,
+			colorScale: _colorScale,
 			...others
 		} = props
 		safeProps = others
+		/* eslint-enable @typescript-eslint/no-unused-vars */
 	} else if (colorMode === 'interpolate') {
+		/* eslint-disable @typescript-eslint/no-unused-vars */
 		const {
-			data,
-			startDate,
-			endDate,
-			cellSize,
-			daysOfTheWeek,
-			gap,
-			displayStyle,
-			valueDisplayFunction,
-			dateDisplayFunction,
-			className,
-			colorMode,
-			minColor,
-			maxColor,
-			interpolation,
+			data: _data,
+			startDate: _startDate,
+			endDate: _endDate,
+			cellSize: _cellSize,
+			daysOfTheWeek: _daysOfTheWeek,
+			gap: _gap,
+			displayStyle: _displayStyle,
+			valueDisplayFunction: _valueDisplayFunction,
+			dateDisplayFunction: _dateDisplayFunction,
+			className: _className,
+			colorMode: _colorMode,
+			minColor: _minColor,
+			maxColor: _maxColor,
+			interpolation: _interpolation,
 			...others
 		} = props
 		safeProps = others
+		/* eslint-enable @typescript-eslint/no-unused-vars */
 	}
 
 	const getCellColor = (value: number) => {

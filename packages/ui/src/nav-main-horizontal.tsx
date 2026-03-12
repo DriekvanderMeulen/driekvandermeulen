@@ -15,20 +15,20 @@ import { cn } from '@/lib/utils'
 export function NavMainHorizontal({
 	items,
 }: {
-	items: {
+	items: Array<{
 		title: string
 		type: string
 		url?: string
 		icon?: LucideIcon
 		isActive?: boolean
-		items?: {
+		items?: Array<{
 			title: string
 			url: string
 			description?: string
 			icon?: LucideIcon
 			isActive?: boolean
-		}[]
-	}[]
+		}>
+	}>
 }) {
 	return (
 		<NavigationMenu viewport={false} className="max-md:hidden">

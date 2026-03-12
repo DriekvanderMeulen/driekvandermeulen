@@ -18,7 +18,7 @@ export const Cover = ({
 	const ref = useRef<HTMLDivElement>(null)
 
 	const [containerWidth, setContainerWidth] = useState(0)
-	const [beamPositions, setBeamPositions] = useState<number[]>([])
+	const [beamPositions, setBeamPositions] = useState<Array<number>>([])
 
 	useEffect(() => {
 		if (ref.current) {
@@ -213,7 +213,6 @@ export const Beam = ({
 
 export const CircleIcon = ({
 	className,
-	delay,
 }: {
 	className?: string
 	delay?: number

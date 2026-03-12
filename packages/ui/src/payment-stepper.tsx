@@ -14,7 +14,7 @@ interface PaymentStepperProps {
 }
 
 const PaymentStepper = ({ currentStep }: PaymentStepperProps) => {
-	const steps: Step[] = [
+	const steps: Array<Step> = [
 		{
 			number: 1,
 			label: 'Cart',

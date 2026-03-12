@@ -7,7 +7,7 @@ import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 type CodeBlockProps = {
 	language: string
 	filename: string
-	highlightLines?: number[]
+	highlightLines?: Array<number>
 } & (
 	| {
 			code: string
@@ -19,7 +19,7 @@ type CodeBlockProps = {
 				name: string
 				code: string
 				language?: string
-				highlightLines?: number[]
+				highlightLines?: Array<number>
 			}>
 	  }
 )

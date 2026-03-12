@@ -12,12 +12,12 @@ import React, { useRef, useState } from 'react'
 export const AnimatedTooltip = ({
 	items,
 }: {
-	items: {
+	items: Array<{
 		id: number
 		name: string
 		designation: string
 		image: string
-	}[]
+	}>
 }) => {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 	const springConfig = { stiffness: 100, damping: 15 }
@@ -33,7 +33,7 @@ export const AnimatedTooltip = ({
 		springConfig,
 	)
 
-	const handleMouseMove = (event: any) => {
+	const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
 		if (animationFrameRef.current) {
 			cancelAnimationFrame(animationFrameRef.current)
 		}
@@ -46,7 +46,7 @@ export const AnimatedTooltip = ({
 
 	return (
 		<>
-			{items.map((item, idx) => (
+			{items.map((item) => (
 				<div
 					className="group relative -mr-4"
 					key={item.name}

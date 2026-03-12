@@ -33,7 +33,6 @@ export function ProductQuickviewDialog({
 	product,
 }: ProductQuickviewProps) {
 	const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name)
-	const [selectedSize, setSelectedSize] = useState('S')
 
 	const renderStars = (rating: number) => {
 		return Array(5)
@@ -138,7 +137,6 @@ export function ProductQuickviewDialog({
 								</legend>
 								<RadioGroup
 									className="grid grid-cols-4 gap-2"
-									onValueChange={(value) => setSelectedSize(value)}
 									defaultValue="1"
 								>
 									{product.sizes.map((size) => (

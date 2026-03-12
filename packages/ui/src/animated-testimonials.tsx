@@ -14,7 +14,7 @@ export const AnimatedTestimonials = ({
 	testimonials,
 	autoplay = false,
 }: {
-	testimonials: Testimonial[]
+	testimonials: Array<Testimonial>
 	autoplay?: boolean
 }) => {
 	const [active, setActive] = useState(0)
