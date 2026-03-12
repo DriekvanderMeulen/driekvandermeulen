@@ -13,9 +13,9 @@ export interface StaggeredMenuSocialItem {
 }
 export interface StaggeredMenuProps {
 	position?: 'left' | 'right'
-	colors?: string[]
-	items?: StaggeredMenuItem[]
-	socialItems?: StaggeredMenuSocialItem[]
+	colors?: Array<string>
+	items?: Array<StaggeredMenuItem>
+	socialItems?: Array<StaggeredMenuSocialItem>
 	displaySocials?: boolean
 	displayItemNumbering?: boolean
 	className?: string
@@ -52,7 +52,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
 	const panelRef = useRef<HTMLDivElement | null>(null)
 	const preLayersRef = useRef<HTMLDivElement | null>(null)
-	const preLayerElsRef = useRef<HTMLElement[]>([])
+	const preLayerElsRef = useRef<Array<HTMLElement>>([])
 	const blackBackgroundRef = useRef<HTMLDivElement | null>(null)
 	const hoverSvgRef = useRef<HTMLImageElement | null>(null)
 
@@ -62,7 +62,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
 	const textInnerRef = useRef<HTMLSpanElement | null>(null)
 	const textWrapRef = useRef<HTMLSpanElement | null>(null)
-	const [textLines, setTextLines] = useState<string[]>(['Menu', 'Close'])
+	const [textLines, setTextLines] = useState<Array<string>>(['Menu', 'Close'])
 
 	const openTlRef = useRef<gsap.core.Timeline | null>(null)
 	const closeTweenRef = useRef<gsap.core.Tween | null>(null)
@@ -87,11 +87,11 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
 			if (!panel || !plusH || !plusV || !icon || !textInner) return
 
-			let preLayers: HTMLElement[] = []
+			let preLayers: Array<HTMLElement> = []
 			if (preContainer) {
 				preLayers = Array.from(
 					preContainer.querySelectorAll('.sm-prelayer'),
-				) as HTMLElement[]
+				) as Array<HTMLElement>
 			}
 			preLayerElsRef.current = preLayers
 
@@ -129,16 +129,16 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
 		const itemEls = Array.from(
 			panel.querySelectorAll('.sm-panel-itemLabel'),
-		) as HTMLElement[]
+		) as Array<HTMLElement>
 		const numberEls = Array.from(
 			panel.querySelectorAll('.sm-panel-list[data-numbering] .sm-panel-item'),
-		) as HTMLElement[]
+		) as Array<HTMLElement>
 		const socialTitle = panel.querySelector(
 			'.sm-socials-title',
 		) as HTMLElement | null
 		const socialLinks = Array.from(
 			panel.querySelectorAll('.sm-socials-link'),
-		) as HTMLElement[]
+		) as Array<HTMLElement>
 
 		const layerStates = layers.map((el) => ({
 			el,
@@ -270,7 +270,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 		const layers = preLayerElsRef.current
 		if (!panel) return
 
-		const all: HTMLElement[] = [...layers, panel]
+		const all: Array<HTMLElement> = [...layers, panel]
 		const blackBg = blackBackgroundRef.current
 		if (blackBg) {
 			all.push(blackBg)
@@ -287,14 +287,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 			onComplete: () => {
 				const itemEls = Array.from(
 					panel.querySelectorAll('.sm-panel-itemLabel'),
-				) as HTMLElement[]
+				) as Array<HTMLElement>
 				if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 })
 
 				const numberEls = Array.from(
 					panel.querySelectorAll(
 						'.sm-panel-list[data-numbering] .sm-panel-item',
 					),
-				) as HTMLElement[]
+				) as Array<HTMLElement>
 				if (numberEls.length)
 					gsap.set(numberEls, { ['--sm-num-opacity' as any]: 0 })
 
@@ -303,7 +303,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 				) as HTMLElement | null
 				const socialLinks = Array.from(
 					panel.querySelectorAll('.sm-socials-link'),
-				) as HTMLElement[]
+				) as Array<HTMLElement>
 				if (socialTitle) gsap.set(socialTitle, { opacity: 0 })
 				if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 })
 
@@ -411,7 +411,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 		const targetLabel = opening ? 'Close' : 'Menu'
 		const cycles = 3
 
-		const seq: string[] = [currentLabel]
+		const seq: Array<string> = [currentLabel]
 		let last = currentLabel
 		for (let i = 0; i < cycles; i++) {
 			last = last === 'Menu' ? 'Close' : 'Menu'
@@ -487,7 +487,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 							colors && colors.length
 								? colors.slice(0, 4)
 								: ['#1D98CD', '#1D7A8C']
-						let arr = [...raw]
+						const arr = [...raw]
 						if (arr.length >= 3) {
 							const mid = Math.floor(arr.length / 2)
 							arr.splice(mid, 1)

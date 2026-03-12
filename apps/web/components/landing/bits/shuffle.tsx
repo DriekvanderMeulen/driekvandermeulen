@@ -63,7 +63,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 	const [ready, setReady] = useState(false)
 
 	const splitRef = useRef<GSAPSplitText | null>(null)
-	const wrappersRef = useRef<HTMLElement[]>([])
+	const wrappersRef = useRef<Array<HTMLElement>>([])
 	const tlRef = useRef<gsap.core.Timeline | null>(null)
 	const playingRef = useRef(false)
 	const hoverHandlerRef = useRef<((e: Event) => void) | null>(null)
@@ -139,7 +139,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 					reduceWhiteSpace: false,
 				})
 
-				const chars = (splitRef.current.chars || []) as HTMLElement[]
+				const chars = (splitRef.current.chars || []) as Array<HTMLElement>
 				wrappersRef.current = []
 
 				const rolls = Math.max(1, Math.floor(shuffleTimes))
@@ -213,7 +213,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 				wrappersRef.current.forEach((w) => {
 					const strip = w.firstElementChild as HTMLElement
 					if (!strip) return
-					const kids = Array.from(strip.children) as HTMLElement[]
+					const kids = Array.from(strip.children) as Array<HTMLElement>
 					for (let i = 1; i < kids.length - 1; i++) {
 						kids[i]!.textContent = scrambleCharset.charAt(
 							Math.floor(Math.random() * scrambleCharset.length),
@@ -265,7 +265,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 					},
 				})
 
-				const addTween = (targets: HTMLElement[], at: number) => {
+				const addTween = (targets: Array<HTMLElement>, at: number) => {
 					tl.to(
 						targets,
 						{
