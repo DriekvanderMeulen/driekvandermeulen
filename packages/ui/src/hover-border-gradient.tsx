@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/exhaustive-deps */
 import { motion } from 'motion/react'
 import React, { useEffect, useState } from 'react'
 

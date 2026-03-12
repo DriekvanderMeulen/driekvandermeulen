@@ -230,8 +230,7 @@ export const TransportBadge = ({
 					)
 				})}
 			</span>
-			{showStationName && stationName && (
-				<span
+			{showStationName && stationName ? <span
 					className={cn(
 						'ml-2 font-medium text-slate-700 dark:text-slate-200',
 						size === 'xs' && 'text-[10px]',
@@ -241,8 +240,7 @@ export const TransportBadge = ({
 					)}
 				>
 					{stationName}
-				</span>
-			)}
+				</span> : null}
 		</span>
 	)
 }

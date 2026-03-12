@@ -485,8 +485,7 @@ const Example = () => {
 										key={`${message.key}-${version.id}`}
 									>
 										<div>
-											{message.sources?.length && (
-												<Sources>
+											{message.sources?.length ? <Sources>
 													<SourcesTrigger count={message.sources.length} />
 													<SourcesContent>
 														{message.sources.map((source) => (
@@ -497,16 +496,13 @@ const Example = () => {
 															/>
 														))}
 													</SourcesContent>
-												</Sources>
-											)}
-											{message.reasoning && (
-												<Reasoning duration={message.reasoning.duration}>
+												</Sources> : null}
+											{message.reasoning ? <Reasoning duration={message.reasoning.duration}>
 													<ReasoningTrigger />
 													<ReasoningContent>
 														{message.reasoning.content}
 													</ReasoningContent>
-												</Reasoning>
-											)}
+												</Reasoning> : null}
 											<MessageContent>
 												<MessageResponse>{version.content}</MessageResponse>
 											</MessageContent>
@@ -514,13 +510,11 @@ const Example = () => {
 									</Message>
 								))}
 							</MessageBranchContent>
-							{versions.length > 1 && (
-								<MessageBranchSelector from={message.from}>
+							{versions.length > 1 ? <MessageBranchSelector from={message.from}>
 									<MessageBranchPrevious />
 									<MessageBranchPage />
 									<MessageBranchNext />
-								</MessageBranchSelector>
-							)}
+								</MessageBranchSelector> : null}
 						</MessageBranch>
 					))}
 				</ConversationContent>
@@ -575,16 +569,12 @@ const Example = () => {
 								>
 									<ModelSelectorTrigger asChild>
 										<PromptInputButton>
-											{selectedModelData?.chefSlug && (
-												<ModelSelectorLogo
+											{selectedModelData?.chefSlug ? <ModelSelectorLogo
 													provider={selectedModelData.chefSlug}
-												/>
-											)}
-											{selectedModelData?.name && (
-												<ModelSelectorName>
+												/> : null}
+											{selectedModelData?.name ? <ModelSelectorName>
 													{selectedModelData.name}
-												</ModelSelectorName>
-											)}
+												</ModelSelectorName> : null}
 										</PromptInputButton>
 									</ModelSelectorTrigger>
 									<ModelSelectorContent>

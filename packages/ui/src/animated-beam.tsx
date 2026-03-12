@@ -5,6 +5,8 @@ import { type RefObject, useEffect, useId, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
+/* eslint-disable react/prop-types */
+
 export interface AnimatedBeamProps {
 	className?: string
 	containerRef: RefObject<HTMLElement | null> // Container ref

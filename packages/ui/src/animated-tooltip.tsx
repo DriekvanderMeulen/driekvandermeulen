@@ -54,8 +54,7 @@ export const AnimatedTooltip = ({
 					onMouseLeave={() => setHoveredIndex(null)}
 				>
 					<AnimatePresence>
-						{hoveredIndex === item.id && (
-							<motion.div
+						{hoveredIndex === item.id ? <motion.div
 								initial={{ opacity: 0, y: 20, scale: 0.6 }}
 								animate={{
 									opacity: 1,
@@ -81,8 +80,7 @@ export const AnimatedTooltip = ({
 									{item.name}
 								</div>
 								<div className="text-xs text-white">{item.designation}</div>
-							</motion.div>
-						)}
+							</motion.div> : null}
 					</AnimatePresence>
 					<img
 						onMouseMove={handleMouseMove}

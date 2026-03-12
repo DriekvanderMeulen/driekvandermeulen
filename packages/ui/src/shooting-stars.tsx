@@ -120,8 +120,7 @@ export const ShootingStars: React.FC<ShootingStarsProps> = ({
 			ref={svgRef}
 			className={cn('absolute inset-0 h-full w-full', className)}
 		>
-			{star && (
-				<rect
+			{star ? <rect
 					key={star.id}
 					x={star.x}
 					y={star.y}
@@ -131,8 +130,7 @@ export const ShootingStars: React.FC<ShootingStarsProps> = ({
 					transform={`rotate(${star.angle}, ${
 						star.x + (starWidth * star.scale) / 2
 					}, ${star.y + starHeight / 2})`}
-				/>
-			)}
+				/> : null}
 			<defs>
 				<linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
 					<stop offset="0%" style={{ stopColor: trailColor, stopOpacity: 0 }} />

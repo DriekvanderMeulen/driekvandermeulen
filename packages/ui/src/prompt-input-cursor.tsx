@@ -308,16 +308,12 @@ const Example = () => {
 							>
 								<ModelSelectorTrigger asChild>
 									<PromptInputButton>
-										{selectedModelData?.chefSlug && (
-											<ModelSelectorLogo
+										{selectedModelData?.chefSlug ? <ModelSelectorLogo
 												provider={selectedModelData.chefSlug}
-											/>
-										)}
-										{selectedModelData?.name && (
-											<ModelSelectorName>
+											/> : null}
+										{selectedModelData?.name ? <ModelSelectorName>
 												{selectedModelData.name}
-											</ModelSelectorName>
-										)}
+											</ModelSelectorName> : null}
 									</PromptInputButton>
 								</ModelSelectorTrigger>
 								<ModelSelectorContent>

@@ -30,14 +30,12 @@ export const MenuItem = ({
 			>
 				{item}
 			</motion.p>
-			{active !== null && (
-				<motion.div
+			{active !== null ? <motion.div
 					initial={{ opacity: 0, scale: 0.85, y: 10 }}
 					animate={{ opacity: 1, scale: 1, y: 0 }}
 					transition={transition}
 				>
-					{active === item && (
-						<div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 -translate-x-1/2 transform pt-4">
+					{active === item ? <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 -translate-x-1/2 transform pt-4">
 							<motion.div
 								transition={transition}
 								layoutId="active" // layoutId ensures smooth animation
@@ -50,10 +48,8 @@ export const MenuItem = ({
 									{children}
 								</motion.div>
 							</motion.div>
-						</div>
-					)}
-				</motion.div>
-			)}
+						</div> : null}
+				</motion.div> : null}
 		</div>
 	)
 }

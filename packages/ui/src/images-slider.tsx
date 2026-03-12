@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AnimatePresence, motion } from 'motion/react'
 import React, { useEffect, useState } from 'react'
 
@@ -124,15 +125,12 @@ export const ImagesSlider = ({
 				perspective: '1000px',
 			}}
 		>
-			{areImagesLoaded && children}
-			{areImagesLoaded && overlay && (
-				<div
+			{areImagesLoaded ? children : null}
+			{areImagesLoaded && overlay ? <div
 					className={cn('absolute inset-0 z-40 bg-black/60', overlayClassName)}
-				/>
-			)}
+				/> : null}
 
-			{areImagesLoaded && (
-				<AnimatePresence>
+			{areImagesLoaded ? <AnimatePresence>
 					<motion.img
 						key={currentIndex}
 						src={loadedImages[currentIndex]}
@@ -142,8 +140,7 @@ export const ImagesSlider = ({
 						variants={slideVariants}
 						className="image absolute inset-0 h-full w-full object-cover object-center"
 					/>
-				</AnimatePresence>
-			)}
+				</AnimatePresence> : null}
 		</div>
 	)
 }

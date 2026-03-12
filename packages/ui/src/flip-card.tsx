@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import { AnimatePresence, PanInfo, motion } from 'motion/react'
 import React, { ReactNode, useCallback, useMemo, useState } from 'react'

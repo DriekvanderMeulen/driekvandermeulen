@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/exhaustive-deps */
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 
@@ -48,8 +49,7 @@ export function PointerHighlight({
 			ref={containerRef}
 		>
 			{children}
-			{dimensions.width > 0 && dimensions.height > 0 && (
-				<motion.div
+			{dimensions.width > 0 && dimensions.height > 0 ? <motion.div
 					className="pointer-events-none absolute inset-0 z-0"
 					initial={{ opacity: 0, scale: 0.95, originX: 0, originY: 0 }}
 					animate={{ opacity: 1, scale: 1 }}
@@ -94,8 +94,7 @@ export function PointerHighlight({
 							className={cn('h-5 w-5 text-blue-500', pointerClassName)}
 						/>
 					</motion.div>
-				</motion.div>
-			)}
+				</motion.div> : null}
 		</div>
 	)
 }

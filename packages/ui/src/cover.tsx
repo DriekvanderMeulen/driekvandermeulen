@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AnimatePresence, motion } from 'motion/react'
 import React, { useEffect, useId, useState } from 'react'
 import { useRef } from 'react'
@@ -42,8 +43,7 @@ export const Cover = ({
 			className="group/cover relative inline-block rounded-sm bg-neutral-100 px-2 py-2 transition duration-200 hover:bg-neutral-900 dark:bg-neutral-900"
 		>
 			<AnimatePresence>
-				{hovered && (
-					<motion.div
+				{hovered ? <motion.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
@@ -84,8 +84,7 @@ export const Cover = ({
 								particleColor="#FFFFFF"
 							/>
 						</motion.div>
-					</motion.div>
-				)}
+					</motion.div> : null}
 			</AnimatePresence>
 			{beamPositions.map((position, index) => (
 				<Beam

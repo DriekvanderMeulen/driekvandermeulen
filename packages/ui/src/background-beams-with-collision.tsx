@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AnimatePresence, motion } from 'motion/react'
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -205,8 +206,7 @@ const CollisionMechanism = React.forwardRef<
 				)}
 			/>
 			<AnimatePresence>
-				{collision.detected && collision.coordinates && (
-					<Explosion
+				{collision.detected && collision.coordinates ? <Explosion
 						key={`${collision.coordinates.x}-${collision.coordinates.y}`}
 						className=""
 						style={{
@@ -214,8 +214,7 @@ const CollisionMechanism = React.forwardRef<
 							top: `${collision.coordinates.y}px`,
 							transform: 'translate(-50%, -50%)',
 						}}
-					/>
-				)}
+					/> : null}
 			</AnimatePresence>
 		</>
 	)

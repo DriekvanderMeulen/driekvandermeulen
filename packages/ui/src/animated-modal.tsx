@@ -84,8 +84,7 @@ export const ModalBody = ({
 
 	return (
 		<AnimatePresence>
-			{open && (
-				<motion.div
+			{open ? <motion.div
 					initial={{
 						opacity: 0,
 					}}
@@ -133,8 +132,7 @@ export const ModalBody = ({
 						<CloseIcon />
 						{children}
 					</motion.div>
-				</motion.div>
-			)}
+				</motion.div> : null}
 		</AnimatePresence>
 	)
 }

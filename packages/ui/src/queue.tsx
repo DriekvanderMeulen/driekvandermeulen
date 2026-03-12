@@ -117,8 +117,7 @@ const Example = () => {
 
 	return (
 		<Queue>
-			{messages.length > 0 && (
-				<QueueSection>
+			{messages.length > 0 ? <QueueSection>
 					<QueueSectionTrigger>
 						<QueueSectionLabel count={messages.length} label="Queued" />
 					</QueueSectionTrigger>
@@ -169,8 +168,7 @@ const Example = () => {
 												</QueueItemAction>
 											</QueueItemActions>
 										</div>
-										{hasFiles && (
-											<QueueItemAttachment>
+										{hasFiles ? <QueueItemAttachment>
 												{message.parts
 													.filter((p) => p.type === 'file' && p.url)
 													.map((file) => {
@@ -192,17 +190,14 @@ const Example = () => {
 															</QueueItemFile>
 														)
 													})}
-											</QueueItemAttachment>
-										)}
+											</QueueItemAttachment> : null}
 									</QueueItem>
 								)
 							})}
 						</QueueList>
 					</QueueSectionContent>
-				</QueueSection>
-			)}
-			{todos.length > 0 && (
-				<QueueSection>
+				</QueueSection> : null}
+			{todos.length > 0 ? <QueueSection>
 					<QueueSectionTrigger>
 						<QueueSectionLabel count={todos.length} label="Todo" />
 					</QueueSectionTrigger>
@@ -227,18 +222,15 @@ const Example = () => {
 												</QueueItemAction>
 											</QueueItemActions>
 										</div>
-										{todo.description && (
-											<QueueItemDescription completed={isCompleted}>
+										{todo.description ? <QueueItemDescription completed={isCompleted}>
 												{todo.description}
-											</QueueItemDescription>
-										)}
+											</QueueItemDescription> : null}
 									</QueueItem>
 								)
 							})}
 						</QueueList>
 					</QueueSectionContent>
-				</QueueSection>
-			)}
+				</QueueSection> : null}
 		</Queue>
 	)
 }

@@ -101,8 +101,7 @@ export const LinkPreview = ({
 					sideOffset={10}
 				>
 					<AnimatePresence>
-						{isOpen && (
-							<motion.div
+						{isOpen ? <motion.div
 								initial={{ opacity: 0, y: 20, scale: 0.6 }}
 								animate={{
 									opacity: 1,
@@ -133,8 +132,7 @@ export const LinkPreview = ({
 										alt="preview image"
 									/>
 								</a>
-							</motion.div>
-						)}
+							</motion.div> : null}
 					</AnimatePresence>
 				</HoverCardPrimitive.Content>
 			</HoverCardPrimitive.Root>

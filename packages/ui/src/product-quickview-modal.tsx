@@ -110,6 +110,7 @@ export function ProductQuickviewDialog({
 								>
 									{product.colors.map((color) => (
 										<RadioGroupItem
+											key={color.name}
 											value={color.name}
 											style={{ backgroundColor: color.value }}
 											aria-label={`Select ${color.name} color`}

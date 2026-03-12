@@ -69,8 +69,7 @@ const Example = () => {
 										<MessageResponse>{message.content}</MessageResponse>
 									</MessageContent>
 								</Message>
-								{checkpoint && (
-									<Checkpoint>
+								{checkpoint ? <Checkpoint>
 										<CheckpointIcon />
 										<CheckpointTrigger
 											onClick={() => handleRestore(checkpoint.messageCount)}
@@ -78,8 +77,7 @@ const Example = () => {
 										>
 											Restore checkpoint
 										</CheckpointTrigger>
-									</Checkpoint>
-								)}
+									</Checkpoint> : null}
 							</Fragment>
 						)
 					})}

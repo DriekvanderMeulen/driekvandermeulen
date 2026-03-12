@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -246,8 +247,7 @@ export function PlaceholdersAndVanishInput({
 
 			<div className="pointer-events-none absolute inset-0 flex items-center rounded-full">
 				<AnimatePresence mode="wait">
-					{!value && (
-						<motion.p
+					{!value ? <motion.p
 							initial={{
 								y: 5,
 								opacity: 0,
@@ -268,8 +268,7 @@ export function PlaceholdersAndVanishInput({
 							className="w-[calc(100%-2rem)] truncate pl-4 text-left text-sm font-normal text-neutral-500 sm:pl-12 sm:text-base dark:text-zinc-500"
 						>
 							{placeholders[currentPlaceholder]}
-						</motion.p>
-					)}
+						</motion.p> : null}
 				</AnimatePresence>
 			</div>
 		</form>

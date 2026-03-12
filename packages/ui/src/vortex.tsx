@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from 'react'
 import { createNoise3D } from 'simplex-noise'
 

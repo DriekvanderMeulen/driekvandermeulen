@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/exhaustive-deps */
 import { motion, stagger, useAnimate } from 'motion/react'
 import { useEffect } from 'react'
 

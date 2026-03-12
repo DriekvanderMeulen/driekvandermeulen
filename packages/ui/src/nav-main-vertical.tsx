@@ -29,7 +29,7 @@ export function NavMainVertical({
 	return (
 		<>
 			{items.map((item) => (
-				<SidebarGroup>
+				<SidebarGroup key={item.title}>
 					<SidebarGroupLabel>{item.title}</SidebarGroupLabel>
 					<SidebarMenu>
 						{item.items?.length ? (

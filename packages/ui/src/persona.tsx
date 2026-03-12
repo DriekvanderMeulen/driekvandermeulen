@@ -1,5 +1,7 @@
 'use client'
 
+/* eslint-disable react/prop-types, react/display-name */
+
 import {
 	type RiveParameters,
 	useRive,

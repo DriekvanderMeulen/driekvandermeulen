@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
@@ -108,49 +109,41 @@ export default function ScrollFade({
 				</div>
 			</div>
 
-			{(axis === 'horizontal' || axis === 'both') && showLeft && (
-				<div
+			{(axis === 'horizontal' || axis === 'both') && showLeft ? <div
 					aria-hidden
 					className="pointer-events-none absolute top-0 left-0 z-10 h-full w-10"
 					style={{
 						background:
 							'linear-gradient(to right, var(--background) 0%, transparent 100%)',
 					}}
-				/>
-			)}
+				/> : null}
 
-			{(axis === 'horizontal' || axis === 'both') && showRight && (
-				<div
+			{(axis === 'horizontal' || axis === 'both') && showRight ? <div
 					aria-hidden
 					className="pointer-events-none absolute top-0 right-0 z-10 h-full w-10"
 					style={{
 						background:
 							'linear-gradient(to left, var(--background) 0%, transparent 100%)',
 					}}
-				/>
-			)}
+				/> : null}
 
-			{(axis === 'vertical' || axis === 'both') && showTop && (
-				<div
+			{(axis === 'vertical' || axis === 'both') && showTop ? <div
 					aria-hidden
 					className="pointer-events-none absolute top-0 left-0 z-10 h-10 w-full"
 					style={{
 						background:
 							'linear-gradient(to bottom, var(--background) 0%, transparent 100%)',
 					}}
-				/>
-			)}
+				/> : null}
 
-			{(axis === 'vertical' || axis === 'both') && showBottom && (
-				<div
+			{(axis === 'vertical' || axis === 'both') && showBottom ? <div
 					aria-hidden
 					className="pointer-events-none absolute bottom-0 left-0 z-10 h-10 w-full"
 					style={{
 						background:
 							'linear-gradient(to top, var(--background) 0%, transparent 100%)',
 					}}
-				/>
-			)}
+				/> : null}
 		</div>
 	)
 }

@@ -58,16 +58,14 @@ export const Tabs = ({
 							transformStyle: 'preserve-3d',
 						}}
 					>
-						{active.value === tab.value && (
-							<motion.div
+						{active.value === tab.value ? <motion.div
 								layoutId="clickedbutton"
 								transition={{ type: 'spring', bounce: 0.3, duration: 0.6 }}
 								className={cn(
 									'absolute inset-0 rounded-full bg-gray-200 dark:bg-zinc-800',
 									activeTabClassName,
 								)}
-							/>
-						)}
+							/> : null}
 
 						<span className="relative block text-black dark:text-white">
 							{tab.title}

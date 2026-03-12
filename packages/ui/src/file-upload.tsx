@@ -77,8 +77,7 @@ export const FileUpload = ({
 						Drag or drop your files here or click to upload
 					</p>
 					<div className="relative mx-auto mt-10 w-full max-w-xl">
-						{files.length > 0 &&
-							files.map((file, idx) => (
+						{files.length > 0 ? files.map((file, idx) => (
 								<motion.div
 									key={'file' + idx}
 									layoutId={idx === 0 ? 'file-upload' : 'file-upload-' + idx}
@@ -126,9 +125,8 @@ export const FileUpload = ({
 										</motion.p>
 									</div>
 								</motion.div>
-							))}
-						{!files.length && (
-							<motion.div
+							)) : null}
+						{!files.length ? <motion.div
 								layoutId="file-upload"
 								variants={mainVariant}
 								transition={{
@@ -153,15 +151,12 @@ export const FileUpload = ({
 								) : (
 									<IconUpload className="h-4 w-4 text-neutral-600 dark:text-neutral-300" />
 								)}
-							</motion.div>
-						)}
+							</motion.div> : null}
 
-						{!files.length && (
-							<motion.div
+						{!files.length ? <motion.div
 								variants={secondaryVariant}
 								className="absolute inset-0 z-30 mx-auto mt-4 flex h-32 w-full max-w-[8rem] items-center justify-center rounded-md border border-dashed border-sky-400 bg-transparent opacity-0"
-							></motion.div>
-						)}
+							></motion.div> : null}
 					</div>
 				</div>
 			</motion.div>

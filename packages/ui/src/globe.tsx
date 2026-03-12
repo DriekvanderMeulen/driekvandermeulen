@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react/no-unknown-property, react-hooks/exhaustive-deps */
 import { OrbitControls } from '@react-three/drei'
 import { Canvas, extend, useThree } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'

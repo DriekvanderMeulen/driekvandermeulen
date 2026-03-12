@@ -81,8 +81,7 @@ const Example = () => {
 								<div className="space-y-3">
 									{mediaCategory === 'image' &&
 										attachment.type === 'file' &&
-										attachment.url && (
-											<div className="flex max-h-96 w-80 items-center justify-center overflow-hidden rounded-md border">
+										attachment.url ? <div className="flex max-h-96 w-80 items-center justify-center overflow-hidden rounded-md border">
 												<img
 													alt={label}
 													className="max-h-full max-w-full object-contain"
@@ -90,17 +89,14 @@ const Example = () => {
 													src={attachment.url}
 													width={320}
 												/>
-											</div>
-										)}
+											</div> : null}
 									<div className="space-y-1 px-0.5">
 										<h4 className="text-sm leading-none font-semibold">
 											{label}
 										</h4>
-										{attachment.mediaType && (
-											<p className="font-mono text-xs text-muted-foreground">
+										{attachment.mediaType ? <p className="font-mono text-xs text-muted-foreground">
 												{attachment.mediaType}
-											</p>
-										)}
+											</p> : null}
 									</div>
 								</div>
 							</AttachmentHoverCardContent>

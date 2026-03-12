@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react/no-unknown-property, react-hooks/exhaustive-deps */
 import {
 	IconArrowNarrowLeft,
 	IconArrowNarrowRight,
@@ -198,8 +199,7 @@ export const Card = ({
 	return (
 		<>
 			<AnimatePresence>
-				{open && (
-					<div className="fixed inset-0 z-50 h-screen overflow-auto">
+				{open ? <div className="fixed inset-0 z-50 h-screen overflow-auto">
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
@@ -234,8 +234,7 @@ export const Card = ({
 							</motion.p>
 							<div className="py-10">{card.content}</div>
 						</motion.div>
-					</div>
-				)}
+					</div> : null}
 			</AnimatePresence>
 			<motion.button
 				layoutId={layout ? `card-${card.title}` : undefined}

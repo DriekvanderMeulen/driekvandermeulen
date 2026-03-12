@@ -186,11 +186,9 @@ export const Compare = ({
 							particleColor="#FFFFFF"
 						/>
 					</div>
-					{showHandlebar && (
-						<div className="absolute top-1/2 -right-2.5 z-30 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-md bg-white shadow-[0px_-1px_0px_0px_#FFFFFF40]">
+					{showHandlebar ? <div className="absolute top-1/2 -right-2.5 z-30 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-md bg-white shadow-[0px_-1px_0px_0px_#FFFFFF40]">
 							<IconDotsVertical className="h-4 w-4 text-black" />
-						</div>
-					)}
+						</div> : null}
 				</motion.div>
 			</AnimatePresence>
 			<div className="pointer-events-none relative z-20 h-full w-full overflow-hidden">

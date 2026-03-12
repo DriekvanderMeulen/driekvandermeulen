@@ -56,8 +56,7 @@ export const CodeBlock = ({
 	return (
 		<div className="relative w-full rounded-lg bg-slate-900 p-4 font-mono text-sm">
 			<div className="flex flex-col gap-2">
-				{tabsExist && (
-					<div className="flex overflow-x-auto">
+				{tabsExist ? <div className="flex overflow-x-auto">
 						{tabs.map((tab, index) => (
 							<button
 								key={index}
@@ -71,10 +70,8 @@ export const CodeBlock = ({
 								{tab.name}
 							</button>
 						))}
-					</div>
-				)}
-				{!tabsExist && filename && (
-					<div className="flex items-center justify-between py-2">
+					</div> : null}
+				{!tabsExist && filename ? <div className="flex items-center justify-between py-2">
 						<div className="text-xs text-zinc-400">{filename}</div>
 						<button
 							onClick={copyToClipboard}
@@ -82,8 +79,7 @@ export const CodeBlock = ({
 						>
 							{copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
 						</button>
-					</div>
-				)}
+					</div> : null}
 			</div>
 			<SyntaxHighlighter
 				language={activeLanguage}

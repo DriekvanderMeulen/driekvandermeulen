@@ -51,7 +51,7 @@ export const FollowerPointerCard = ({
 			className={cn('relative', className)}
 		>
 			<AnimatePresence>
-				{isInside && <FollowPointer x={x} y={y} title={title} />}
+				{isInside ? <FollowPointer x={x} y={y} title={title} /> : null}
 			</AnimatePresence>
 			{children}
 		</div>

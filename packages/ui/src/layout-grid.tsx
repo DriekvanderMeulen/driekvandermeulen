@@ -42,7 +42,7 @@ export const LayoutGrid = ({ cards }: { cards: Array<Card> }) => {
 						)}
 						layoutId={`card-${card.id}`}
 					>
-						{selected?.id === card.id && <SelectedCard selected={selected} />}
+						{selected?.id === card.id ? <SelectedCard selected={selected} /> : null}
 						<ImageComponent card={card} />
 					</motion.div>
 				</div>
