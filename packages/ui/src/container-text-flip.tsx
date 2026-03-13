@@ -7,7 +7,7 @@ import { cn } from '@/utils/cn'
 
 export interface ContainerTextFlipProps {
 	/** Array of words to cycle through in the animation */
-	words?: string[]
+	words?: Array<string>
 	/** Time in milliseconds between word transitions */
 	interval?: number
 	/** Additional CSS classes to apply to the container */
@@ -33,7 +33,7 @@ export function ContainerTextFlip({
 	const updateWidthForWord = () => {
 		if (textRef.current) {
 			// Add some padding to the text width (30px on each side)
-			// @ts-ignore
+			// @ts-expect-error scrollWidth exists on HTMLElement
 			const textWidth = textRef.current.scrollWidth + 30
 			setWidth(textWidth)
 		}

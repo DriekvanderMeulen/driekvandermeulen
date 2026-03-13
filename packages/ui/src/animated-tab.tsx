@@ -8,7 +8,7 @@ type AnimatedTab = {
 	content: React.ReactNode | string
 }
 
-export function AnimatedTab({ tabs }: { tabs: AnimatedTab[] }) {
+export function AnimatedTab({ tabs }: { tabs: Array<AnimatedTab> }) {
 	const [selected, setSelected] = useState(0)
 	const duration = 0.3
 
@@ -29,13 +29,11 @@ export function AnimatedTab({ tabs }: { tabs: AnimatedTab[] }) {
 					>
 						<span className="relative z-10">{name}</span>
 
-						{i === selected && (
-							<motion.div
+						{i === selected ? <motion.div
 								className="absolute top-0 left-0 h-full w-full rounded-xl bg-muted"
 								layoutId="selected"
 								transition={{ duration }}
-							/>
-						)}
+							/> : null}
 					</motion.div>
 				))}
 			</div>

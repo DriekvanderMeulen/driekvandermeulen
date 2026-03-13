@@ -51,7 +51,7 @@ export const FollowerPointerCard = ({
 			className={cn('relative', className)}
 		>
 			<AnimatePresence>
-				{isInside && <FollowPointer x={x} y={y} title={title} />}
+				{isInside ? <FollowPointer x={x} y={y} title={title} /> : null}
 			</AnimatePresence>
 			{children}
 		</div>
@@ -63,8 +63,8 @@ export const FollowPointer = ({
 	y,
 	title,
 }: {
-	x: any
-	y: any
+	x: number | string
+	y: number | string
 	title?: string | React.ReactNode
 }) => {
 	const colors = [

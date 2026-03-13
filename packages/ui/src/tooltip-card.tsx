@@ -158,8 +158,7 @@ export const Tooltip = ({
 		>
 			{children}
 			<AnimatePresence>
-				{isVisible && (
-					<motion.div
+				{isVisible ? <motion.div
 						key={String(isVisible)}
 						initial={{ height: 0, opacity: 1 }}
 						animate={{ height, opacity: 1 }}
@@ -181,8 +180,7 @@ export const Tooltip = ({
 						>
 							{content}
 						</div>
-					</motion.div>
-				)}
+					</motion.div> : null}
 			</AnimatePresence>
 		</div>
 	)

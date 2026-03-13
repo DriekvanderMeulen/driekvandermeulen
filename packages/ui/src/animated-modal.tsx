@@ -84,8 +84,7 @@ export const ModalBody = ({
 
 	return (
 		<AnimatePresence>
-			{open && (
-				<motion.div
+			{open ? <motion.div
 					initial={{
 						opacity: 0,
 					}}
@@ -133,8 +132,7 @@ export const ModalBody = ({
 						<CloseIcon />
 						{children}
 					</motion.div>
-				</motion.div>
-			)}
+				</motion.div> : null}
 		</AnimatePresence>
 	)
 }
@@ -222,10 +220,10 @@ const CloseIcon = () => {
 // Add it in a separate file, I've added here for simplicity
 export const useOutsideClick = (
 	ref: React.RefObject<HTMLDivElement>,
-	callback: Function,
+	callback: (event: MouseEvent | TouchEvent) => void,
 ) => {
 	useEffect(() => {
-		const listener = (event: any) => {
+		const listener = (event: MouseEvent | TouchEvent) => {
 			// DO NOTHING if the element being clicked is the target element or their children
 			if (!ref.current || ref.current.contains(event.target)) {
 				return

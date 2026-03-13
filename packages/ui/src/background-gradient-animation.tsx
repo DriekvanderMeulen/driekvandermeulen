@@ -165,8 +165,7 @@ export const BackgroundGradientAnimation = ({
 					)}
 				></div>
 
-				{interactive && (
-					<div
+				{interactive ? <div
 						ref={interactiveRef}
 						onMouseMove={handleMouseMove}
 						className={cn(
@@ -174,8 +173,7 @@ export const BackgroundGradientAnimation = ({
 							`-top-1/2 -left-1/2 h-full w-full [mix-blend-mode:var(--blending-value)]`,
 							`opacity-70`,
 						)}
-					></div>
-				)}
+					></div> : null}
 			</div>
 		</div>
 	)

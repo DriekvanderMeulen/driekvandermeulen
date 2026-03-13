@@ -72,7 +72,7 @@ export const WebcamPixelGrid: React.FC<WebcamPixelGridProps> = ({
 	const processingCanvasRef = useRef<HTMLCanvasElement>(null)
 	const displayCanvasRef = useRef<HTMLCanvasElement>(null)
 	const previousFrameRef = useRef<Uint8ClampedArray | null>(null)
-	const pixelDataRef = useRef<PixelData[][]>([])
+	const pixelDataRef = useRef<Array<Array<PixelData>>>([])
 	const animationRef = useRef<number>(0)
 	const [isReady, setIsReady] = useState(false)
 	const [error, setError] = useState<string | null>(null)
@@ -424,8 +424,7 @@ export const WebcamPixelGrid: React.FC<WebcamPixelGridProps> = ({
 			/>
 
 			{/* Error popup */}
-			{error && showErrorPopup && (
-				<div className="fixed top-4 right-4 z-50 animate-in duration-300 fade-in slide-in-from-top-2">
+			{error && showErrorPopup ? <div className="fixed top-4 right-4 z-50 animate-in duration-300 fade-in slide-in-from-top-2">
 					<div className="relative flex max-w-sm items-start gap-3 rounded-lg border border-white/10 bg-black/80 p-4 shadow-2xl backdrop-blur-xl">
 						{/* Close button */}
 						<button
@@ -493,12 +492,10 @@ export const WebcamPixelGrid: React.FC<WebcamPixelGridProps> = ({
 							</button>
 						</div>
 					</div>
-				</div>
-			)}
+				</div> : null}
 
 			{/* Minimized error indicator */}
-			{error && !showErrorPopup && (
-				<button
+			{error && !showErrorPopup ? <button
 					onClick={() => setShowErrorPopup(true)}
 					className="fixed top-4 right-4 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white/50 shadow-lg backdrop-blur-xl transition-all hover:scale-105 hover:bg-black/80 hover:text-white/80"
 					title="Camera access required"
@@ -524,8 +521,7 @@ export const WebcamPixelGrid: React.FC<WebcamPixelGridProps> = ({
 							stroke="currentColor"
 						/>
 					</svg>
-				</button>
-			)}
+				</button> : null}
 		</div>
 	)
 }

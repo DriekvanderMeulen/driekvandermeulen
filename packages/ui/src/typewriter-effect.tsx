@@ -10,10 +10,10 @@ export const TypewriterEffect = ({
 	className,
 	cursorClassName,
 }: {
-	words: {
+	words: Array<{
 		text: string
 		className?: string
-	}[]
+	}>
 	className?: string
 	cursorClassName?: string
 }) => {
@@ -104,10 +104,10 @@ export const TypewriterEffectSmooth = ({
 	className,
 	cursorClassName,
 }: {
-	words: {
+	words: Array<{
 		text: string
 		className?: string
-	}[]
+	}>
 	className?: string
 	cursorClassName?: string
 }) => {

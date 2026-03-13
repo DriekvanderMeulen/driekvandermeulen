@@ -76,23 +76,23 @@ import {
 interface MessageType {
 	key: string
 	from: 'user' | 'assistant'
-	sources?: { href: string; title: string }[]
-	versions: {
+	sources?: Array<{ href: string; title: string }>
+	versions: Array<{
 		id: string
 		content: string
-	}[]
+	}>
 	reasoning?: {
 		content: string
 		duration: number
 	}
-	tools?: {
+	tools?: Array<{
 		name: string
 		description: string
 		status: ToolUIPart['state']
 		parameters: Record<string, unknown>
 		result: string | undefined
 		error: string | undefined
-	}[]
+	}>
 	isReasoningComplete?: boolean
 	isContentComplete?: boolean
 	isReasoningStreaming?: boolean
@@ -115,7 +115,7 @@ const models = [
 	},
 ]
 
-const mockMessages: MessageType[] = [
+const mockMessages: Array<MessageType> = [
 	{
 		key: nanoid(),
 		from: 'user',
@@ -323,7 +323,7 @@ const Example = () => {
 	const [_status, setStatus] = useState<
 		'submitted' | 'streaming' | 'ready' | 'error'
 	>('ready')
-	const [messages, setMessages] = useState<MessageType[]>([])
+	const [messages, setMessages] = useState<Array<MessageType>>([])
 	const [_streamingMessageId, setStreamingMessageId] = useState<string | null>(
 		null,
 	)
@@ -603,8 +603,7 @@ const Example = () => {
 										key={`${message.key}-${version.id}`}
 									>
 										<div>
-											{message.sources?.length && (
-												<Sources>
+											{message.sources?.length ? <Sources>
 													<SourcesTrigger count={message.sources.length} />
 													<SourcesContent>
 														{message.sources.map((source) => (
@@ -615,10 +614,8 @@ const Example = () => {
 															/>
 														))}
 													</SourcesContent>
-												</Sources>
-											)}
-											{message.reasoning && (
-												<Reasoning
+												</Sources> : null}
+											{message.reasoning ? <Reasoning
 													duration={message.reasoning.duration}
 													isStreaming={message.isReasoningStreaming}
 												>
@@ -626,31 +623,26 @@ const Example = () => {
 													<ReasoningContent>
 														{message.reasoning.content}
 													</ReasoningContent>
-												</Reasoning>
-											)}
+												</Reasoning> : null}
 											{(message.from === 'user' ||
 												message.isReasoningComplete ||
-												!message.reasoning) && (
-												<MessageContent
+												!message.reasoning) ? <MessageContent
 													className={cn(
 														'group-[.is-user]:rounded-[24px] group-[.is-user]:rounded-br-sm group-[.is-user]:border group-[.is-user]:bg-background group-[.is-user]:text-foreground',
 														'group-[.is-assistant]:bg-transparent group-[.is-assistant]:p-0 group-[.is-assistant]:text-foreground',
 													)}
 												>
 													<MessageResponse>{version.content}</MessageResponse>
-												</MessageContent>
-											)}
+												</MessageContent> : null}
 										</div>
 									</Message>
 								))}
 							</MessageBranchContent>
-							{versions.length > 1 && (
-								<MessageBranchSelector className="px-0" from={message.from}>
+							{versions.length > 1 ? <MessageBranchSelector className="px-0" from={message.from}>
 									<MessageBranchPrevious />
 									<MessageBranchPage />
 									<MessageBranchNext />
-								</MessageBranchSelector>
-							)}
+								</MessageBranchSelector> : null}
 						</MessageBranch>
 					))}
 				</ConversationContent>
@@ -739,16 +731,12 @@ const Example = () => {
 							>
 								<ModelSelectorTrigger asChild>
 									<PromptInputButton>
-										{selectedModelData?.chefSlug && (
-											<ModelSelectorLogo
+										{selectedModelData?.chefSlug ? <ModelSelectorLogo
 												provider={selectedModelData.chefSlug}
-											/>
-										)}
-										{selectedModelData?.name && (
-											<ModelSelectorName>
+											/> : null}
+										{selectedModelData?.name ? <ModelSelectorName>
 												{selectedModelData.name}
-											</ModelSelectorName>
-										)}
+											</ModelSelectorName> : null}
 									</PromptInputButton>
 								</ModelSelectorTrigger>
 								<ModelSelectorContent>

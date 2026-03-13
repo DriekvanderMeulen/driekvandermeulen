@@ -12,12 +12,12 @@ import React, { useRef, useState } from 'react'
 export const AnimatedTooltip = ({
 	items,
 }: {
-	items: {
+	items: Array<{
 		id: number
 		name: string
 		designation: string
 		image: string
-	}[]
+	}>
 }) => {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 	const springConfig = { stiffness: 100, damping: 15 }
@@ -33,20 +33,20 @@ export const AnimatedTooltip = ({
 		springConfig,
 	)
 
-	const handleMouseMove = (event: any) => {
+	const handleMouseMove = (event: React.MouseEvent<HTMLImageElement>) => {
 		if (animationFrameRef.current) {
 			cancelAnimationFrame(animationFrameRef.current)
 		}
 
 		animationFrameRef.current = requestAnimationFrame(() => {
-			const halfWidth = event.target.offsetWidth / 2
+			const halfWidth = (event.target as HTMLImageElement).offsetWidth / 2
 			x.set(event.nativeEvent.offsetX - halfWidth)
 		})
 	}
 
 	return (
 		<>
-			{items.map((item, idx) => (
+			{items.map((item) => (
 				<div
 					className="group relative -mr-4"
 					key={item.name}
@@ -54,8 +54,7 @@ export const AnimatedTooltip = ({
 					onMouseLeave={() => setHoveredIndex(null)}
 				>
 					<AnimatePresence>
-						{hoveredIndex === item.id && (
-							<motion.div
+						{hoveredIndex === item.id ? <motion.div
 								initial={{ opacity: 0, y: 20, scale: 0.6 }}
 								animate={{
 									opacity: 1,
@@ -81,8 +80,7 @@ export const AnimatedTooltip = ({
 									{item.name}
 								</div>
 								<div className="text-xs text-white">{item.designation}</div>
-							</motion.div>
-						)}
+							</motion.div> : null}
 					</AnimatePresence>
 					<img
 						onMouseMove={handleMouseMove}

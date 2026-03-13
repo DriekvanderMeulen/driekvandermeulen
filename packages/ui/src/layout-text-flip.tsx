@@ -10,7 +10,7 @@ export const LayoutTextFlip = ({
 	duration = 3000,
 }: {
 	text: string
-	words: string[]
+	words: Array<string>
 	duration?: number
 }) => {
 	const [currentIndex, setCurrentIndex] = useState(0)

@@ -115,7 +115,7 @@ const CollisionMechanism = React.forwardRef<
 			repeatDelay?: number
 		}
 	}
->(({ parentRef, containerRef, beamOptions = {} }, ref) => {
+>(({ parentRef, containerRef, beamOptions = {} }) => {
 	const beamRef = useRef<HTMLDivElement>(null)
 	const [collision, setCollision] = useState<{
 		detected: boolean
@@ -205,8 +205,7 @@ const CollisionMechanism = React.forwardRef<
 				)}
 			/>
 			<AnimatePresence>
-				{collision.detected && collision.coordinates && (
-					<Explosion
+				{collision.detected && collision.coordinates ? <Explosion
 						key={`${collision.coordinates.x}-${collision.coordinates.y}`}
 						className=""
 						style={{
@@ -214,8 +213,7 @@ const CollisionMechanism = React.forwardRef<
 							top: `${collision.coordinates.y}px`,
 							transform: 'translate(-50%, -50%)',
 						}}
-					/>
-				)}
+					/> : null}
 			</AnimatePresence>
 		</>
 	)

@@ -5,8 +5,7 @@ import {
 	IconX,
 } from '@tabler/icons-react'
 import { AnimatePresence, motion } from 'motion/react'
-import Image, { ImageProps } from 'next/image'
-import React, {
+import {
 	createContext,
 	useContext,
 	useEffect,
@@ -18,7 +17,7 @@ import { useOutsideClick } from '@/hooks/use-outside-click'
 import { cn } from '@/lib/utils'
 
 interface CarouselProps {
-	items: JSX.Element[]
+	items: Array<JSX.Element>
 	initialScroll?: number
 }
 
@@ -165,7 +164,7 @@ export const Card = ({
 }) => {
 	const [open, setOpen] = useState(false)
 	const containerRef = useRef<HTMLDivElement>(null)
-	const { onCardClose, currentIndex } = useContext(CarouselContext)
+	const { onCardClose } = useContext(CarouselContext)
 
 	useEffect(() => {
 		function onKeyDown(event: KeyboardEvent) {
@@ -198,8 +197,7 @@ export const Card = ({
 	return (
 		<>
 			<AnimatePresence>
-				{open && (
-					<div className="fixed inset-0 z-50 h-screen overflow-auto">
+				{open ? <div className="fixed inset-0 z-50 h-screen overflow-auto">
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
@@ -234,8 +232,7 @@ export const Card = ({
 							</motion.p>
 							<div className="py-10">{card.content}</div>
 						</motion.div>
-					</div>
-				)}
+					</div> : null}
 			</AnimatePresence>
 			<motion.button
 				layoutId={layout ? `card-${card.title}` : undefined}

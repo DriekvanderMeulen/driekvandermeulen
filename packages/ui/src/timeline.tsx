@@ -1,18 +1,17 @@
 'use client'
 import {
 	motion,
-	useMotionValueEvent,
 	useScroll,
 	useTransform,
 } from 'motion/react'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface TimelineEntry {
 	title: string
 	content: React.ReactNode
 }
 
-export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
+export const Timeline = ({ data }: { data: Array<TimelineEntry> }) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const containerRef = useRef<HTMLDivElement>(null)
 	const [height, setHeight] = useState(0)

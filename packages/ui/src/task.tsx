@@ -13,7 +13,7 @@ import {
 } from '@/components/ai-elements/task'
 
 const Example = () => {
-	const tasks: { key: string; value: ReactNode }[] = [
+	const tasks: Array<{ key: string; value: ReactNode }> = [
 		{ key: nanoid(), value: 'Searching "app/page.tsx, components structure"' },
 		{
 			key: nanoid(),

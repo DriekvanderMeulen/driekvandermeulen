@@ -56,15 +56,13 @@ const Example = () => {
 					size="icon"
 					variant="outline"
 				/>
-				{transcript && (
-					<button
+				{transcript ? <button
 						className="text-sm text-muted-foreground underline hover:text-foreground"
 						onClick={handleClear}
 						type="button"
 					>
 						Clear
-					</button>
-				)}
+					</button> : null}
 			</div>
 			{transcript ? (
 				<div className="max-w-md rounded-lg border bg-card p-4 text-sm">
