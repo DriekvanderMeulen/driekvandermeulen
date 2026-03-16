@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
 	motion,
-	useMotionValueEvent,
 	useScroll,
 	useSpring,
 	useTransform,
@@ -48,8 +48,8 @@ const MovingLine = () => {
 						y2="1566.02"
 						gradientUnits="userSpaceOnUse"
 					>
-						<stop stop-color="#3879E7" stop-opacity="0" />
-						<stop offset="1" stop-color="#3879E7" />
+						<stop stopColor="#3879E7" stopOpacity="0" />
+						<stop offset="1" stopColor="#3879E7" />
 					</linearGradient>
 				</defs>
 				<motion.path

@@ -44,7 +44,7 @@ function MagneticEffect({ children, distance = 0.6 }: MagneticEffectType) {
 		return () => {
 			document.removeEventListener('mousemove', calculateDistance)
 		}
-	}, [ref, isHovered])
+	}, [isHovered, distance, x, y])
 
 	return (
 		<motion.div

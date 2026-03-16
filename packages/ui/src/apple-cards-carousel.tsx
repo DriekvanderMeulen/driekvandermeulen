@@ -5,9 +5,10 @@ import {
 	IconX,
 } from '@tabler/icons-react'
 import { AnimatePresence, motion } from 'motion/react'
-import Image, { ImageProps } from 'next/image'
+import { type ImageProps } from 'next/image'
 import React, {
 	createContext,
+	useCallback,
 	useContext,
 	useEffect,
 	useRef,
@@ -18,7 +19,7 @@ import { useOutsideClick } from '@/hooks/use-outside-click'
 import { cn } from '@/lib/utils'
 
 interface CarouselProps {
-	items: JSX.Element[]
+	items: Array<JSX.Element>
 	initialScroll?: number
 }
 
@@ -165,7 +166,16 @@ export const Card = ({
 }) => {
 	const [open, setOpen] = useState(false)
 	const containerRef = useRef<HTMLDivElement>(null)
-	const { onCardClose, currentIndex } = useContext(CarouselContext)
+	const { onCardClose } = useContext(CarouselContext)
+
+	const handleOpen = () => {
+		setOpen(true)
+	}
+
+	const handleClose = useCallback(() => {
+		setOpen(false)
+		onCardClose(index)
+	}, [onCardClose, index])
 
 	useEffect(() => {
 		function onKeyDown(event: KeyboardEvent) {
@@ -182,24 +192,14 @@ export const Card = ({
 
 		window.addEventListener('keydown', onKeyDown)
 		return () => window.removeEventListener('keydown', onKeyDown)
-	}, [open])
+	}, [open, handleClose])
 
 	useOutsideClick(containerRef, () => handleClose())
-
-	const handleOpen = () => {
-		setOpen(true)
-	}
-
-	const handleClose = () => {
-		setOpen(false)
-		onCardClose(index)
-	}
 
 	return (
 		<>
 			<AnimatePresence>
-				{open && (
-					<div className="fixed inset-0 z-50 h-screen overflow-auto">
+				{open ? <div className="fixed inset-0 z-50 h-screen overflow-auto">
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
@@ -234,8 +234,7 @@ export const Card = ({
 							</motion.p>
 							<div className="py-10">{card.content}</div>
 						</motion.div>
-					</div>
-				)}
+					</div> : null}
 			</AnimatePresence>
 			<motion.button
 				layoutId={layout ? `card-${card.title}` : undefined}
@@ -290,7 +289,6 @@ export const BlurImage = ({
 			height={height}
 			loading="lazy"
 			decoding="async"
-			blurDataURL={typeof src === 'string' ? src : undefined}
 			alt={alt ? alt : 'Background of a beautiful view'}
 			{...rest}
 		/>

@@ -11,11 +11,11 @@ import React from 'react'
 export const HeroParallax = ({
 	products,
 }: {
-	products: {
+	products: Array<{
 		title: string
 		link: string
 		thumbnail: string
-	}[]
+	}>
 }) => {
 	const firstRow = products.slice(0, 5)
 	const secondRow = products.slice(5, 10)

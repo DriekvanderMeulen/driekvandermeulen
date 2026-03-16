@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
@@ -20,23 +21,22 @@ export const MaskContainer = ({
 	const [isHovered, setIsHovered] = useState(false)
 	const [mousePosition, setMousePosition] = useState<any>({ x: null, y: null })
 	const containerRef = useRef<any>(null)
-	const updateMousePosition = (e: any) => {
-		const rect = containerRef.current.getBoundingClientRect()
-		setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top })
-	}
 
 	useEffect(() => {
-		containerRef.current.addEventListener('mousemove', updateMousePosition)
+		const container = containerRef.current
+		if (!container) return
+
+		const updateMousePosition = () => {
+			const rect = container.getBoundingClientRect()
+			setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+		}
+
+		container.addEventListener('mousemove', updateMousePosition)
 		return () => {
-			if (containerRef.current) {
-				containerRef.current.removeEventListener(
-					'mousemove',
-					updateMousePosition,
-				)
-			}
+			container.removeEventListener('mousemove', updateMousePosition)
 		}
 	}, [])
-	let maskSize = isHovered ? revealSize : size
+	const maskSize = isHovered ? revealSize : size
 
 	return (
 		<motion.div

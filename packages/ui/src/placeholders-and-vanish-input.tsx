@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { AnimatePresence, motion } from 'motion/react'
@@ -10,28 +11,29 @@ export function PlaceholdersAndVanishInput({
 	onChange,
 	onSubmit,
 }: {
-	placeholders: string[]
+	placeholders: Array<string>
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }) {
 	const [currentPlaceholder, setCurrentPlaceholder] = useState(0)
 
 	const intervalRef = useRef<NodeJS.Timeout | null>(null)
-	const startAnimation = () => {
-		intervalRef.current = setInterval(() => {
-			setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length)
-		}, 3000)
-	}
-	const handleVisibilityChange = () => {
-		if (document.visibilityState !== 'visible' && intervalRef.current) {
-			clearInterval(intervalRef.current) // Clear the interval when the tab is not visible
-			intervalRef.current = null
-		} else if (document.visibilityState === 'visible') {
-			startAnimation() // Restart the interval when the tab becomes visible
-		}
-	}
 
 	useEffect(() => {
+		const startAnimation = () => {
+			intervalRef.current = setInterval(() => {
+				setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length)
+			}, 3000)
+		}
+		const handleVisibilityChange = () => {
+			if (document.visibilityState !== 'visible' && intervalRef.current) {
+				clearInterval(intervalRef.current) // Clear the interval when the tab is not visible
+				intervalRef.current = null
+			} else if (document.visibilityState === 'visible') {
+				startAnimation() // Restart the interval when the tab becomes visible
+			}
+		}
+
 		startAnimation()
 		document.addEventListener('visibilitychange', handleVisibilityChange)
 
@@ -41,10 +43,10 @@ export function PlaceholdersAndVanishInput({
 			}
 			document.removeEventListener('visibilitychange', handleVisibilityChange)
 		}
-	}, [placeholders])
+	}, [placeholders.length])
 
 	const canvasRef = useRef<HTMLCanvasElement>(null)
-	const newDataRef = useRef<any[]>([])
+	const newDataRef = useRef<Array<any>>([])
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [value, setValue] = useState('')
 	const [animating, setAnimating] = useState(false)
@@ -68,12 +70,12 @@ export function PlaceholdersAndVanishInput({
 
 		const imageData = ctx.getImageData(0, 0, 800, 800)
 		const pixelData = imageData.data
-		const newData: any[] = []
+		const newData: Array<any> = []
 
 		for (let t = 0; t < 800; t++) {
-			let i = 4 * t * 800
+			const i = 4 * t * 800
 			for (let n = 0; n < 800; n++) {
-				let e = i + 4 * n
+				const e = i + 4 * n
 				if (
 					pixelData[e] !== 0 &&
 					pixelData[e + 1] !== 0 &&
@@ -173,7 +175,7 @@ export function PlaceholdersAndVanishInput({
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		vanishAndSubmit()
-		onSubmit && onSubmit(e)
+		onSubmit?.(e)
 	}
 	return (
 		<form
@@ -194,7 +196,7 @@ export function PlaceholdersAndVanishInput({
 				onChange={(e) => {
 					if (!animating) {
 						setValue(e.target.value)
-						onChange && onChange(e)
+						onChange?.(e)
 					}
 				}}
 				onKeyDown={handleKeyDown}
@@ -246,8 +248,7 @@ export function PlaceholdersAndVanishInput({
 
 			<div className="pointer-events-none absolute inset-0 flex items-center rounded-full">
 				<AnimatePresence mode="wait">
-					{!value && (
-						<motion.p
+					{!value ? <motion.p
 							initial={{
 								y: 5,
 								opacity: 0,
@@ -268,8 +269,7 @@ export function PlaceholdersAndVanishInput({
 							className="w-[calc(100%-2rem)] truncate pl-4 text-left text-sm font-normal text-neutral-500 sm:pl-12 sm:text-base dark:text-zinc-500"
 						>
 							{placeholders[currentPlaceholder]}
-						</motion.p>
-					)}
+						</motion.p> : null}
 				</AnimatePresence>
 			</div>
 		</form>

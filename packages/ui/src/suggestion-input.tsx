@@ -20,7 +20,7 @@ import {
 } from '@/components/ai-elements/prompt-input'
 import { Suggestion, Suggestions } from '@/components/ai-elements/suggestion'
 
-const suggestions: { key: string; value: string }[] = [
+const suggestions: Array<{ key: string; value: string }> = [
 	{ key: nanoid(), value: 'What are the latest trends in AI?' },
 	{ key: nanoid(), value: 'How does machine learning work?' },
 	{ key: nanoid(), value: 'Explain quantum computing' },

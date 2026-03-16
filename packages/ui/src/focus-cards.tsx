@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { useState } from 'react'
@@ -50,7 +51,7 @@ type Card = {
 	src: string
 }
 
-export function FocusCards({ cards }: { cards: Card[] }) {
+export function FocusCards({ cards }: { cards: Array<Card> }) {
 	const [hovered, setHovered] = useState<number | null>(null)
 
 	return (

@@ -19,11 +19,11 @@ const Example = () => {
 	const [content, setContent] = useState('')
 	const [isStreaming, setIsStreaming] = useState(false)
 	const [currentTokenIndex, setCurrentTokenIndex] = useState(0)
-	const [tokens, setTokens] = useState<string[]>([])
+	const [tokens, setTokens] = useState<Array<string>>([])
 
 	// Function to chunk text into fake tokens of 3-4 characters
-	const chunkIntoTokens = useCallback((text: string): string[] => {
-		const tokens: string[] = []
+	const chunkIntoTokens = useCallback((text: string): Array<string> => {
+		const tokens: Array<string> = []
 		let i = 0
 		while (i < text.length) {
 			const chunkSize = Math.floor(Math.random() * 2) + 3 // Random size between 3-4

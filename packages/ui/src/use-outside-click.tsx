@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-function-type, @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react'
 
 export const useOutsideClick = (

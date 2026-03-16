@@ -24,7 +24,7 @@ export const MouseTrail = ({
 	trailLength = 20,
 	fadeDuration = 1000,
 }: MouseTrailProps) => {
-	const [dots, setDots] = useState<Dot[]>([])
+	const [dots, setDots] = useState<Array<Dot>>([])
 	const lastPositionRef = useRef({ x: 0, y: 0 })
 	const dotIdRef = useRef(0)
 

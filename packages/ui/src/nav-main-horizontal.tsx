@@ -15,20 +15,20 @@ import { cn } from '@/lib/utils'
 export function NavMainHorizontal({
 	items,
 }: {
-	items: {
+	items: Array<{
 		title: string
 		type: string
 		url?: string
 		icon?: LucideIcon
 		isActive?: boolean
-		items?: {
+		items?: Array<{
 			title: string
 			url: string
 			description?: string
 			icon?: LucideIcon
 			isActive?: boolean
-		}[]
-	}[]
+		}>
+	}>
 }) {
 	return (
 		<NavigationMenu viewport={false} className="max-md:hidden">
@@ -39,9 +39,7 @@ export function NavMainHorizontal({
 							<>
 								<NavigationMenuTrigger className="border-y-2 border-y-transparent bg-transparent px-2 py-1.5 font-medium text-muted-foreground hover:text-primary *:[svg]:-me-0.5 *:[svg]:size-3.5">
 									{link.title}
-									{link.isActive && (
-										<div className="absolute start-2 end-2 -bottom-4 h-0.5 bg-primary"></div>
-									)}
+									{link.isActive ? <div className="absolute start-2 end-2 -bottom-4 h-0.5 bg-primary"></div> : null}
 								</NavigationMenuTrigger>
 								<NavigationMenuContent className="z-50 p-1 data-[motion=from-end]:slide-in-from-right-16! data-[motion=from-start]:slide-in-from-left-16! data-[motion=to-end]:slide-out-to-right-16! data-[motion=to-start]:slide-out-to-left-16!">
 									<ul
@@ -53,18 +51,14 @@ export function NavMainHorizontal({
 											<li key={itemIndex}>
 												<NavigationMenuLink href={item.url} className="py-1.5">
 													{/* Display icon if present */}
-													{link.type === 'icon' && 'icon' in item && (
-														<div className="flex items-center gap-2">
-															{item.icon && (
-																<item.icon
+													{link.type === 'icon' && 'icon' in item ? <div className="flex items-center gap-2">
+															{item.icon ? <item.icon
 																	size={16}
 																	className="text-foreground opacity-60"
 																	aria-hidden="true"
-																/>
-															)}
+																/> : null}
 															<span>{item.title}</span>
-														</div>
-													)}
+														</div> : null}
 
 													{/* Display label with description if present */}
 													{link.type === 'description' &&

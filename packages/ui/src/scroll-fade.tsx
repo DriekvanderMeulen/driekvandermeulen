@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -27,7 +28,7 @@ export default function ScrollFade({
 	const [showTop, setShowTop] = useState(false)
 	const [showBottom, setShowBottom] = useState(false)
 
-	const checkScroll = () => {
+	const checkScroll = React.useCallback(() => {
 		const el = containerRef.current
 		if (!el) return
 
@@ -53,11 +54,11 @@ export default function ScrollFade({
 				Math.ceil(scrollTop + clientHeight) < Math.floor(scrollHeight - 1),
 			)
 		}
-	}
+	}, [axis])
 
 	useLayoutEffect(() => {
 		requestAnimationFrame(checkScroll)
-	}, [axis])
+	}, [checkScroll])
 
 	useEffect(() => {
 		const container = containerRef.current
@@ -81,7 +82,7 @@ export default function ScrollFade({
 			ro.disconnect()
 			cancelAnimationFrame(raf)
 		}
-	}, [axis])
+	}, [checkScroll])
 
 	return (
 		<div className="relative">
@@ -108,49 +109,41 @@ export default function ScrollFade({
 				</div>
 			</div>
 
-			{(axis === 'horizontal' || axis === 'both') && showLeft && (
-				<div
+			{(axis === 'horizontal' || axis === 'both') && showLeft ? <div
 					aria-hidden
 					className="pointer-events-none absolute top-0 left-0 z-10 h-full w-10"
 					style={{
 						background:
 							'linear-gradient(to right, var(--background) 0%, transparent 100%)',
 					}}
-				/>
-			)}
+				/> : null}
 
-			{(axis === 'horizontal' || axis === 'both') && showRight && (
-				<div
+			{(axis === 'horizontal' || axis === 'both') && showRight ? <div
 					aria-hidden
 					className="pointer-events-none absolute top-0 right-0 z-10 h-full w-10"
 					style={{
 						background:
 							'linear-gradient(to left, var(--background) 0%, transparent 100%)',
 					}}
-				/>
-			)}
+				/> : null}
 
-			{(axis === 'vertical' || axis === 'both') && showTop && (
-				<div
+			{(axis === 'vertical' || axis === 'both') && showTop ? <div
 					aria-hidden
 					className="pointer-events-none absolute top-0 left-0 z-10 h-10 w-full"
 					style={{
 						background:
 							'linear-gradient(to bottom, var(--background) 0%, transparent 100%)',
 					}}
-				/>
-			)}
+				/> : null}
 
-			{(axis === 'vertical' || axis === 'both') && showBottom && (
-				<div
+			{(axis === 'vertical' || axis === 'both') && showBottom ? <div
 					aria-hidden
 					className="pointer-events-none absolute bottom-0 left-0 z-10 h-10 w-full"
 					style={{
 						background:
 							'linear-gradient(to top, var(--background) 0%, transparent 100%)',
 					}}
-				/>
-			)}
+				/> : null}
 		</div>
 	)
 }

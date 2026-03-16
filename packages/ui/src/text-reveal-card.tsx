@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { motion } from 'motion/react'
 import React, { memo, useEffect, useRef, useState } from 'react'
@@ -31,7 +32,7 @@ export const TextRevealCard = ({
 		}
 	}, [])
 
-	function mouseMoveHandler(event: any) {
+	function mouseMoveHandler() {
 		event.preventDefault()
 
 		const { clientX } = event

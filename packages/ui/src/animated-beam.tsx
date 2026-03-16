@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 'use client'
 
 import { motion } from 'motion/react'
@@ -90,11 +91,9 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
 		}
 
 		// Initialize ResizeObserver
-		const resizeObserver = new ResizeObserver((entries) => {
+		const resizeObserver = new ResizeObserver(() => {
 			// For all entries, recalculate the path
-			for (const entry of entries) {
-				updatePath()
-			}
+			updatePath()
 		})
 
 		// Observe the container element

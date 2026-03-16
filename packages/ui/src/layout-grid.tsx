@@ -11,7 +11,7 @@ type Card = {
 	thumbnail: string
 }
 
-export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
+export const LayoutGrid = ({ cards }: { cards: Array<Card> }) => {
 	const [selected, setSelected] = useState<Card | null>(null)
 	const [lastSelected, setLastSelected] = useState<Card | null>(null)
 
@@ -42,7 +42,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 						)}
 						layoutId={`card-${card.id}`}
 					>
-						{selected?.id === card.id && <SelectedCard selected={selected} />}
+						{selected?.id === card.id ? <SelectedCard selected={selected} /> : null}
 						<ImageComponent card={card} />
 					</motion.div>
 				</div>

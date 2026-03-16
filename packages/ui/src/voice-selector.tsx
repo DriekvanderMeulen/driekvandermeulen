@@ -20,7 +20,7 @@ import {
 } from '@/components/ai-elements/voice-selector'
 import { Button } from '@/registry/default/ui/button'
 
-const voices: {
+const voices: Array<{
 	id: string
 	name: string
 	description: string
@@ -28,7 +28,7 @@ const voices: {
 	accent: ComponentProps<typeof VoiceSelectorAccent>['value']
 	age: string
 	previewUrl: string
-}[] = [
+}> = [
 	{
 		id: 'liam',
 		name: 'Liam',

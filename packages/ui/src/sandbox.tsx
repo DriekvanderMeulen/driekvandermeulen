@@ -63,7 +63,7 @@ const outputs: Record<ToolUIPart['state'], string | undefined> = {
     at node_modules/react-dom/cjs/react-dom.development.js:4245:12`,
 }
 
-const states: ToolUIPart['state'][] = [
+const states: Array<ToolUIPart['state']> = [
 	'input-streaming',
 	'input-available',
 	'output-available',

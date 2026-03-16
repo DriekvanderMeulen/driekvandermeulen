@@ -241,8 +241,7 @@ export default function FlipClock({
 			</span>
 
 			{/* Days */}
-			{shouldShowDays && (
-				<>
+			{shouldShowDays ? <>
 					{daysStr.split('').map((digit, i) => (
 						<FlipUnit
 							key={`d-${i}`}
@@ -252,8 +251,7 @@ export default function FlipClock({
 						/>
 					))}
 					<ClockSeparator size={size!} />
-				</>
-			)}
+				</> : null}
 
 			{/* Hours */}
 			{hoursStr.split('').map((digit, index) => (
@@ -290,6 +288,8 @@ export default function FlipClock({
 			))}
 
 			{/* Injected Keyframes (The Shadcn "Cheat Code") */}
+			{/* @ts-expect-error - style jsx global is valid Next.js syntax */}
+			{/* eslint-disable-next-line react/no-unknown-property */}
 			<style jsx global>{`
 				/* Use the same duration for both to keep them in sync */
 				.animate-flip-top {

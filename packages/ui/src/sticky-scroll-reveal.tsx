@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { useMotionValueEvent, useScroll } from 'motion/react'
 import { motion } from 'motion/react'
@@ -9,11 +10,11 @@ export const StickyScroll = ({
 	content,
 	contentClassName,
 }: {
-	content: {
+	content: Array<{
 		title: string
 		description: string
 		content?: React.ReactNode | any
-	}[]
+	}>
 	contentClassName?: string
 }) => {
 	const [activeCard, setActiveCard] = React.useState(0)
@@ -46,11 +47,11 @@ export const StickyScroll = ({
 		'#000000', // black
 		'#171717', // neutral-900
 	]
-	const linearGradients = [
+	const linearGradients = React.useMemo(() => [
 		'linear-gradient(to bottom right, #06b6d4, #10b981)', // cyan-500 to emerald-500
 		'linear-gradient(to bottom right, #ec4899, #6366f1)', // pink-500 to indigo-500
 		'linear-gradient(to bottom right, #f97316, #eab308)', // orange-500 to yellow-500
-	]
+	], [])
 
 	const [backgroundGradient, setBackgroundGradient] = useState(
 		linearGradients[0],
@@ -58,7 +59,7 @@ export const StickyScroll = ({
 
 	useEffect(() => {
 		setBackgroundGradient(linearGradients[activeCard % linearGradients.length])
-	}, [activeCard])
+	}, [activeCard, linearGradients])
 
 	return (
 		<motion.div

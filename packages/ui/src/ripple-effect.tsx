@@ -23,7 +23,7 @@ export const RippleEffect = ({
 	duration = 0.8,
 	className,
 }: RippleProps) => {
-	const [ripples, setRipples] = React.useState<RipplePosition[]>([])
+	const [ripples, setRipples] = React.useState<Array<RipplePosition>>([])
 	const containerRef = React.useRef<HTMLDivElement>(null)
 
 	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {

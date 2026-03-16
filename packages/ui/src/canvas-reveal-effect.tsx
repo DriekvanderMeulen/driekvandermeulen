@@ -1,6 +1,6 @@
 'use client'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import React, { useMemo, useRef } from 'react'
+import React, { useCallback, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
 import { cn } from '@/lib/utils'
@@ -18,8 +18,8 @@ export const CanvasRevealEffect = ({
 	 * 1.0 - faster
 	 */
 	animationSpeed?: number
-	opacities?: number[]
-	colors?: number[][]
+	opacities?: Array<number>
+	colors?: Array<Array<number>>
 	containerClassName?: string
 	dotSize?: number
 	showGradient?: boolean
@@ -42,20 +42,18 @@ export const CanvasRevealEffect = ({
 					center={['x', 'y']}
 				/>
 			</div>
-			{showGradient && (
-				<div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-[84%]" />
-			)}
+			{showGradient ? <div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-[84%]" /> : null}
 		</div>
 	)
 }
 
 interface DotMatrixProps {
-	colors?: number[][]
-	opacities?: number[]
+	colors?: Array<Array<number>>
+	opacities?: Array<number>
 	totalSize?: number
 	dotSize?: number
 	shader?: string
-	center?: ('x' | 'y')[]
+	center?: Array<'x' | 'y'>
 }
 
 const DotMatrix: React.FC<DotMatrixProps> = ({
@@ -178,7 +176,7 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
 
 type Uniforms = {
 	[key: string]: {
-		value: number[] | number[][] | number
+		value: Array<number> | Array<Array<number>> | number
 		type: string
 	}
 }
@@ -204,16 +202,16 @@ const ShaderMaterial = ({
 		}
 		lastFrameTime = timestamp
 
-		const material: any = ref.current.material
-		const timeLocation = material.uniforms.u_time
+		const material = ref.current?.material as THREE.ShaderMaterial
+		const timeLocation = material.uniforms.u_time as THREE.Uniform<number>
 		timeLocation.value = timestamp
 	})
 
-	const getUniforms = () => {
-		const preparedUniforms: any = {}
+	const getUniforms = useCallback(() => {
+		const preparedUniforms: Record<string, Record<string, unknown>> = {}
 
 		for (const uniformName in uniforms) {
-			const uniform: any = uniforms[uniformName]
+			const uniform = uniforms[uniformName]
 
 			switch (uniform.type) {
 				case 'uniform1f':
@@ -230,7 +228,7 @@ const ShaderMaterial = ({
 					break
 				case 'uniform3fv':
 					preparedUniforms[uniformName] = {
-						value: uniform.value.map((v: number[]) =>
+						value: uniform.value.map((v: Array<number>) =>
 							new THREE.Vector3().fromArray(v),
 						),
 						type: '3fv',
@@ -253,7 +251,7 @@ const ShaderMaterial = ({
 			value: new THREE.Vector2(size.width * 2, size.height * 2),
 		} // Initialize u_resolution
 		return preparedUniforms
-	}
+	}, [uniforms, size.width, size.height])
 
 	// Shader material
 	const material = useMemo(() => {
@@ -280,11 +278,15 @@ const ShaderMaterial = ({
 		})
 
 		return materialObject
-	}, [size.width, size.height, source])
+	}, [source, getUniforms])
 
 	return (
-		<mesh ref={ref as any}>
+		<mesh ref={ref}>
+			{/* @ts-expect-error - R3F element  */}
+			{/* eslint-disable-next-line react/no-unknown-property */}
 			<planeGeometry args={[2, 2]} />
+			{/* @ts-expect-error - R3F element  */}
+			{/* eslint-disable-next-line react/no-unknown-property */}
 			<primitive object={material} attach="material" />
 		</mesh>
 	)
@@ -301,7 +303,7 @@ interface ShaderProps {
 	source: string
 	uniforms: {
 		[key: string]: {
-			value: number[] | number[][] | number
+			value: Array<number> | Array<Array<number>> | number
 			type: string
 		}
 	}

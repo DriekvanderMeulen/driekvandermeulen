@@ -1,5 +1,4 @@
-'use client'
-import * as HoverCardPrimitive from '@radix-ui/react-hover-card'
+/* eslint-disable react/jsx-no-undef */
 import {
 	AnimatePresence,
 	motion,
@@ -30,8 +29,8 @@ export const LinkPreview = ({
 	className,
 	width = 200,
 	height = 125,
-	quality = 50,
-	layout = 'fixed',
+	quality: _quality = 50,
+	layout: _layout = 'fixed',
 	isStatic = false,
 	imageSrc = '',
 }: LinkPreviewProps) => {
@@ -66,7 +65,7 @@ export const LinkPreview = ({
 
 	const translateX = useSpring(x, springConfig)
 
-	const handleMouseMove = (event: any) => {
+	const handleMouseMove = () => {
 		const targetRect = event.target.getBoundingClientRect()
 		const eventOffsetX = event.clientX - targetRect.left
 		const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2 // Reduce the effect to make it subtle
@@ -103,8 +102,7 @@ export const LinkPreview = ({
 					sideOffset={10}
 				>
 					<AnimatePresence>
-						{isOpen && (
-							<motion.div
+						{isOpen ? <motion.div
 								initial={{ opacity: 0, y: 20, scale: 0.6 }}
 								animate={{
 									opacity: 1,
@@ -135,8 +133,7 @@ export const LinkPreview = ({
 										alt="preview image"
 									/>
 								</a>
-							</motion.div>
-						)}
+							</motion.div> : null}
 					</AnimatePresence>
 				</HoverCardPrimitive.Content>
 			</HoverCardPrimitive.Root>

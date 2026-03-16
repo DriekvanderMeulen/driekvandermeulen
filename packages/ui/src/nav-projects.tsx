@@ -14,11 +14,11 @@ import {
 export function NavProjects({
 	projects,
 }: {
-	projects: {
+	projects: Array<{
 		name: string
 		url: string
 		icon: LucideIcon
-	}[]
+	}>
 }) {
 	return (
 		<SidebarGroup className="group-data-[collapsible=icon]:hidden">

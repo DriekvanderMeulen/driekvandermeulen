@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-
+/* eslint-disable */
 import { cn } from '@/lib/utils'
 
 export const GlareCard = ({

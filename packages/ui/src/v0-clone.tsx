@@ -125,24 +125,21 @@ export default function Home() {
 									))}
 								</ConversationContent>
 							</Conversation>
-							{isLoading && (
-								<Message from="assistant">
+							{isLoading ? <Message from="assistant">
 									<MessageContent>
 										<p className="flex items-center gap-2">
 											<Loader />
 											Creating your app...
 										</p>
 									</MessageContent>
-								</Message>
-							)}
+								</Message> : null}
 						</>
 					)}
 				</div>
 
 				{/* Input */}
 				<div className="border-t p-4">
-					{!currentChat && (
-						<Suggestions>
+					{!currentChat ? <Suggestions>
 							<Suggestion
 								onClick={() =>
 									setMessage('Create a responsive navbar with Tailwind CSS')
@@ -159,8 +156,7 @@ export default function Home() {
 								}
 								suggestion="Make a landing page for a coffee shop"
 							/>
-						</Suggestions>
-					)}
+						</Suggestions> : null}
 					<div className="flex gap-2">
 						<PromptInput
 							className="relative mx-auto mt-4 w-full max-w-2xl"

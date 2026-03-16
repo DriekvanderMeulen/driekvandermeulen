@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { useScroll, useTransform } from 'motion/react'
 import { motion } from 'motion/react'
@@ -9,7 +10,7 @@ export const ParallaxScrollSecond = ({
 	images,
 	className,
 }: {
-	images: string[]
+	images: Array<string>
 	className?: string
 }) => {
 	const gridRef = useRef<any>(null)

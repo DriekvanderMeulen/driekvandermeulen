@@ -46,7 +46,7 @@ interface NoiseBackgroundProps {
 	children?: React.ReactNode
 	className?: string
 	containerClassName?: string
-	gradientColors?: string[]
+	gradientColors?: Array<string>
 	noiseIntensity?: number
 	speed?: number
 	backdropBlur?: boolean

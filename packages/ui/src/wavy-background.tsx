@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, react-hooks/exhaustive-deps */
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
 import { createNoise3D } from 'simplex-noise'
@@ -19,7 +20,7 @@ export const WavyBackground = ({
 	children?: any
 	className?: string
 	containerClassName?: string
-	colors?: string[]
+	colors?: Array<string>
 	waveWidth?: number
 	backgroundFill?: string
 	blur?: number
@@ -47,20 +48,6 @@ export const WavyBackground = ({
 		}
 	}
 
-	const init = () => {
-		canvas = canvasRef.current
-		ctx = canvas.getContext('2d')
-		w = ctx.canvas.width = window.innerWidth
-		h = ctx.canvas.height = window.innerHeight
-		ctx.filter = `blur(${blur}px)`
-		nt = 0
-		window.onresize = function () {
-			w = ctx.canvas.width = window.innerWidth
-			h = ctx.canvas.height = window.innerHeight
-			ctx.filter = `blur(${blur}px)`
-		}
-		render()
-	}
 
 	const waveColors = colors ?? [
 		'#38bdf8',
@@ -76,7 +63,7 @@ export const WavyBackground = ({
 			ctx.lineWidth = waveWidth || 50
 			ctx.strokeStyle = waveColors[i % waveColors.length]
 			for (x = 0; x < w; x += 5) {
-				var y = noise(x / 800, 0.3 * i, nt) * 100
+				const y = noise(x / 800, 0.3 * i, nt) * 100
 				ctx.lineTo(x, y + h * 0.5) // adjust for height, currently at 50% of the container
 			}
 			ctx.stroke()
@@ -84,21 +71,39 @@ export const WavyBackground = ({
 		}
 	}
 
-	let animationId: number
-	const render = () => {
-		ctx.fillStyle = backgroundFill || 'black'
-		ctx.globalAlpha = waveOpacity || 0.5
-		ctx.fillRect(0, 0, w, h)
-		drawWave(5)
-		animationId = requestAnimationFrame(render)
-	}
+	const animationIdRef = useRef<number>()
 
 	useEffect(() => {
-		init()
-		return () => {
-			cancelAnimationFrame(animationId)
+		const initFn = () => {
+			canvas = canvasRef.current
+			ctx = canvas.getContext('2d')
+			w = ctx.canvas.width = window.innerWidth
+			h = ctx.canvas.height = window.innerHeight
+			ctx.filter = `blur(${blur}px)`
+			nt = 0
+			window.onresize = function () {
+				w = ctx.canvas.width = window.innerWidth
+				h = ctx.canvas.height = window.innerHeight
+				ctx.filter = `blur(${blur}px)`
+			}
+			renderFn()
 		}
-	}, [])
+
+		const renderFn = () => {
+			ctx.fillStyle = backgroundFill || 'black'
+			ctx.globalAlpha = waveOpacity || 0.5
+			ctx.fillRect(0, 0, w, h)
+			drawWave(5)
+			animationIdRef.current = requestAnimationFrame(renderFn)
+		}
+
+		initFn()
+		return () => {
+			if (animationIdRef.current) {
+				cancelAnimationFrame(animationIdRef.current)
+			}
+		}
+	}, [blur, backgroundFill, waveOpacity])
 
 	const [isSafari, setIsSafari] = useState(false)
 	useEffect(() => {

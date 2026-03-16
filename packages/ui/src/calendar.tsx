@@ -125,7 +125,8 @@ function Calendar({
 				...classNames,
 			}}
 			components={{
-				Root: ({ className, rootRef, ...props }) => {
+				// eslint-disable-next-line react/prop-types
+			Root: ({ className, rootRef, ...props }) => {
 					return (
 						<div
 							data-slot="calendar"
@@ -135,7 +136,8 @@ function Calendar({
 						/>
 					)
 				},
-				Chevron: ({ className, orientation, ...props }) => {
+				// eslint-disable-next-line react/prop-types
+			Chevron: ({ className, orientation, ...props }) => {
 					if (orientation === 'left') {
 						return (
 							<ChevronLeftIcon className={cn('size-4', className)} {...props} />
@@ -194,8 +196,7 @@ function CalendarDayButton({
 			data-selected-single={
 				modifiers.selected &&
 				!modifiers.range_start &&
-				!modifiers.range_end &&
-				!modifiers.range_middle
+				!modifiers.range_end ? !modifiers.range_middle : null
 			}
 			data-range-start={modifiers.range_start}
 			data-range-end={modifiers.range_end}

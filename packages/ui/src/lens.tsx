@@ -86,8 +86,7 @@ export const Lens: React.FC<LensProps> = ({
 				</div>
 			) : (
 				<AnimatePresence>
-					{isHovering && (
-						<div>
+					{isHovering ? <div>
 							<motion.div
 								initial={{ opacity: 0, scale: 0.58 }}
 								animate={{ opacity: 1, scale: 1 }}
@@ -117,8 +116,7 @@ export const Lens: React.FC<LensProps> = ({
 									{children}
 								</div>
 							</motion.div>
-						</div>
-					)}
+						</div> : null}
 				</AnimatePresence>
 			)}
 		</div>

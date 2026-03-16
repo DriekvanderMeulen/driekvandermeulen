@@ -2,7 +2,7 @@
 
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
 import { AnimatePresence, motion } from 'motion/react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 type Testimonial = {
 	quote: string
@@ -14,14 +14,14 @@ export const AnimatedTestimonials = ({
 	testimonials,
 	autoplay = false,
 }: {
-	testimonials: Testimonial[]
+	testimonials: Array<Testimonial>
 	autoplay?: boolean
 }) => {
 	const [active, setActive] = useState(0)
 
-	const handleNext = () => {
+	const handleNext = useCallback(() => {
 		setActive((prev) => (prev + 1) % testimonials.length)
-	}
+	}, [testimonials.length])
 
 	const handlePrev = () => {
 		setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length)
@@ -36,7 +36,7 @@ export const AnimatedTestimonials = ({
 			const interval = setInterval(handleNext, 5000)
 			return () => clearInterval(interval)
 		}
-	}, [autoplay])
+	}, [autoplay, handleNext])
 
 	const randomRotateY = () => {
 		return Math.floor(Math.random() * 21) - 10
@@ -47,7 +47,7 @@ export const AnimatedTestimonials = ({
 				<div>
 					<div className="relative h-80 w-full">
 						<AnimatePresence>
-							{testimonials.map((testimonial, index) => (
+							{testimonials.map((testimonial) => (
 								<motion.div
 									key={testimonial.src}
 									initial={{
@@ -118,9 +118,9 @@ export const AnimatedTestimonials = ({
 							{testimonials[active].designation}
 						</p>
 						<motion.p className="mt-8 text-lg text-gray-500 dark:text-neutral-300">
-							{testimonials[active].quote.split(' ').map((word, index) => (
+							{testimonials[active].quote.split(' ').map((word, wordIndex) => (
 								<motion.span
-									key={index}
+									key={wordIndex}
 									initial={{
 										filter: 'blur(10px)',
 										opacity: 0,
@@ -134,7 +134,7 @@ export const AnimatedTestimonials = ({
 									transition={{
 										duration: 0.2,
 										ease: 'easeInOut',
-										delay: 0.02 * index,
+										delay: 0.02 * wordIndex,
 									}}
 									className="inline-block"
 								>

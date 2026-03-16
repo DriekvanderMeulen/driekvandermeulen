@@ -62,7 +62,7 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
 	const animationFrameRef = useRef<number | null>(null)
 	const startTimeRef = useRef<number>(0)
 	const lastFlipTimeRef = useRef<number>(0)
-	const scrambleCharsRef = useRef<string[]>(
+	const scrambleCharsRef = useRef<Array<string>>(
 		text ? generateGibberishPreservingSpaces(text, charset).split('') : [],
 	)
 

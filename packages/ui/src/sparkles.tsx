@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import type { Container, SingleOrMultiple } from '@tsparticles/engine'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
 import { motion, useAnimation } from 'motion/react'
-import React, { useId, useMemo } from 'react'
+import React, { useId } from 'react'
 import { useEffect, useState } from 'react'
 
 import { cn } from '@/lib/utils'
@@ -54,8 +55,7 @@ export const SparklesCore = (props: ParticlesProps) => {
 	const generatedId = useId()
 	return (
 		<motion.div animate={controls} className={cn('opacity-0', className)}>
-			{init && (
-				<Particles
+			{init ? <Particles
 					id={id || generatedId}
 					className={cn('h-full w-full')}
 					particlesLoaded={particlesLoaded}
@@ -428,8 +428,7 @@ export const SparklesCore = (props: ParticlesProps) => {
 						},
 						detectRetina: true,
 					}}
-				/>
-			)}
+				/> : null}
 		</motion.div>
 	)
 }

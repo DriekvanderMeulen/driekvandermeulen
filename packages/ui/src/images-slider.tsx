@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { AnimatePresence, motion } from 'motion/react'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -13,7 +14,7 @@ export const ImagesSlider = ({
 	autoplay = true,
 	direction = 'up',
 }: {
-	images: string[]
+	images: Array<string>
 	children: React.ReactNode
 	overlay?: React.ReactNode
 	overlayClassName?: string
@@ -22,27 +23,23 @@ export const ImagesSlider = ({
 	direction?: 'up' | 'down'
 }) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
-	const [loading, setLoading] = useState(false)
-	const [loadedImages, setLoadedImages] = useState<string[]>([])
+	const [_loading, _setLoading] = useState(false)
+	const [loadedImages, setLoadedImages] = useState<Array<string>>([])
 
-	const handleNext = () => {
+	const handleNext = useCallback(() => {
 		setCurrentIndex((prevIndex) =>
 			prevIndex + 1 === images.length ? 0 : prevIndex + 1,
 		)
-	}
+	}, [images.length])
 
-	const handlePrevious = () => {
+	const handlePrevious = useCallback(() => {
 		setCurrentIndex((prevIndex) =>
 			prevIndex - 1 < 0 ? images.length - 1 : prevIndex - 1,
 		)
-	}
+	}, [images.length])
 
-	useEffect(() => {
-		loadImages()
-	}, [])
-
-	const loadImages = () => {
-		setLoading(true)
+	const loadImages = useCallback(() => {
+		_setLoading(true)
 		const loadPromises = images.map((image) => {
 			return new Promise((resolve, reject) => {
 				const img = new Image()
@@ -54,11 +51,15 @@ export const ImagesSlider = ({
 
 		Promise.all(loadPromises)
 			.then((loadedImages) => {
-				setLoadedImages(loadedImages as string[])
-				setLoading(false)
+				setLoadedImages(loadedImages as Array<string>)
+				_setLoading(false)
 			})
 			.catch((error) => console.error('Failed to load images', error))
-	}
+	}, [images])
+
+	useEffect(() => {
+		loadImages()
+	}, [loadImages])
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if (event.key === 'ArrowRight') {
@@ -82,7 +83,7 @@ export const ImagesSlider = ({
 			window.removeEventListener('keydown', handleKeyDown)
 			clearInterval(interval)
 		}
-	}, [])
+	}, [autoplay, handleNext, handlePrevious])
 
 	const slideVariants = {
 		initial: {
@@ -127,15 +128,12 @@ export const ImagesSlider = ({
 				perspective: '1000px',
 			}}
 		>
-			{areImagesLoaded && children}
-			{areImagesLoaded && overlay && (
-				<div
+			{areImagesLoaded ? children : null}
+			{areImagesLoaded && overlay ? <div
 					className={cn('absolute inset-0 z-40 bg-black/60', overlayClassName)}
-				/>
-			)}
+				/> : null}
 
-			{areImagesLoaded && (
-				<AnimatePresence>
+			{areImagesLoaded ? <AnimatePresence>
 					<motion.img
 						key={currentIndex}
 						src={loadedImages[currentIndex]}
@@ -145,8 +143,7 @@ export const ImagesSlider = ({
 						variants={slideVariants}
 						className="image absolute inset-0 h-full w-full object-cover object-center"
 					/>
-				</AnimatePresence>
-			)}
+				</AnimatePresence> : null}
 		</div>
 	)
 }

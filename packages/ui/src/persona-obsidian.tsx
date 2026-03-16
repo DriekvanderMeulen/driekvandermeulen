@@ -19,11 +19,11 @@ import {
 	TooltipTrigger,
 } from '@/registry/default/ui/tooltip'
 
-const states: {
+const states: Array<{
 	state: PersonaState
 	icon: LucideIcon
 	label: string
-}[] = [
+}> = [
 	{
 		state: 'idle',
 		icon: CircleIcon,

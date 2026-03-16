@@ -175,7 +175,7 @@ export const DottedGlowBackground = ({
 		resize()
 
 		// Precompute dot metadata for a medium-sized grid and regenerate on resize
-		let dots: { x: number; y: number; phase: number; speed: number }[] = []
+		let dots: Array<{ x: number; y: number; phase: number; speed: number }> = []
 
 		const regenDots = () => {
 			dots = []
@@ -203,12 +203,11 @@ export const DottedGlowBackground = ({
 
 		regenDots()
 
-		let last = performance.now()
+		let _last = performance.now()
 
 		const draw = (now: number) => {
 			if (stopped) return
-			const dt = (now - last) / 1000 // seconds
-			last = now
+			_last = now
 			const { width, height } = container.getBoundingClientRect()
 
 			ctx.clearRect(0, 0, el.width, el.height)
