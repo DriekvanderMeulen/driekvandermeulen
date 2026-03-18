@@ -113,7 +113,7 @@ function StoryContent({
 }
 
 export default function About() {
-	const yearsExperience = calculateYearsExperience()
+	const _yearsExperience = calculateYearsExperience()
 
 	let storySections: Array<StorySection> = []
 	try {

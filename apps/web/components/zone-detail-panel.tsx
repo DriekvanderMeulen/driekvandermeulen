@@ -11,7 +11,7 @@ interface ZoneDetailPanelProps {
 
 function parseMarkdownLinks(text: string): React.ReactNode {
 	const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g
-	const parts: React.ReactNode[] = []
+	const parts: Array<React.ReactNode> = []
 	let lastIndex = 0
 	let match: RegExpExecArray | null
 

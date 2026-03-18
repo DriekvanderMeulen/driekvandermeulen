@@ -2,7 +2,6 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 
 import {
-	type ParsedContent,
 	type ParsedContentItem,
 	parseContentDocument,
 } from '@/utils/content-parser'

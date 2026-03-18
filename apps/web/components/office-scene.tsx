@@ -262,8 +262,7 @@ const OfficeModel = memo(function OfficeModel() {
 
 		setCollisionMeshes(colliders)
 		context?.setTriggerZones(triggers)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [scene])
+		}, [scene]) // context intentionally excluded to avoid re-running on every render
 
 	if (!scene) return null
 
