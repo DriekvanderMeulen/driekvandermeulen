@@ -87,11 +87,11 @@ export default function OfficePage() {
 						width: '12rem',
 					}}
 				/>
-				{error && (
+				{error ? (
 					<p style={{ color: '#ef4444', fontSize: '0.875rem', margin: 0 }}>
 						Invalid code
 					</p>
-				)}
+				) : null}
 			</form>
 		</div>
 	)
