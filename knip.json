@@ -2,7 +2,7 @@
 	"$schema": "https://unpkg.com/knip@latest/schema.json",
 	"workspaces": {
 		".": {
-			"entry": ["package.json", "turbo.json", "prettier.config.js"]
+			"entry": ["package.json", "turbo.json", "prettier.config.js", "commitlint.config.mjs"]
 		},
 		"apps/web": {
 			"entry": [
@@ -37,5 +37,5 @@
 		"**/.vercel/**",
 		"**/packages/ui/**"
 	],
-	"ignoreDependencies": ["@types/*", "typescript", "prettier", "turbo"]
+	"ignoreDependencies": ["@types/*", "typescript", "prettier", "turbo", "husky"]
 }
