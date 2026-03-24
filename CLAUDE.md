@@ -16,7 +16,6 @@ packages/
   ui/               # Shared React component library (300+ components)
   eslint-config/    # Shared ESLint configuration
   typescript-config/# Shared TypeScript configuration
-  brand/            # Brand assets and design tokens
 ```
 
 ## Development Commands
