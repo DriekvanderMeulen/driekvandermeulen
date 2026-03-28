@@ -27,6 +27,7 @@
 		"**/dist/**",
 		"**/build/**",
 		"**/*.config.js",
+		"**/*.config.mjs",
 		"**/*.config.ts",
 		"**/drizzle/**",
 		"**/test-results/**",
