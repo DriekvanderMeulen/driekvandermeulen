@@ -31,7 +31,7 @@ interface VelocityTextProps {
 
 interface ScrollVelocityProps {
 	scrollContainerRef?: React.RefObject<HTMLElement>
-	texts: string[]
+	texts: Array<string>
 	velocity?: number
 	className?: string
 	damping?: number

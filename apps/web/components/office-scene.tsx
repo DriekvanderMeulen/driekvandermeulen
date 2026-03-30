@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 'use client'
 
 import { PointerLockControls, Preload, useProgress } from '@react-three/drei'
@@ -795,7 +796,7 @@ export default function OfficeScene() {
 				</EffectComposer>
 			</Canvas>
 
-			{started && <ZoneDetailPanel zone={displayedZone} />}
+			{started ? <ZoneDetailPanel zone={displayedZone} /> : null}
 		</div>
 	)
 }

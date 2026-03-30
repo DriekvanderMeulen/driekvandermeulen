@@ -11,7 +11,7 @@ interface ZoneDetailPanelProps {
 
 function parseMarkdownLinks(text: string): React.ReactNode {
 	const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g
-	const parts: React.ReactNode[] = []
+	const parts: Array<React.ReactNode> = []
 	let lastIndex = 0
 	let match: RegExpExecArray | null
 
@@ -66,7 +66,7 @@ export function ZoneDetailPanel({ zone }: ZoneDetailPanelProps) {
 							<h2 className="font-quantico text-3xl leading-none font-bold tracking-tight text-studio-lighter">
 								{zone.title}
 							</h2>
-							{zone.type && (
+							{zone.type ? (
 								<Badge
 									variant="secondary"
 									className="shrink-0 rounded-full border border-studio-light/20 bg-studio-light/5 text-sm font-medium tracking-wide text-studio-light capitalize ring-1 ring-studio-light/5 backdrop-blur-sm transition-colors hover:bg-studio-light/10"
@@ -74,7 +74,7 @@ export function ZoneDetailPanel({ zone }: ZoneDetailPanelProps) {
 								>
 									{zone.type}
 								</Badge>
-							)}
+							) : null}
 						</div>
 
 						{/* Divider */}
