@@ -1,5 +1,6 @@
 'use client'
 
+/* eslint-disable react/prop-types */
 import { Mesh, Program, Renderer, Triangle } from 'ogl'
 import { useEffect, useRef, useState } from 'react'
 

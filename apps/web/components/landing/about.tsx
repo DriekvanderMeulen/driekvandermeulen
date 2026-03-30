@@ -113,7 +113,7 @@ function StoryContent({
 }
 
 export default function About() {
-	const yearsExperience = calculateYearsExperience()
+	const _yearsExperience = calculateYearsExperience()
 
 	let storySections: Array<StorySection> = []
 	try {
@@ -142,7 +142,7 @@ export default function About() {
 
 						{/* Name */}
 						<h2 className="mb-6 text-5xl leading-tight font-bold text-pure-white md:text-6xl lg:text-7xl">
-							I'm Driek
+							I&apos;m Driek
 						</h2>
 
 						{/* Description */}
@@ -176,15 +176,14 @@ export default function About() {
 					<h2 className="h1 mb-8 font-bold text-pure-white">Story</h2>
 					<p className="p mx-auto max-w-3xl leading-relaxed text-almost-white">
 						I want to begin with my story because these moments shaped who I am
-						today. I have always wondered how much of people's stories is real
+						today. I have always wondered how much of people&apos;s stories is real
 						because most only share the polished parts. I choose to be honest
 						instead. These were the moments that challenged me and helped me
 						grow.{' '}
 					</p>
 				</div>
 				{/* Story Sections */}
-				{storySections.length > 0 && (
-					<div className="mt-32">
+				{storySections.length > 0 ? (<div className="mt-32">
 						<div className="grid gap-12 md:grid-cols-2">
 							{storySections.map((section, index) => {
 								return (
@@ -197,8 +196,7 @@ export default function About() {
 								)
 							})}
 						</div>
-					</div>
-				)}
+					</div>) : null}
 			</div>
 		</section>
 	)

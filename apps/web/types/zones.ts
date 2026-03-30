@@ -7,5 +7,5 @@ export interface ZoneMetadata {
 }
 
 export interface ZoneData {
-	zones: ZoneMetadata[]
+	zones: Array<ZoneMetadata>
 }

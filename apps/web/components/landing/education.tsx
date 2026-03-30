@@ -2,7 +2,6 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 
 import {
-	type ParsedContent,
 	type ParsedContentItem,
 	parseContentDocument,
 } from '@/utils/content-parser'
@@ -31,7 +30,7 @@ function EducationContent({
 }) {
 	return (
 		<div className="space-y-8">
-			{title && <h3 className="h2 mb-8 font-bold text-studio">{title}</h3>}
+			{title ? <h3 className="h2 mb-8 font-bold text-studio">{title}</h3> : null}
 			<div className="space-y-6">
 				{content.map((item, itemIndex) => (
 					<div key={itemIndex}>{renderContentItem(item)}</div>
