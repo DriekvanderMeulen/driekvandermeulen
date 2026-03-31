@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'motion/react'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -27,7 +27,7 @@ export function HoverBorderGradient({
 	const [direction, setDirection] = useState<Direction>('TOP')
 
 	const rotateDirection = (currentDirection: Direction): Direction => {
-		const directions: Direction[] = ['TOP', 'LEFT', 'BOTTOM', 'RIGHT']
+		const directions: Array<Direction> = ['TOP', 'LEFT', 'BOTTOM', 'RIGHT']
 		const currentIndex = directions.indexOf(currentDirection)
 		const nextIndex = clockwise
 			? (currentIndex - 1 + directions.length) % directions.length
@@ -54,10 +54,11 @@ export function HoverBorderGradient({
 			}, duration * 1000)
 			return () => clearInterval(interval)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hovered])
 	return (
 		<Tag
-			onMouseEnter={(event: React.MouseEvent<HTMLDivElement>) => {
+			onMouseEnter={(_event: React.MouseEvent<HTMLDivElement>) => {
 				setHovered(true)
 			}}
 			onMouseLeave={() => setHovered(false)}

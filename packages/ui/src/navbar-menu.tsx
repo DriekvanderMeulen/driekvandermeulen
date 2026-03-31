@@ -30,13 +30,13 @@ export const MenuItem = ({
 			>
 				{item}
 			</motion.p>
-			{active !== null && (
+			{active !== null ? (
 				<motion.div
 					initial={{ opacity: 0, scale: 0.85, y: 10 }}
 					animate={{ opacity: 1, scale: 1, y: 0 }}
 					transition={transition}
 				>
-					{active === item && (
+					{active === item ? (
 						<div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 -translate-x-1/2 transform pt-4">
 							<motion.div
 								transition={transition}
@@ -51,9 +51,9 @@ export const MenuItem = ({
 								</motion.div>
 							</motion.div>
 						</div>
-					)}
+					) : null}
 				</motion.div>
-			)}
+			) : null}
 		</div>
 	)
 }
@@ -107,7 +107,13 @@ export const ProductItem = ({
 	)
 }
 
-export const HoveredLink = ({ children, ...rest }: any) => {
+export const HoveredLink = ({
+	children,
+	...rest
+}: {
+	children: React.ReactNode
+	[key: string]: unknown
+}) => {
 	return (
 		<a
 			{...rest}

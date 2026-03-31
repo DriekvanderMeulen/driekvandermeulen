@@ -34,9 +34,9 @@ const Example = () => (
 			<ToolHeader state={toolCall.state} type={toolCall.type} />
 			<ToolContent>
 				<ToolInput input={toolCall.input} />
-				{toolCall.state === 'output-error' && (
+				{toolCall.state === 'output-error' ? (
 					<ToolOutput errorText={toolCall.errorText} output={toolCall.output} />
-				)}
+				) : null}
 			</ToolContent>
 		</Tool>
 	</div>

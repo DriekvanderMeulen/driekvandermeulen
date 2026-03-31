@@ -56,7 +56,7 @@ const Example = () => {
 					size="icon"
 					variant="outline"
 				/>
-				{transcript && (
+				{transcript ? (
 					<button
 						className="text-sm text-muted-foreground underline hover:text-foreground"
 						onClick={handleClear}
@@ -64,7 +64,7 @@ const Example = () => {
 					>
 						Clear
 					</button>
-				)}
+				) : null}
 			</div>
 			{transcript ? (
 				<div className="max-w-md rounded-lg border bg-card p-4 text-sm">

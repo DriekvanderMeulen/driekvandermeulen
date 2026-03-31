@@ -22,10 +22,10 @@ interface NavBodyProps {
 }
 
 interface NavItemsProps {
-	items: {
+	items: Array<{
 		name: string
 		link: string
-	}[]
+	}>
 	className?: string
 	onItemClick?: () => void
 }
@@ -131,12 +131,12 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
 					key={`link-${idx}`}
 					href={item.link}
 				>
-					{hovered === idx && (
+					{hovered === idx ? (
 						<motion.div
 							layoutId="hovered"
 							className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
 						/>
-					)}
+					) : null}
 					<span className="relative z-20">{item.name}</span>
 				</a>
 			))}
@@ -194,11 +194,11 @@ export const MobileNavMenu = ({
 	children,
 	className,
 	isOpen,
-	onClose,
+	onClose: _onClose,
 }: MobileNavMenuProps) => {
 	return (
 		<AnimatePresence>
-			{isOpen && (
+			{isOpen ? (
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
@@ -210,7 +210,7 @@ export const MobileNavMenu = ({
 				>
 					{children}
 				</motion.div>
-			)}
+			) : null}
 		</AnimatePresence>
 	)
 }

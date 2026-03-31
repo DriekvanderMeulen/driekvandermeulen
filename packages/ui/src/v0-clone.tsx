@@ -125,7 +125,7 @@ export default function Home() {
 									))}
 								</ConversationContent>
 							</Conversation>
-							{isLoading && (
+							{isLoading ? (
 								<Message from="assistant">
 									<MessageContent>
 										<p className="flex items-center gap-2">
@@ -134,14 +134,14 @@ export default function Home() {
 										</p>
 									</MessageContent>
 								</Message>
-							)}
+							) : null}
 						</>
 					)}
 				</div>
 
 				{/* Input */}
 				<div className="border-t p-4">
-					{!currentChat && (
+					{!currentChat ? (
 						<Suggestions>
 							<Suggestion
 								onClick={() =>
@@ -160,7 +160,7 @@ export default function Home() {
 								suggestion="Make a landing page for a coffee shop"
 							/>
 						</Suggestions>
-					)}
+					) : null}
 					<div className="flex gap-2">
 						<PromptInput
 							className="relative mx-auto mt-4 w-full max-w-2xl"

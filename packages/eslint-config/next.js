@@ -52,7 +52,39 @@ export const nextJsConfig = [
       ...pluginReactHooks.configs.recommended.rules,
       // React scope no longer necessary with new JSX transform.
       "react/react-in-jsx-scope": "off",
+      // TypeScript handles prop type validation
+      "react/prop-types": "off",
       "react/jsx-no-leaked-render": ["error", { validStrategies: ["ternary"] }],
+      // Allow known properties from R3F, Next.js, styled-jsx, and CMDK
+      "react/no-unknown-property": [
+        "warn",
+        {
+          ignore: [
+            "intensity",
+            "position",
+            "args",
+            "object",
+            "attach",
+            "castShadow",
+            "shadow-mapSize",
+            "shadow-bias",
+            "shadow-normalBias",
+            "shadow-camera-left",
+            "shadow-camera-right",
+            "shadow-camera-top",
+            "shadow-camera-bottom",
+            "emissive",
+            "emissiveIntensity",
+            "toneMapped",
+            "decay",
+            "distance",
+            "jsx",
+            "global",
+            "blurDataURL",
+            "cmdk-input-wrapper",
+          ],
+        },
+      ],
     },
   },
 ];

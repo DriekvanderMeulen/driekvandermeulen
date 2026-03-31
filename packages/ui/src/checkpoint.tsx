@@ -24,7 +24,7 @@ interface MessageType {
 	content: string
 }
 
-const initialMessages: MessageType[] = [
+const initialMessages: Array<MessageType> = [
 	{
 		id: nanoid(),
 		role: 'user',
@@ -44,7 +44,7 @@ const initialMessages: MessageType[] = [
 ]
 
 const Example = () => {
-	const [messages, setMessages] = useState<MessageType[]>(initialMessages)
+	const [messages, setMessages] = useState<Array<MessageType>>(initialMessages)
 	const [checkpoints] = useState([
 		{ messageCount: 2, timestamp: new Date(Date.now() - 3_600_000) },
 	])
@@ -69,7 +69,7 @@ const Example = () => {
 										<MessageResponse>{message.content}</MessageResponse>
 									</MessageContent>
 								</Message>
-								{checkpoint && (
+								{checkpoint ? (
 									<Checkpoint>
 										<CheckpointIcon />
 										<CheckpointTrigger
@@ -79,7 +79,7 @@ const Example = () => {
 											Restore checkpoint
 										</CheckpointTrigger>
 									</Checkpoint>
-								)}
+								) : null}
 							</Fragment>
 						)
 					})}

@@ -1,11 +1,5 @@
 'use client'
-import {
-	motion,
-	useScroll,
-	useSpring,
-	useTransform,
-	useVelocity,
-} from 'motion/react'
+import { motion, useScroll, useSpring, useTransform } from 'motion/react'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'

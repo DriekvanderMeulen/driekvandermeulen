@@ -13,7 +13,7 @@ export const ImagesSlider = ({
 	autoplay = true,
 	direction = 'up',
 }: {
-	images: string[]
+	images: Array<string>
 	children: React.ReactNode
 	overlay?: React.ReactNode
 	overlayClassName?: string
@@ -22,8 +22,8 @@ export const ImagesSlider = ({
 	direction?: 'up' | 'down'
 }) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
-	const [loading, setLoading] = useState(false)
-	const [loadedImages, setLoadedImages] = useState<string[]>([])
+	const [_loading, setLoading] = useState(false)
+	const [loadedImages, setLoadedImages] = useState<Array<string>>([])
 
 	const handleNext = () => {
 		setCurrentIndex((prevIndex) =>
@@ -39,6 +39,7 @@ export const ImagesSlider = ({
 
 	useEffect(() => {
 		loadImages()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const loadImages = () => {
@@ -54,7 +55,7 @@ export const ImagesSlider = ({
 
 		Promise.all(loadPromises)
 			.then((loadedImages) => {
-				setLoadedImages(loadedImages as string[])
+				setLoadedImages(loadedImages as Array<string>)
 				setLoading(false)
 			})
 			.catch((error) => console.error('Failed to load images', error))
@@ -71,7 +72,7 @@ export const ImagesSlider = ({
 		window.addEventListener('keydown', handleKeyDown)
 
 		// autoplay
-		let interval: any
+		let interval: ReturnType<typeof setInterval> | undefined
 		if (autoplay) {
 			interval = setInterval(() => {
 				handleNext()
@@ -82,6 +83,7 @@ export const ImagesSlider = ({
 			window.removeEventListener('keydown', handleKeyDown)
 			clearInterval(interval)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const slideVariants = {
@@ -127,14 +129,14 @@ export const ImagesSlider = ({
 				perspective: '1000px',
 			}}
 		>
-			{areImagesLoaded && children}
-			{areImagesLoaded && overlay && (
+			{areImagesLoaded ? children : null}
+			{areImagesLoaded && overlay ? (
 				<div
 					className={cn('absolute inset-0 z-40 bg-black/60', overlayClassName)}
 				/>
-			)}
+			) : null}
 
-			{areImagesLoaded && (
+			{areImagesLoaded ? (
 				<AnimatePresence>
 					<motion.img
 						key={currentIndex}
@@ -146,7 +148,7 @@ export const ImagesSlider = ({
 						className="image absolute inset-0 h-full w-full object-cover object-center"
 					/>
 				</AnimatePresence>
-			)}
+			) : null}
 		</div>
 	)
 }

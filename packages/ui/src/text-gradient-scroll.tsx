@@ -18,19 +18,19 @@ type TextGradientScrollType = {
 type LetterType = {
 	children: React.ReactNode | string
 	progress: MotionValue<number>
-	range: number[]
+	range: Array<number>
 }
 
 type WordType = {
 	children: React.ReactNode
 	progress: MotionValue<number>
-	range: number[]
+	range: Array<number>
 }
 
 type CharType = {
 	children: React.ReactNode
 	progress: MotionValue<number>
-	range: number[]
+	range: Array<number>
 }
 
 type TextGradientScrollContextType = {

@@ -164,9 +164,9 @@ const Example = () => (
 						</ConfirmationRejected>
 					</ConfirmationTitle>
 				</Confirmation>
-				{toolCall.state === 'output-available' && (
+				{toolCall.state === 'output-available' ? (
 					<ToolOutput errorText={toolCall.errorText} output={toolCall.output} />
-				)}
+				) : null}
 			</ToolContent>
 		</Tool>
 

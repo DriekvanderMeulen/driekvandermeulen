@@ -57,6 +57,7 @@ export const BackgroundGradientAnimation = ({
 		document.body.style.setProperty('--pointer-color', pointerColor)
 		document.body.style.setProperty('--size', size)
 		document.body.style.setProperty('--blending-value', blendingValue)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
@@ -72,6 +73,7 @@ export const BackgroundGradientAnimation = ({
 		}
 
 		move()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [tgX, tgY])
 
 	const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -165,7 +167,7 @@ export const BackgroundGradientAnimation = ({
 					)}
 				></div>
 
-				{interactive && (
+				{interactive ? (
 					<div
 						ref={interactiveRef}
 						onMouseMove={handleMouseMove}
@@ -175,7 +177,7 @@ export const BackgroundGradientAnimation = ({
 							`opacity-70`,
 						)}
 					></div>
-				)}
+				) : null}
 			</div>
 		</div>
 	)

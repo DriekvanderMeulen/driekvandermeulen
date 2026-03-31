@@ -10,10 +10,10 @@ export const TypewriterEffect = ({
 	className,
 	cursorClassName,
 }: {
-	words: {
+	words: Array<{
 		text: string
 		className?: string
-	}[]
+	}>
 	className?: string
 	cursorClassName?: string
 }) => {
@@ -43,6 +43,7 @@ export const TypewriterEffect = ({
 				},
 			)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isInView])
 
 	const renderWords = () => {
@@ -104,10 +105,10 @@ export const TypewriterEffectSmooth = ({
 	className,
 	cursorClassName,
 }: {
-	words: {
+	words: Array<{
 		text: string
 		className?: string
-	}[]
+	}>
 	className?: string
 	cursorClassName?: string
 }) => {

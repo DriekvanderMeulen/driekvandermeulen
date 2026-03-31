@@ -1,4 +1,9 @@
-import { AnimatePresence, motion, useMotionValue } from 'motion/react'
+import {
+	AnimatePresence,
+	MotionValue,
+	motion,
+	useMotionValue,
+} from 'motion/react'
 import React, { useEffect, useState } from 'react'
 
 import { cn } from '@/lib/utils'
@@ -51,7 +56,7 @@ export const FollowerPointerCard = ({
 			className={cn('relative', className)}
 		>
 			<AnimatePresence>
-				{isInside && <FollowPointer x={x} y={y} title={title} />}
+				{isInside ? <FollowPointer x={x} y={y} title={title} /> : null}
 			</AnimatePresence>
 			{children}
 		</div>
@@ -63,8 +68,8 @@ export const FollowPointer = ({
 	y,
 	title,
 }: {
-	x: any
-	y: any
+	x: MotionValue<number>
+	y: MotionValue<number>
 	title?: string | React.ReactNode
 }) => {
 	const colors = [

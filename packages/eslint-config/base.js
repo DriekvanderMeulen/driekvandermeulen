@@ -32,6 +32,13 @@ export const config = [
     rules: {
       "turbo/no-undeclared-env-vars": "warn",
       "func-style": ["error", "declaration", { allowArrowFunctions: true }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
       "@typescript-eslint/array-type": ["error", { default: "generic" }],
       "check-file/filename-naming-convention": [
         "error",
@@ -65,6 +72,12 @@ export const config = [
   {
     plugins: {
       onlyWarn,
+    },
+  },
+  {
+    files: ["**/3d-*.{ts,tsx}"],
+    rules: {
+      "check-file/filename-naming-convention": "off",
     },
   },
   {

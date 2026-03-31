@@ -74,6 +74,7 @@ export const PinPerspective = ({
 						href={href}
 						target={'_blank'}
 						className="relative z-10 flex items-center space-x-2 rounded-full bg-zinc-950 px-4 py-0.5 ring-1 ring-white/10"
+						rel="noreferrer"
 					>
 						<span className="relative z-20 inline-block py-0.5 text-xs font-bold text-white">
 							{title}

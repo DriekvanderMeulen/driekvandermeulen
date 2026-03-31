@@ -173,7 +173,6 @@ const Example = () => {
 
 		setStatus('submitted')
 
-		// eslint-disable-next-line no-console
 		console.log('Submitting message:', message)
 
 		setTimeout(() => {
@@ -211,16 +210,16 @@ const Example = () => {
 							>
 								<ModelSelectorTrigger asChild>
 									<PromptInputButton>
-										{selectedModelData?.chefSlug && (
+										{selectedModelData?.chefSlug ? (
 											<ModelSelectorLogo
 												provider={selectedModelData.chefSlug}
 											/>
-										)}
-										{selectedModelData?.name && (
+										) : null}
+										{selectedModelData?.name ? (
 											<ModelSelectorName>
 												{selectedModelData.name}
 											</ModelSelectorName>
-										)}
+										) : null}
 									</PromptInputButton>
 								</ModelSelectorTrigger>
 								<ModelSelectorContent>

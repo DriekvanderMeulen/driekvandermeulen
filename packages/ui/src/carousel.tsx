@@ -101,9 +101,9 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
 						loading="eager"
 						decoding="sync"
 					/>
-					{current === index && (
+					{current === index ? (
 						<div className="absolute inset-0 bg-black/30 transition-all duration-1000" />
-					)}
+					) : null}
 				</div>
 
 				<article
@@ -150,7 +150,7 @@ const CarouselControl = ({
 }
 
 interface CarouselProps {
-	slides: SlideData[]
+	slides: Array<SlideData>
 }
 
 export default function Carousel({ slides }: CarouselProps) {

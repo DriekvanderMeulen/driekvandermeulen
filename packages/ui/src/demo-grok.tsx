@@ -76,23 +76,23 @@ import {
 interface MessageType {
 	key: string
 	from: 'user' | 'assistant'
-	sources?: { href: string; title: string }[]
-	versions: {
+	sources?: Array<{ href: string; title: string }>
+	versions: Array<{
 		id: string
 		content: string
-	}[]
+	}>
 	reasoning?: {
 		content: string
 		duration: number
 	}
-	tools?: {
+	tools?: Array<{
 		name: string
 		description: string
 		status: ToolUIPart['state']
 		parameters: Record<string, unknown>
 		result: string | undefined
 		error: string | undefined
-	}[]
+	}>
 	isReasoningComplete?: boolean
 	isContentComplete?: boolean
 	isReasoningStreaming?: boolean
@@ -115,7 +115,7 @@ const models = [
 	},
 ]
 
-const mockMessages: MessageType[] = [
+const mockMessages: Array<MessageType> = [
 	{
 		key: nanoid(),
 		from: 'user',
@@ -320,13 +320,11 @@ const Example = () => {
 	const [text, setText] = useState<string>('')
 	const [useWebSearch, setUseWebSearch] = useState<boolean>(false)
 	const [useMicrophone, setUseMicrophone] = useState<boolean>(false)
-	const [_status, setStatus] = useState<
-		'submitted' | 'streaming' | 'ready' | 'error'
-	>('ready')
-	const [messages, setMessages] = useState<MessageType[]>([])
-	const [_streamingMessageId, setStreamingMessageId] = useState<string | null>(
-		null,
+	const [, setStatus] = useState<'submitted' | 'streaming' | 'ready' | 'error'>(
+		'ready',
 	)
+	const [messages, setMessages] = useState<Array<MessageType>>([])
+	const [, setStreamingMessageId] = useState<string | null>(null)
 
 	const selectedModelData = models.find((m) => m.id === model)
 
@@ -585,11 +583,6 @@ const Example = () => {
 		})
 	}
 
-	const _handleSuggestionClick = (suggestion: string) => {
-		setStatus('submitted')
-		addUserMessage(suggestion)
-	}
-
 	return (
 		<div className="relative flex size-full flex-col divide-y overflow-hidden bg-secondary">
 			<Conversation>
@@ -603,7 +596,7 @@ const Example = () => {
 										key={`${message.key}-${version.id}`}
 									>
 										<div>
-											{message.sources?.length && (
+											{message.sources?.length ? (
 												<Sources>
 													<SourcesTrigger count={message.sources.length} />
 													<SourcesContent>
@@ -616,8 +609,8 @@ const Example = () => {
 														))}
 													</SourcesContent>
 												</Sources>
-											)}
-											{message.reasoning && (
+											) : null}
+											{message.reasoning ? (
 												<Reasoning
 													duration={message.reasoning.duration}
 													isStreaming={message.isReasoningStreaming}
@@ -627,10 +620,10 @@ const Example = () => {
 														{message.reasoning.content}
 													</ReasoningContent>
 												</Reasoning>
-											)}
-											{(message.from === 'user' ||
-												message.isReasoningComplete ||
-												!message.reasoning) && (
+											) : null}
+											{message.from === 'user' ||
+											message.isReasoningComplete ||
+											!message.reasoning ? (
 												<MessageContent
 													className={cn(
 														'group-[.is-user]:rounded-[24px] group-[.is-user]:rounded-br-sm group-[.is-user]:border group-[.is-user]:bg-background group-[.is-user]:text-foreground',
@@ -639,18 +632,18 @@ const Example = () => {
 												>
 													<MessageResponse>{version.content}</MessageResponse>
 												</MessageContent>
-											)}
+											) : null}
 										</div>
 									</Message>
 								))}
 							</MessageBranchContent>
-							{versions.length > 1 && (
+							{versions.length > 1 ? (
 								<MessageBranchSelector className="px-0" from={message.from}>
 									<MessageBranchPrevious />
 									<MessageBranchPage />
 									<MessageBranchNext />
 								</MessageBranchSelector>
-							)}
+							) : null}
 						</MessageBranch>
 					))}
 				</ConversationContent>
@@ -739,16 +732,16 @@ const Example = () => {
 							>
 								<ModelSelectorTrigger asChild>
 									<PromptInputButton>
-										{selectedModelData?.chefSlug && (
+										{selectedModelData?.chefSlug ? (
 											<ModelSelectorLogo
 												provider={selectedModelData.chefSlug}
 											/>
-										)}
-										{selectedModelData?.name && (
+										) : null}
+										{selectedModelData?.name ? (
 											<ModelSelectorName>
 												{selectedModelData.name}
 											</ModelSelectorName>
-										)}
+										) : null}
 									</PromptInputButton>
 								</ModelSelectorTrigger>
 								<ModelSelectorContent>

@@ -24,7 +24,7 @@ export const CardSpotlight = ({
 		clientX,
 		clientY,
 	}: ReactMouseEvent<HTMLDivElement>) {
-		let { left, top } = currentTarget.getBoundingClientRect()
+		const { left, top } = currentTarget.getBoundingClientRect()
 
 		mouseX.set(clientX - left)
 		mouseY.set(clientY - top)
@@ -57,7 +57,7 @@ export const CardSpotlight = ({
           `,
 				}}
 			>
-				{isHovering && (
+				{isHovering ? (
 					<CanvasRevealEffect
 						animationSpeed={5}
 						containerClassName="bg-transparent absolute inset-0 pointer-events-none"
@@ -67,7 +67,7 @@ export const CardSpotlight = ({
 						]}
 						dotSize={3}
 					/>
-				)}
+				) : null}
 			</motion.div>
 			{children}
 		</div>

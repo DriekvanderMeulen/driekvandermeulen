@@ -34,7 +34,46 @@ export const config = [
       ...pluginReactHooks.configs.recommended.rules,
       // React scope no longer necessary with new JSX transform.
       "react/react-in-jsx-scope": "off",
+      // TypeScript handles prop type validation
+      "react/prop-types": "off",
+      // Allow display name inference
+      "react/display-name": "off",
+      // Allow known properties from R3F, Next.js, styled-jsx, and CMDK
+      "react/no-unknown-property": [
+        "warn",
+        {
+          ignore: [
+            "intensity",
+            "position",
+            "args",
+            "object",
+            "attach",
+            "jsx",
+            "global",
+            "blurDataURL",
+            "cmdk-input-wrapper",
+          ],
+        },
+      ],
       "react/jsx-no-leaked-render": ["error", { validStrategies: ["ternary"] }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          varsIgnorePattern: "^_",
+          argsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+        },
+      ],
+      "@typescript-eslint/ban-ts-comment": [
+        "warn",
+        {
+          "ts-expect-error": "allow-with-description",
+          "ts-ignore": true,
+          "ts-nocheck": true,
+          "ts-check": false,
+        },
+      ],
     },
   },
 ];

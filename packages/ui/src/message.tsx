@@ -30,19 +30,19 @@ import {
 	MessageToolbar,
 } from '@/components/ai-elements/message'
 
-const messages: {
+const messages: Array<{
 	key: string
 	from: 'user' | 'assistant'
-	versions?: { id: string; content: string }[]
+	versions?: Array<{ id: string; content: string }>
 	content?: string
-	attachments?: {
+	attachments?: Array<{
 		id: string
 		type: 'file'
 		url: string
 		mediaType?: string
 		filename?: string
-	}[]
-}[] = [
+	}>
+}> = [
 	{
 		key: nanoid(),
 		from: 'user',
@@ -195,7 +195,7 @@ const Example = () => {
 									</MessageContent>
 								))}
 							</MessageBranchContent>
-							{message.from === 'assistant' && (
+							{message.from === 'assistant' ? (
 								<MessageToolbar>
 									<MessageBranchSelector from={message.from}>
 										<MessageBranchPrevious />
@@ -253,11 +253,11 @@ const Example = () => {
 										</MessageAction>
 									</MessageActions>
 								</MessageToolbar>
-							)}
+							) : null}
 						</MessageBranch>
 					) : (
 						<div key={message.key}>
-							{message.attachments && message.attachments.length > 0 && (
+							{message.attachments && message.attachments.length > 0 ? (
 								<Attachments className="mb-2" variant="grid">
 									{message.attachments.map((attachment) => (
 										<Attachment data={attachment} key={attachment.id}>
@@ -266,7 +266,7 @@ const Example = () => {
 										</Attachment>
 									))}
 								</Attachments>
-							)}
+							) : null}
 							<MessageContent>
 								{message.from === 'assistant' ? (
 									<MessageResponse>{message.content}</MessageResponse>
@@ -274,7 +274,7 @@ const Example = () => {
 									message.content
 								)}
 							</MessageContent>
-							{message.from === 'assistant' && message.versions && (
+							{message.from === 'assistant' && message.versions ? (
 								<MessageActions>
 									<MessageAction
 										label="Retry"
@@ -321,7 +321,7 @@ const Example = () => {
 										<CopyIcon className="size-4" />
 									</MessageAction>
 								</MessageActions>
-							)}
+							) : null}
 						</div>
 					)}
 				</Message>

@@ -62,7 +62,7 @@ const Example = () => (
 			<ToolHeader state={toolCall.state} type={toolCall.type} />
 			<ToolContent>
 				<ToolInput input={toolCall.input} />
-				{toolCall.state === 'output-available' && (
+				{toolCall.state === 'output-available' ? (
 					<ToolOutput
 						errorText={toolCall.errorText}
 						output={
@@ -72,7 +72,7 @@ const Example = () => (
 							/>
 						}
 					/>
-				)}
+				) : null}
 			</ToolContent>
 		</Tool>
 	</div>

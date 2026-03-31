@@ -33,7 +33,7 @@ export function ProductQuickviewDialog({
 	product,
 }: ProductQuickviewProps) {
 	const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name)
-	const [selectedSize, setSelectedSize] = useState('S')
+	const [_selectedSize, _setSelectedSize] = useState('S')
 
 	const renderStars = (rating: number) => {
 		return Array(5)
@@ -111,6 +111,7 @@ export function ProductQuickviewDialog({
 								>
 									{product.colors.map((color) => (
 										<RadioGroupItem
+											key={color.name}
 											value={color.name}
 											style={{ backgroundColor: color.value }}
 											aria-label={`Select ${color.name} color`}
@@ -138,7 +139,7 @@ export function ProductQuickviewDialog({
 								</legend>
 								<RadioGroup
 									className="grid grid-cols-4 gap-2"
-									onValueChange={(value) => setSelectedSize(value)}
+									onValueChange={(value) => _setSelectedSize(value)}
 									defaultValue="1"
 								>
 									{product.sizes.map((size) => (

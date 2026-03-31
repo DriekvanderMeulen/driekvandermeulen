@@ -1,5 +1,5 @@
 'use client'
-import { AnimatePresence, motion, useAnimate } from 'motion/react'
+import { motion, useAnimate } from 'motion/react'
 import React from 'react'
 
 import { cn } from '@/lib/utils'
@@ -71,12 +71,12 @@ export const Button = ({ className, children, ...props }: ButtonProps) => {
 	}
 
 	const {
-		onClick,
-		onDrag,
-		onDragStart,
-		onDragEnd,
-		onAnimationStart,
-		onAnimationEnd,
+		onClick: _onClick,
+		onDrag: _onDrag,
+		onDragStart: _onDragStart,
+		onDragEnd: _onDragEnd,
+		onAnimationStart: _onAnimationStart,
+		onAnimationEnd: _onAnimationEnd,
 		...buttonProps
 	} = props
 

@@ -18,8 +18,8 @@ export const CanvasRevealEffect = ({
 	 * 1.0 - faster
 	 */
 	animationSpeed?: number
-	opacities?: number[]
-	colors?: number[][]
+	opacities?: Array<number>
+	colors?: Array<Array<number>>
 	containerClassName?: string
 	dotSize?: number
 	showGradient?: boolean
@@ -42,20 +42,20 @@ export const CanvasRevealEffect = ({
 					center={['x', 'y']}
 				/>
 			</div>
-			{showGradient && (
+			{showGradient ? (
 				<div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-[84%]" />
-			)}
+			) : null}
 		</div>
 	)
 }
 
 interface DotMatrixProps {
-	colors?: number[][]
-	opacities?: number[]
+	colors?: Array<Array<number>>
+	opacities?: Array<number>
 	totalSize?: number
 	dotSize?: number
 	shader?: string
-	center?: ('x' | 'y')[]
+	center?: Array<'x' | 'y'>
 }
 
 const DotMatrix: React.FC<DotMatrixProps> = ({
@@ -178,7 +178,7 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
 
 type Uniforms = {
 	[key: string]: {
-		value: number[] | number[][] | number
+		value: Array<number> | Array<Array<number>> | number
 		type: string
 	}
 }
@@ -204,16 +204,17 @@ const ShaderMaterial = ({
 		}
 		lastFrameTime = timestamp
 
-		const material: any = ref.current.material
+		const material = ref.current.material as THREE.ShaderMaterial
 		const timeLocation = material.uniforms.u_time
 		timeLocation.value = timestamp
 	})
 
 	const getUniforms = () => {
-		const preparedUniforms: any = {}
+		const preparedUniforms: Record<string, { value: unknown; type: string }> =
+			{}
 
 		for (const uniformName in uniforms) {
-			const uniform: any = uniforms[uniformName]
+			const uniform = uniforms[uniformName]
 
 			switch (uniform.type) {
 				case 'uniform1f':
@@ -230,7 +231,7 @@ const ShaderMaterial = ({
 					break
 				case 'uniform3fv':
 					preparedUniforms[uniformName] = {
-						value: uniform.value.map((v: number[]) =>
+						value: uniform.value.map((v: Array<number>) =>
 							new THREE.Vector3().fromArray(v),
 						),
 						type: '3fv',
@@ -280,10 +281,11 @@ const ShaderMaterial = ({
 		})
 
 		return materialObject
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [size.width, size.height, source])
 
 	return (
-		<mesh ref={ref as any}>
+		<mesh ref={ref as React.RefObject<THREE.Mesh>}>
 			<planeGeometry args={[2, 2]} />
 			<primitive object={material} attach="material" />
 		</mesh>
@@ -301,7 +303,7 @@ interface ShaderProps {
 	source: string
 	uniforms: {
 		[key: string]: {
-			value: number[] | number[][] | number
+			value: Array<number> | Array<Array<number>> | number
 			type: string
 		}
 	}

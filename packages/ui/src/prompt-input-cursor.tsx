@@ -103,7 +103,7 @@ const models = [
 const SUBMITTING_TIMEOUT = 200
 const STREAMING_TIMEOUT = 2000
 
-const sampleSources: SourceDocumentUIPart[] = [
+const sampleSources: Array<SourceDocumentUIPart> = [
 	{
 		type: 'source-document',
 		sourceId: '1',
@@ -308,16 +308,16 @@ const Example = () => {
 							>
 								<ModelSelectorTrigger asChild>
 									<PromptInputButton>
-										{selectedModelData?.chefSlug && (
+										{selectedModelData?.chefSlug ? (
 											<ModelSelectorLogo
 												provider={selectedModelData.chefSlug}
 											/>
-										)}
-										{selectedModelData?.name && (
+										) : null}
+										{selectedModelData?.name ? (
 											<ModelSelectorName>
 												{selectedModelData.name}
 											</ModelSelectorName>
-										)}
+										) : null}
 									</PromptInputButton>
 								</ModelSelectorTrigger>
 								<ModelSelectorContent>

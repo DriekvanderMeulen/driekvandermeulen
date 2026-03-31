@@ -294,12 +294,12 @@ const Example = () => {
 			<ModelSelector onOpenChange={setOpen} open={open}>
 				<ModelSelectorTrigger asChild>
 					<Button className="w-[200px] justify-between" variant="outline">
-						{selectedModelData?.chefSlug && (
+						{selectedModelData?.chefSlug ? (
 							<ModelSelectorLogo provider={selectedModelData.chefSlug} />
-						)}
-						{selectedModelData?.name && (
+						) : null}
+						{selectedModelData?.name ? (
 							<ModelSelectorName>{selectedModelData.name}</ModelSelectorName>
-						)}
+						) : null}
 					</Button>
 				</ModelSelectorTrigger>
 				<ModelSelectorContent>

@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 type Tab = {
 	title: string
 	value: string
-	content?: string | React.ReactNode | any
+	content?: string | React.ReactNode | unknown
 }
 
 export const Tabs = ({
@@ -18,14 +18,14 @@ export const Tabs = ({
 	tabClassName,
 	contentClassName,
 }: {
-	tabs: Tab[]
+	tabs: Array<Tab>
 	containerClassName?: string
 	activeTabClassName?: string
 	tabClassName?: string
 	contentClassName?: string
 }) => {
 	const [active, setActive] = useState<Tab>(propTabs[0])
-	const [tabs, setTabs] = useState<Tab[]>(propTabs)
+	const [tabs, setTabs] = useState<Array<Tab>>(propTabs)
 
 	const moveSelectedTabToTop = (idx: number) => {
 		const newTabs = [...propTabs]
@@ -58,7 +58,7 @@ export const Tabs = ({
 							transformStyle: 'preserve-3d',
 						}}
 					>
-						{active.value === tab.value && (
+						{active.value === tab.value ? (
 							<motion.div
 								layoutId="clickedbutton"
 								transition={{ type: 'spring', bounce: 0.3, duration: 0.6 }}
@@ -67,7 +67,7 @@ export const Tabs = ({
 									activeTabClassName,
 								)}
 							/>
-						)}
+						) : null}
 
 						<span className="relative block text-black dark:text-white">
 							{tab.title}
@@ -93,7 +93,7 @@ export const FadeInDiv = ({
 }: {
 	className?: string
 	key?: string
-	tabs: Tab[]
+	tabs: Array<Tab>
 	active: Tab
 	hovering?: boolean
 }) => {

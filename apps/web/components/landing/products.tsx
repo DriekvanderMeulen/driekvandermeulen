@@ -7,7 +7,7 @@ interface Product {
 	link: string
 }
 
-const products: Product[] = [
+const products: Array<Product> = [
 	{
 		title: 'Hobby Farmer',
 		description:

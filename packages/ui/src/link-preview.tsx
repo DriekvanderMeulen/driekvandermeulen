@@ -30,8 +30,8 @@ export const LinkPreview = ({
 	className,
 	width = 200,
 	height = 125,
-	quality = 50,
-	layout = 'fixed',
+	quality: _quality = 50,
+	layout: _layout = 'fixed',
 	isStatic = false,
 	imageSrc = '',
 }: LinkPreviewProps) => {
@@ -66,8 +66,8 @@ export const LinkPreview = ({
 
 	const translateX = useSpring(x, springConfig)
 
-	const handleMouseMove = (event: any) => {
-		const targetRect = event.target.getBoundingClientRect()
+	const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+		const targetRect = (event.target as HTMLElement).getBoundingClientRect()
 		const eventOffsetX = event.clientX - targetRect.left
 		const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2 // Reduce the effect to make it subtle
 		x.set(offsetFromCenter)
@@ -103,7 +103,7 @@ export const LinkPreview = ({
 					sideOffset={10}
 				>
 					<AnimatePresence>
-						{isOpen && (
+						{isOpen ? (
 							<motion.div
 								initial={{ opacity: 0, y: 20, scale: 0.6 }}
 								animate={{
@@ -136,7 +136,7 @@ export const LinkPreview = ({
 									/>
 								</a>
 							</motion.div>
-						)}
+						) : null}
 					</AnimatePresence>
 				</HoverCardPrimitive.Content>
 			</HoverCardPrimitive.Root>

@@ -73,26 +73,26 @@ import { Suggestion, Suggestions } from '@/components/ai-elements/suggestion'
 interface MessageType {
 	key: string
 	from: 'user' | 'assistant'
-	sources?: { href: string; title: string }[]
-	versions: {
+	sources?: Array<{ href: string; title: string }>
+	versions: Array<{
 		id: string
 		content: string
-	}[]
+	}>
 	reasoning?: {
 		content: string
 		duration: number
 	}
-	tools?: {
+	tools?: Array<{
 		name: string
 		description: string
 		status: ToolUIPart['state']
 		parameters: Record<string, unknown>
 		result: string | undefined
 		error: string | undefined
-	}[]
+	}>
 }
 
-const initialMessages: MessageType[] = [
+const initialMessages: Array<MessageType> = [
 	{
 		key: nanoid(),
 		from: 'user',
@@ -366,10 +366,8 @@ const Example = () => {
 	const [status, setStatus] = useState<
 		'submitted' | 'streaming' | 'ready' | 'error'
 	>('ready')
-	const [messages, setMessages] = useState<MessageType[]>(initialMessages)
-	const [_streamingMessageId, setStreamingMessageId] = useState<string | null>(
-		null,
-	)
+	const [messages, setMessages] = useState<Array<MessageType>>(initialMessages)
+	const [, setStreamingMessageId] = useState<string | null>(null)
 
 	const selectedModelData = models.find((m) => m.id === model)
 
@@ -485,7 +483,7 @@ const Example = () => {
 										key={`${message.key}-${version.id}`}
 									>
 										<div>
-											{message.sources?.length && (
+											{message.sources?.length ? (
 												<Sources>
 													<SourcesTrigger count={message.sources.length} />
 													<SourcesContent>
@@ -498,15 +496,15 @@ const Example = () => {
 														))}
 													</SourcesContent>
 												</Sources>
-											)}
-											{message.reasoning && (
+											) : null}
+											{message.reasoning ? (
 												<Reasoning duration={message.reasoning.duration}>
 													<ReasoningTrigger />
 													<ReasoningContent>
 														{message.reasoning.content}
 													</ReasoningContent>
 												</Reasoning>
-											)}
+											) : null}
 											<MessageContent>
 												<MessageResponse>{version.content}</MessageResponse>
 											</MessageContent>
@@ -514,13 +512,13 @@ const Example = () => {
 									</Message>
 								))}
 							</MessageBranchContent>
-							{versions.length > 1 && (
+							{versions.length > 1 ? (
 								<MessageBranchSelector from={message.from}>
 									<MessageBranchPrevious />
 									<MessageBranchPage />
 									<MessageBranchNext />
 								</MessageBranchSelector>
-							)}
+							) : null}
 						</MessageBranch>
 					))}
 				</ConversationContent>
@@ -575,16 +573,16 @@ const Example = () => {
 								>
 									<ModelSelectorTrigger asChild>
 										<PromptInputButton>
-											{selectedModelData?.chefSlug && (
+											{selectedModelData?.chefSlug ? (
 												<ModelSelectorLogo
 													provider={selectedModelData.chefSlug}
 												/>
-											)}
-											{selectedModelData?.name && (
+											) : null}
+											{selectedModelData?.name ? (
 												<ModelSelectorName>
 													{selectedModelData.name}
 												</ModelSelectorName>
-											)}
+											) : null}
 										</PromptInputButton>
 									</ModelSelectorTrigger>
 									<ModelSelectorContent>

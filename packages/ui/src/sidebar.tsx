@@ -124,7 +124,7 @@ export const MobileSidebar = ({
 					/>
 				</div>
 				<AnimatePresence>
-					{open && (
+					{open ? (
 						<motion.div
 							initial={{ x: '-100%', opacity: 0 }}
 							animate={{ x: 0, opacity: 1 }}
@@ -146,7 +146,7 @@ export const MobileSidebar = ({
 							</div>
 							{children}
 						</motion.div>
-					)}
+					) : null}
 				</AnimatePresence>
 			</div>
 		</>

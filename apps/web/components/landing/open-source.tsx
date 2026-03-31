@@ -143,9 +143,9 @@ export default function OpenSource() {
 					<div className="mb-16 text-center">
 						<h2 className="h1 mb-8 font-bold text-pure-white">Open Source</h2>
 						<p className="p mx-auto max-w-3xl leading-relaxed text-almost-white">
-							I'm a big fan of open source, and when you profit from something,
-							you should give back. Here are some of my contributions to the
-							community, completely open source and free to use.
+							I&apos;m a big fan of open source, and when you profit from
+							something, you should give back. Here are some of my contributions
+							to the community, completely open source and free to use.
 						</p>
 					</div>
 
@@ -183,9 +183,9 @@ export default function OpenSource() {
 					<div className="mb-16 text-center">
 						<h2 className="h1 mb-8 font-bold text-pure-white">Open Source</h2>
 						<p className="p mx-auto max-w-3xl leading-relaxed text-almost-white">
-							I'm a big fan of open source, and when you profit from something,
-							you should give back. Here are some of my contributions to the
-							community, completely open source and free to use.
+							I&apos;m a big fan of open source, and when you profit from
+							something, you should give back. Here are some of my contributions
+							to the community, completely open source and free to use.
 						</p>
 					</div>
 					<div className="grid gap-8 md:grid-cols-2">

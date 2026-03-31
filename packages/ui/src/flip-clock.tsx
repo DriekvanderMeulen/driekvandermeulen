@@ -241,7 +241,7 @@ export default function FlipClock({
 			</span>
 
 			{/* Days */}
-			{shouldShowDays && (
+			{shouldShowDays ? (
 				<>
 					{daysStr.split('').map((digit, i) => (
 						<FlipUnit
@@ -253,7 +253,7 @@ export default function FlipClock({
 					))}
 					<ClockSeparator size={size!} />
 				</>
-			)}
+			) : null}
 
 			{/* Hours */}
 			{hoursStr.split('').map((digit, index) => (

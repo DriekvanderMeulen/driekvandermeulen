@@ -8,7 +8,7 @@ export const ThreeDMarquee = ({
 	images,
 	className,
 }: {
-	images: string[]
+	images: Array<string>
 	className?: string
 }) => {
 	// Split the images array into 4 equal parts

@@ -44,6 +44,7 @@ function MagneticEffect({ children, distance = 0.6 }: MagneticEffectType) {
 		return () => {
 			document.removeEventListener('mousemove', calculateDistance)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ref, isHovered])
 
 	return (

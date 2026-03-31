@@ -92,7 +92,7 @@ const models = [
 const SUBMITTING_TIMEOUT = 200
 const STREAMING_TIMEOUT = 2000
 
-const sampleTodos: QueueTodo[] = [
+const sampleTodos: Array<QueueTodo> = [
 	{
 		id: 'todo-1',
 		title: 'Write project documentation',
@@ -207,7 +207,7 @@ const Example = () => {
 	return (
 		<div className="flex size-full flex-col justify-end">
 			<Queue className="mx-auto max-h-[150px] w-[95%] overflow-y-auto rounded-b-none border-b-0 border-input">
-				{todos.length > 0 && (
+				{todos.length > 0 ? (
 					<QueueSection>
 						<QueueSectionContent>
 							<div>
@@ -230,18 +230,18 @@ const Example = () => {
 													</QueueItemAction>
 												</QueueItemActions>
 											</div>
-											{todo.description && (
+											{todo.description ? (
 												<QueueItemDescription completed={isCompleted}>
 													{todo.description}
 												</QueueItemDescription>
-											)}
+											) : null}
 										</QueueItem>
 									)
 								})}
 							</div>
 						</QueueSectionContent>
 					</QueueSection>
-				)}
+				) : null}
 			</Queue>
 			<PromptInput globalDrop multiple onSubmit={handleSubmit}>
 				<PromptInputHeader>
@@ -271,14 +271,14 @@ const Example = () => {
 						>
 							<ModelSelectorTrigger asChild>
 								<PromptInputButton>
-									{selectedModelData?.chefSlug && (
+									{selectedModelData?.chefSlug ? (
 										<ModelSelectorLogo provider={selectedModelData.chefSlug} />
-									)}
-									{selectedModelData?.name && (
+									) : null}
+									{selectedModelData?.name ? (
 										<ModelSelectorName>
 											{selectedModelData.name}
 										</ModelSelectorName>
-									)}
+									) : null}
 								</PromptInputButton>
 							</ModelSelectorTrigger>
 							<ModelSelectorContent>

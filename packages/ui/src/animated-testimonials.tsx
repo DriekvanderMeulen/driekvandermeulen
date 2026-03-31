@@ -14,7 +14,7 @@ export const AnimatedTestimonials = ({
 	testimonials,
 	autoplay = false,
 }: {
-	testimonials: Testimonial[]
+	testimonials: Array<Testimonial>
 	autoplay?: boolean
 }) => {
 	const [active, setActive] = useState(0)
@@ -36,6 +36,7 @@ export const AnimatedTestimonials = ({
 			const interval = setInterval(handleNext, 5000)
 			return () => clearInterval(interval)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [autoplay])
 
 	const randomRotateY = () => {

@@ -63,7 +63,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 	const [ready, setReady] = useState(false)
 
 	const splitRef = useRef<GSAPSplitText | null>(null)
-	const wrappersRef = useRef<HTMLElement[]>([])
+	const wrappersRef = useRef<Array<HTMLElement>>([])
 	const tlRef = useRef<gsap.core.Timeline | null>(null)
 	const playingRef = useRef(false)
 	const hoverHandlerRef = useRef<((e: Event) => void) | null>(null)
@@ -122,7 +122,9 @@ const Shuffle: React.FC<ShuffleProps> = ({
 				}
 				try {
 					splitRef.current?.revert()
-				} catch {}
+				} catch {
+					// intentionally empty
+				}
 				splitRef.current = null
 				playingRef.current = false
 			}
@@ -139,7 +141,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 					reduceWhiteSpace: false,
 				})
 
-				const chars = (splitRef.current.chars || []) as HTMLElement[]
+				const chars = (splitRef.current.chars || []) as Array<HTMLElement>
 				wrappersRef.current = []
 
 				const rolls = Math.max(1, Math.floor(shuffleTimes))
@@ -196,7 +198,8 @@ const Shuffle: React.FC<ShuffleProps> = ({
 					}
 
 					gsap.set(inner, { x: startX, force3D: true })
-					if (colorFrom) (inner.style as any).color = colorFrom
+					if (colorFrom)
+						(inner.style as unknown as Record<string, string>).color = colorFrom
 
 					inner.setAttribute('data-final-x', String(finalX))
 					inner.setAttribute('data-start-x', String(startX))
@@ -213,7 +216,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 				wrappersRef.current.forEach((w) => {
 					const strip = w.firstElementChild as HTMLElement
 					if (!strip) return
-					const kids = Array.from(strip.children) as HTMLElement[]
+					const kids = Array.from(strip.children) as Array<HTMLElement>
 					for (let i = 1; i < kids.length - 1; i++) {
 						kids[i]!.textContent = scrambleCharset.charAt(
 							Math.floor(Math.random() * scrambleCharset.length),
@@ -265,7 +268,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 					},
 				})
 
-				const addTween = (targets: HTMLElement[], at: number) => {
+				const addTween = (targets: Array<HTMLElement>, at: number) => {
 					tl.to(
 						targets,
 						{
@@ -390,7 +393,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
 
 	return React.createElement(
 		Tag,
-		{ ref: ref as any, className: classes, style: commonStyle },
+		{ ref: ref as React.Ref<Element>, className: classes, style: commonStyle },
 		text,
 	)
 }

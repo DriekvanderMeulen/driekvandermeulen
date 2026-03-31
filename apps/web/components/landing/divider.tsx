@@ -59,7 +59,7 @@ function Divider({
 			}}
 		>
 			{/* Fixed divider at top 50% of viewport - Saphire box */}
-			{scrollProgress > 0 && (
+			{scrollProgress > 0 ? (
 				<div className="pointer-events-none fixed top-0 right-0 left-0 z-50 h-[50vh] overflow-hidden">
 					{/* Saphire box from left */}
 					<div
@@ -81,10 +81,10 @@ function Divider({
 						</h2>
 					</div>
 				</div>
-			)}
+			) : null}
 
 			{/* Fixed divider at bottom 50% of viewport - Amber box */}
-			{scrollProgress > 0 && (
+			{scrollProgress > 0 ? (
 				<div className="pointer-events-none fixed right-0 bottom-0 left-0 z-50 h-[50vh] overflow-hidden">
 					{/* Amber box from right */}
 					<div
@@ -131,7 +131,7 @@ function Divider({
 						})}
 					</div>
 				</div>
-			)}
+			) : null}
 		</div>
 	)
 }

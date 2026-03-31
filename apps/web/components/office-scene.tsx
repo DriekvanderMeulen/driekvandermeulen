@@ -795,7 +795,7 @@ export default function OfficeScene() {
 				</EffectComposer>
 			</Canvas>
 
-			{started && <ZoneDetailPanel zone={displayedZone} />}
+			{started ? <ZoneDetailPanel zone={displayedZone} /> : null}
 		</div>
 	)
 }

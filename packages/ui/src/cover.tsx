@@ -18,7 +18,7 @@ export const Cover = ({
 	const ref = useRef<HTMLDivElement>(null)
 
 	const [containerWidth, setContainerWidth] = useState(0)
-	const [beamPositions, setBeamPositions] = useState<number[]>([])
+	const [beamPositions, setBeamPositions] = useState<Array<number>>([])
 
 	useEffect(() => {
 		if (ref.current) {
@@ -32,7 +32,7 @@ export const Cover = ({
 			)
 			setBeamPositions(positions)
 		}
-	}, [ref.current])
+	}, [])
 
 	return (
 		<div
@@ -42,7 +42,7 @@ export const Cover = ({
 			className="group/cover relative inline-block rounded-sm bg-neutral-100 px-2 py-2 transition duration-200 hover:bg-neutral-900 dark:bg-neutral-900"
 		>
 			<AnimatePresence>
-				{hovered && (
+				{hovered ? (
 					<motion.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
@@ -85,7 +85,7 @@ export const Cover = ({
 							/>
 						</motion.div>
 					</motion.div>
-				)}
+				) : null}
 			</AnimatePresence>
 			{beamPositions.map((position, index) => (
 				<Beam
@@ -213,7 +213,7 @@ export const Beam = ({
 
 export const CircleIcon = ({
 	className,
-	delay,
+	delay: _delay,
 }: {
 	className?: string
 	delay?: number

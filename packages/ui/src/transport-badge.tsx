@@ -133,7 +133,7 @@ const sizeClasses: Record<BadgeSize, string> = {
 }
 
 interface TransportBadgeProps {
-	stationCode: string | string[]
+	stationCode: string | Array<string>
 	system: SystemKey
 	className?: string
 	stationName?: string
@@ -230,7 +230,7 @@ export const TransportBadge = ({
 					)
 				})}
 			</span>
-			{showStationName && stationName && (
+			{showStationName && stationName ? (
 				<span
 					className={cn(
 						'ml-2 font-medium text-slate-700 dark:text-slate-200',
@@ -242,7 +242,7 @@ export const TransportBadge = ({
 				>
 					{stationName}
 				</span>
-			)}
+			) : null}
 		</span>
 	)
 }

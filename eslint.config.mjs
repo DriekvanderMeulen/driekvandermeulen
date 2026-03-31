@@ -10,6 +10,10 @@ export default [
 			'**/build/**',
 			'**/knip-report.json',
 			'**/bun.lock',
+			// Packages with their own ESLint configs (linted by turbo)
+			'packages/ui/**',
+			'packages/db/**',
+			'apps/web/**',
 		],
 	},
 	...config,

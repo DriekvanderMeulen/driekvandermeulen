@@ -14,7 +14,7 @@ interface PaymentStepperProps {
 }
 
 const PaymentStepper = ({ currentStep }: PaymentStepperProps) => {
-	const steps: Step[] = [
+	const steps: Array<Step> = [
 		{
 			number: 1,
 			label: 'Cart',
@@ -57,14 +57,14 @@ const PaymentStepper = ({ currentStep }: PaymentStepperProps) => {
 								>
 									{step.completed ? <Check className="h-5 w-5" /> : step.number}
 								</div>
-								{index < steps.length - 1 && (
+								{index < steps.length - 1 ? (
 									<div
 										className={cn(
 											'mx-2 h-0.5 flex-1 transition-colors',
 											step.completed ? 'bg-accent' : 'bg-border',
 										)}
 									/>
-								)}
+								) : null}
 							</div>
 							<span
 								className={cn(

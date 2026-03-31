@@ -39,7 +39,7 @@ const getSizeClasses = (size: StatusIndicatorProps['size']) => {
 
 const StatusIndicator: React.FC<StatusIndicatorProps> = ({
 	state = 'idle',
-	color,
+	color: _color,
 	label,
 	className,
 	size = 'md',
@@ -53,7 +53,7 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({
 	return (
 		<div className={cn('flex items-center gap-2', className)}>
 			<div className="relative flex items-center">
-				{shouldAnimate && (
+				{shouldAnimate ? (
 					<span
 						className={cn(
 							'absolute inline-flex animate-ping rounded-full opacity-75',
@@ -61,7 +61,7 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({
 							colors.ping,
 						)}
 					/>
-				)}
+				) : null}
 				<span
 					className={cn(
 						'relative inline-flex rounded-full',
@@ -70,7 +70,7 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({
 					)}
 				/>
 			</div>
-			{label && (
+			{label ? (
 				<p
 					className={cn(
 						'text-sm text-slate-700 dark:text-slate-300',
@@ -79,7 +79,7 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({
 				>
 					{label}
 				</p>
-			)}
+			) : null}
 		</div>
 	)
 }

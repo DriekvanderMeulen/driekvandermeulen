@@ -57,6 +57,7 @@ export default function ScrollFade({
 
 	useLayoutEffect(() => {
 		requestAnimationFrame(checkScroll)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [axis])
 
 	useEffect(() => {
@@ -81,6 +82,7 @@ export default function ScrollFade({
 			ro.disconnect()
 			cancelAnimationFrame(raf)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [axis])
 
 	return (
@@ -108,7 +110,7 @@ export default function ScrollFade({
 				</div>
 			</div>
 
-			{(axis === 'horizontal' || axis === 'both') && showLeft && (
+			{(axis === 'horizontal' || axis === 'both') && showLeft ? (
 				<div
 					aria-hidden
 					className="pointer-events-none absolute top-0 left-0 z-10 h-full w-10"
@@ -117,9 +119,9 @@ export default function ScrollFade({
 							'linear-gradient(to right, var(--background) 0%, transparent 100%)',
 					}}
 				/>
-			)}
+			) : null}
 
-			{(axis === 'horizontal' || axis === 'both') && showRight && (
+			{(axis === 'horizontal' || axis === 'both') && showRight ? (
 				<div
 					aria-hidden
 					className="pointer-events-none absolute top-0 right-0 z-10 h-full w-10"
@@ -128,9 +130,9 @@ export default function ScrollFade({
 							'linear-gradient(to left, var(--background) 0%, transparent 100%)',
 					}}
 				/>
-			)}
+			) : null}
 
-			{(axis === 'vertical' || axis === 'both') && showTop && (
+			{(axis === 'vertical' || axis === 'both') && showTop ? (
 				<div
 					aria-hidden
 					className="pointer-events-none absolute top-0 left-0 z-10 h-10 w-full"
@@ -139,9 +141,9 @@ export default function ScrollFade({
 							'linear-gradient(to bottom, var(--background) 0%, transparent 100%)',
 					}}
 				/>
-			)}
+			) : null}
 
-			{(axis === 'vertical' || axis === 'both') && showBottom && (
+			{(axis === 'vertical' || axis === 'both') && showBottom ? (
 				<div
 					aria-hidden
 					className="pointer-events-none absolute bottom-0 left-0 z-10 h-10 w-full"
@@ -150,7 +152,7 @@ export default function ScrollFade({
 							'linear-gradient(to top, var(--background) 0%, transparent 100%)',
 					}}
 				/>
-			)}
+			) : null}
 		</div>
 	)
 }

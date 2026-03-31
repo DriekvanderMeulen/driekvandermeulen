@@ -40,7 +40,7 @@ const Example = () => (
 				>
 					<EnvironmentVariableGroup>
 						<EnvironmentVariableName />
-						{variable.required && <EnvironmentVariableRequired />}
+						{variable.required ? <EnvironmentVariableRequired /> : null}
 					</EnvironmentVariableGroup>
 					<EnvironmentVariableGroup>
 						<EnvironmentVariableValue />

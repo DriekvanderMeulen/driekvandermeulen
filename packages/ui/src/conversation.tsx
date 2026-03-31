@@ -12,7 +12,11 @@ import {
 } from '@/components/ai-elements/conversation'
 import { Message, MessageContent } from '@/components/ai-elements/message'
 
-const messages: { key: string; value: string; from: 'user' | 'assistant' }[] = [
+const messages: Array<{
+	key: string
+	value: string
+	from: 'user' | 'assistant'
+}> = [
 	{
 		key: nanoid(),
 		value: 'Hello, how are you?',
@@ -118,11 +122,11 @@ const messages: { key: string; value: string; from: 'user' | 'assistant' }[] = [
 
 const Example = () => {
 	const [visibleMessages, setVisibleMessages] = useState<
-		{
+		Array<{
 			key: string
 			value: string
 			from: 'user' | 'assistant'
-		}[]
+		}>
 	>([])
 
 	useEffect(() => {

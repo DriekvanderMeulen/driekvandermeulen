@@ -23,7 +23,7 @@ import {
 	type QueueTodo,
 } from '@/components/ai-elements/queue'
 
-const sampleMessages: QueueMessage[] = [
+const sampleMessages: Array<QueueMessage> = [
 	{
 		id: 'msg-1',
 		parts: [{ type: 'text', text: 'How do I set up the project?' }],
@@ -62,7 +62,7 @@ const sampleMessages: QueueMessage[] = [
 	},
 ]
 
-const sampleTodos: QueueTodo[] = [
+const sampleTodos: Array<QueueTodo> = [
 	{
 		id: 'todo-1',
 		title: 'Write project documentation',
@@ -117,7 +117,7 @@ const Example = () => {
 
 	return (
 		<Queue>
-			{messages.length > 0 && (
+			{messages.length > 0 ? (
 				<QueueSection>
 					<QueueSectionTrigger>
 						<QueueSectionLabel count={messages.length} label="Queued" />
@@ -169,7 +169,7 @@ const Example = () => {
 												</QueueItemAction>
 											</QueueItemActions>
 										</div>
-										{hasFiles && (
+										{hasFiles ? (
 											<QueueItemAttachment>
 												{message.parts
 													.filter((p) => p.type === 'file' && p.url)
@@ -193,15 +193,15 @@ const Example = () => {
 														)
 													})}
 											</QueueItemAttachment>
-										)}
+										) : null}
 									</QueueItem>
 								)
 							})}
 						</QueueList>
 					</QueueSectionContent>
 				</QueueSection>
-			)}
-			{todos.length > 0 && (
+			) : null}
+			{todos.length > 0 ? (
 				<QueueSection>
 					<QueueSectionTrigger>
 						<QueueSectionLabel count={todos.length} label="Todo" />
@@ -227,18 +227,18 @@ const Example = () => {
 												</QueueItemAction>
 											</QueueItemActions>
 										</div>
-										{todo.description && (
+										{todo.description ? (
 											<QueueItemDescription completed={isCompleted}>
 												{todo.description}
 											</QueueItemDescription>
-										)}
+										) : null}
 									</QueueItem>
 								)
 							})}
 						</QueueList>
 					</QueueSectionContent>
 				</QueueSection>
-			)}
+			) : null}
 		</Queue>
 	)
 }

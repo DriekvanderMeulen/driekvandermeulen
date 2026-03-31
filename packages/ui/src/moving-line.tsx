@@ -1,10 +1,4 @@
-import {
-	motion,
-	useMotionValueEvent,
-	useScroll,
-	useSpring,
-	useTransform,
-} from 'motion/react'
+import { motion, useScroll, useSpring, useTransform } from 'motion/react'
 import React, { useRef } from 'react'
 
 const MovingLine = () => {
@@ -13,7 +7,7 @@ const MovingLine = () => {
 		ease: 'easeInOut',
 	}
 
-	const ref = useRef<any>(null)
+	const ref = useRef<HTMLDivElement>(null)
 
 	// Track scroll progress, lies between 0 and 1.
 	const { scrollYProgress } = useScroll({
@@ -48,8 +42,8 @@ const MovingLine = () => {
 						y2="1566.02"
 						gradientUnits="userSpaceOnUse"
 					>
-						<stop stop-color="#3879E7" stop-opacity="0" />
-						<stop offset="1" stop-color="#3879E7" />
+						<stop stopColor="#3879E7" stopOpacity="0" />
+						<stop offset="1" stopColor="#3879E7" />
 					</linearGradient>
 				</defs>
 				<motion.path
