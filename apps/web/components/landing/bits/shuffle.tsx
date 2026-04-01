@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP)
 
-export interface ShuffleProps {
+interface ShuffleProps {
 	text: string
 	className?: string
 	style?: React.CSSProperties

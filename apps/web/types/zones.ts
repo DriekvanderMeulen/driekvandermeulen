@@ -6,6 +6,6 @@ export interface ZoneMetadata {
 	promptText?: string
 }
 
-export interface ZoneData {
+interface ZoneData {
 	zones: Array<ZoneMetadata>
 }

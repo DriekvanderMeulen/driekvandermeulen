@@ -2,13 +2,11 @@
 	"$schema": "https://unpkg.com/knip@latest/schema.json",
 	"workspaces": {
 		".": {
-			"entry": ["package.json", "turbo.json", "prettier.config.js"]
+			"entry": ["package.json", "turbo.json"]
 		},
 		"apps/web": {
 			"entry": [
-				"next.config.js",
 				"app/**/*.{ts,tsx}",
-				"middleware.ts",
 				"lib/**/*.ts"
 			],
 			"ignore": ["app/globals.css", "app/layout.tsx", "app/page.tsx"]
@@ -17,7 +15,8 @@
 			"entry": ["*.js"]
 		},
 		"packages/typescript-config": {
-			"entry": ["*.json"]
+			"entry": ["*.json"],
+			"ignoreDependencies": ["next"]
 		}
 	},
 	"ignore": [
@@ -37,5 +36,6 @@
 		"**/.vercel/**",
 		"**/packages/ui/**"
 	],
-	"ignoreDependencies": ["@types/*", "typescript", "prettier", "turbo"]
+	"ignoreDependencies": [],
+	"ignoreBinaries": ["jq"]
 }

@@ -3,7 +3,7 @@
 import { Mesh, Program, Renderer, Triangle } from 'ogl'
 import { useEffect, useRef, useState } from 'react'
 
-export type RaysOrigin =
+type RaysOrigin =
 	| 'top-center'
 	| 'top-left'
 	| 'top-right'

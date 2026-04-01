@@ -163,4 +163,4 @@ function parseContentDocument(rawDocument: string): ParsedContent {
 }
 
 export { parseContentDocument }
-export type { ParsedContent, ParsedContentItem }
+export type { ParsedContentItem }

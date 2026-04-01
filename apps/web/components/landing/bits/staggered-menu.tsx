@@ -2,16 +2,16 @@
 import { gsap } from 'gsap'
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
 
-export interface StaggeredMenuItem {
+interface StaggeredMenuItem {
 	label: string
 	ariaLabel: string
 	link: string
 }
-export interface StaggeredMenuSocialItem {
+interface StaggeredMenuSocialItem {
 	label: string
 	link: string
 }
-export interface StaggeredMenuProps {
+interface StaggeredMenuProps {
 	position?: 'left' | 'right'
 	colors?: Array<string>
 	items?: Array<StaggeredMenuItem>
@@ -29,7 +29,7 @@ export interface StaggeredMenuProps {
 	onMenuClose?: () => void
 }
 
-export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
+const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 	position = 'right',
 	colors = ['#1D98CD', '#1D7A8C'],
 	items = [],
