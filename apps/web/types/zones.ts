@@ -5,7 +5,3 @@ export interface ZoneMetadata {
 	type?: string
 	promptText?: string
 }
-
-interface ZoneData {
-	zones: Array<ZoneMetadata>
-}

@@ -11,6 +11,9 @@
 			],
 			"ignore": ["app/globals.css", "app/layout.tsx", "app/page.tsx"]
 		},
+		"packages/db": {
+			"ignoreDependencies": ["@repo/eslint-config"]
+		},
 		"packages/eslint-config": {
 			"entry": ["*.js"]
 		},
